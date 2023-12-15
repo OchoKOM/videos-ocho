@@ -376,6 +376,10 @@ body {
 }
 
 @media (max-width:400px) {
+    .player {
+        width: 100%;
+        border-radius: 0;
+    }
     .video-controls-container .controls .desktop-item{
         display: none;
     }
