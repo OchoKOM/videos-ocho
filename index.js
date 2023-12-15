@@ -12,8 +12,8 @@ function home_page() {
             id: i + 1,
             title: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
             user: "Martin Ocho",
-            vues: "300",
-            date: "1702123979",
+            vues: Math.floor(Math.random() * 1000),
+            date: Math.floor(Math.random() * 1702123979),
             source: "video.mp4",
             cover: "img.webp"
         }
