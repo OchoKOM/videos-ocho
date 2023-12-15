@@ -110,7 +110,7 @@ img {
     position: relative;
     margin: auto;
     inset: 0;
-    border-radius: 10px;
+    border-radius: inherit;
     width: 100%;
     max-height: 80vh;
     transition: 0.5s;
@@ -119,8 +119,19 @@ img {
 video:fullscreen {
     background: radial-gradient(var(--hx), #000);
 }
-
-
-.test {
-    position: relative;
+@media (max-width:400px) {
+    .container.home {
+        grid-template-columns: repeat(auto-fill, 100%);
+        padding: 0;
+    }
+    .container .video-section .mini-player {
+        border-radius: 0;
+    }
+    .container .video-section .video-details .right-d {
+        font-size: .8em;
+    }
+    .container .video-section .video-details .left-d {
+        width: 30px;
+        height: 30px;
+    }
 }
