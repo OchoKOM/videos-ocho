@@ -1,0 +1,126 @@
+.container.home {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fill, 300px);
+    height: max-content;
+    place-content: center;
+    padding: 10px;
+}
+
+.container .video-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    max-width: 350px;
+    height: max-content;
+}
+
+.container .video-section .mini-player {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: #80808062;
+    width: 100%;
+    aspect-ratio: 16/9;
+    border-radius: 10px;
+    position: relative;
+}
+
+.container .video-section .video-details {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    position: relative;
+}
+
+.container .video-section .video-details .left-d {
+    background: #80808062;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    position: relative;
+}
+
+.container .video-section .video-details .right-d {
+    width: calc(100% - 40px);
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    position: relative;
+}
+
+.video-section.loading video,
+.video-section.loading img {
+    opacity: 0;
+    transition: 0.5s;
+}
+
+.video-section.loading .video-details .right-d .v-title,
+.video-section.loading .video-details .right-d .v-data {
+    background: #80808062;
+    max-height: 30px;
+    max-width: calc(100% - 7px);
+    color: transparent;
+    border-radius: 5px;
+    user-select: none;
+}
+
+.video-section .video-details .right-d .v-title {
+    width: 100%;
+    max-height: 55px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex-direction: column;
+    position: relative;
+    font-size: 1.25em;
+    font-weight: 600;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.video-section .video-details .right-d .v-data {
+    max-width: 100%;
+    width: max-content;
+    color: grey;
+    font-size: 0.8em;
+}
+
+.light {
+    position: absolute;
+    margin: auto;
+    inset: 0;
+    border-radius: 10px;
+    box-shadow: var(--hx) 0px 0px 100px;
+    filter: brightness(200%);
+    background: var(--hx);
+    opacity: 0.5;
+    width: 100%;
+    max-width: 900px;
+    max-height: 80vh;
+    aspect-ratio: var(--ratio);
+    transition: 0.5s;
+    z-index: -1;
+}
+
+video,
+img {
+    background: transparent;
+    position: relative;
+    margin: auto;
+    inset: 0;
+    border-radius: 10px;
+    width: 100%;
+    max-height: 80vh;
+    transition: 0.5s;
+}
+
+video:fullscreen {
+    background: radial-gradient(var(--hx), #000);
+}
+
+
+.test {
+    position: relative;
+}
