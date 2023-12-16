@@ -1,0 +1,90 @@
+footer{
+    position: fixed;
+    bottom: -240px;
+    left: 0;
+    right: 0;
+    background: #014f94a9;
+    width: 100vw;
+    color: #fff;
+    z-index: 500;
+    transition: bottom 150ms ease-in-out;
+}
+footer:has(#footer-check-box:checked){
+    position: absolute;
+    bottom: 0;
+}
+footer label{
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.15em;
+    text-align: center;
+    cursor: pointer;
+    user-select: none;
+}
+.footer-content{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+.footer-content h3{
+    font-size: 1.8rem;
+    font-weight: 400;
+    text-transform: capitalize;
+    line-height: 3rem;
+}
+.footer-content p{
+    max-width: 500px;
+    margin: 10px auto;
+    line-height: 28px;
+    font-size: 14px;
+}
+.socials{
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem 0 3rem 0;
+}
+.socials li{
+    margin: 0 10px;
+}
+.socials a{
+    text-decoration: none;
+    color: #fff;
+}
+.socials a i{
+    font-size: 1.1rem;
+    transition: color .4s ease;
+
+}
+.socials a:hover i{
+    color: aqua;
+}
+.ocho-icon {
+    display: flex;
+    font-family: "Ocho";
+    font-size: 1em; 
+    font-weight: bold;
+    height: 1em;
+    width: 1em;
+}
+.footer-bottom{
+    background: #000;
+    width: 100vw;
+    padding: 20px 0;
+    text-align: center;
+}
+.footer-bottom p{
+    font-size: 14px;
+    word-spacing: 2px;
+    text-transform: capitalize;
+}
+.footer-bottom span{
+    text-transform: uppercase;
+    opacity: .4;
+    font-weight: 200;
+}

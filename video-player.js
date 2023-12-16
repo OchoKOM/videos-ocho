@@ -386,12 +386,18 @@ function video_player() {
                     if (Number(source.getAttribute('size')) === size
                         && Number(video.getAttribute('size')) !== size) {
                         let current_time = video.currentTime;
-                        let duration = video.duration
-                        video.src = source.src;
-                        video.currentTime = current_time;
-                        loader_spinner.classList.remove('active')
-                        video.autoplay = true;
-                        video.setAttribute('size', size);
+                        let temp_video = document.createElement('video');
+                        temp_video.src = source.src
+                        temp_video.currentTime = current_time;
+                        temp_video.volume = 0
+                        temp_video.autoplay = true;
+                        temp_video.addEventListener('canplay', ()=>{
+                            video.src = source.src;
+                            video.currentTime = temp_video.currentTime;
+                            video.autoplay = true;
+                            video.setAttribute('size', size);
+                            temp_video.remove();
+                        })
                     }
                 });
             })
