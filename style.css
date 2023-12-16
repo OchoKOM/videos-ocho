@@ -97,7 +97,7 @@
     background: var(--hx);
     opacity: 0.5;
     width: 100%;
-    max-width: 900px;
+    max-width: 850px;
     max-height: 80vh;
     aspect-ratio: var(--ratio);
     transition: 0.5s;

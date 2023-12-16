@@ -23,7 +23,7 @@ body {
     position: relative;
     background: #80808062;
     width: 90%;
-    max-width: 900px;
+    max-width: 850px;
     border-radius: 10px;
     display: flex;
     justify-content: center;
@@ -47,7 +47,7 @@ body {
 
 .player.cinema video {
     height: 100%;
-    max-width: 900px;
+    max-width: 850px;
     border-radius: inherit;
 }
 
