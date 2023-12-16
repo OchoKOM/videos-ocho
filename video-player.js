@@ -75,7 +75,9 @@ function video_player() {
         play_pause_icon.title = video.paused ? 'Lire(k)' : 'Pause(k)';
         // Change the video state
         video.play();
+        loader_spinner.classList.add('active');
     }
+    loader_spinner.classList.add('active');
 
     // Fonction pause
     function pause_video() {
@@ -138,15 +140,16 @@ function video_player() {
             loader_spinner.classList.add('active');
         })
     })
-    video.addEventListener("play", () => {
+    video.oncanplaythrough
+    video.addEventListener("canplaythrough", () => {
         loader_spinner.classList.add('active');
     })
-    video.addEventListener("canplay", () => {
-        loader_spinner.classList.add('active');
-    })
-    video.addEventListener("loadedmetadata", () => {
+    video.addEventListener("loadeddata", () => {
         total_time_el.textContent = format_duration(video.duration);
     })
+    video.onloadeddata = () => {
+        total_time_el.textContent = format_duration(video.duration);
+    }
     video.addEventListener("timeupdate", () => {
         current_time_el.textContent = format_duration(video.currentTime);
         total_time_el.textContent = format_duration(video.duration);
@@ -224,6 +227,9 @@ function video_player() {
     video.addEventListener('progress', () => {
         draw_progress(loaded_progress, video.buffered, video.duration);
     })
+    video.onprogress = () => {
+        draw_progress(loaded_progress, video.buffered, video.duration);
+    }
     function draw_progress(canvas, buffered, duration) {
         // Récupère le contexte du canvas
         let context = canvas.getContext('2d', { antialias: false })
