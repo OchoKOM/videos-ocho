@@ -517,4 +517,7 @@ body {
     .video-controls-container .controls .desktop-item{
         display: none;
     }
+    .video-controls-container .settings-menu .desktop-item{
+        display: none;
+    }
 }
