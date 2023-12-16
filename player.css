@@ -369,6 +369,140 @@ body {
     color: #000;
     background: #fff;
 }
+
+.settings-btn svg{
+    transform: rotate(0);
+    transition: 150ms ease-in-out;
+}
+.settings-btn.active svg{
+    transform: rotate(30deg);
+}
+.settings-menu{
+    position: absolute;
+    right: 10px;
+    bottom: 65px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 50ms ease-in-out;
+    z-index: 20;
+}
+.settings-menu.active{
+    opacity: 1;
+    visibility: visible;
+}
+.settings-menu .wrapper{
+    display: flex;
+    justify-content: space-between;
+    width: 200px;
+    background: #1c1c1ccc;
+    border-radius: 5px;
+    padding: 5px 1px;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.settings-menu .wrapper ::-webkit-scrollbar{
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+    width: 5px;
+    height: 5px;
+}
+.settings-menu ::-webkit-scrollbar-thumb{
+    appearance: none;
+    background: cornsilk;
+    border-radius: 3px;
+}
+.settings-menu .drop{
+    transition: 0.2s;
+    max-height: 200px;
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: none;
+}
+.settings-menu .drop.active{
+    display: block;
+}
+.settings-menu .main-section{
+    margin-left: 0;
+}
+.settings-menu:has(.drop.active) .main-section{
+    margin-left: -220px;
+}
+.settings-menu ul{
+    width: 200px;
+    transition: 0.2s;
+}
+.settings-menu ul li{
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    border-radius: 5px;
+    padding: 3px 5px;
+    font-size: 0.8em;
+    color: #fff8dc;
+    cursor: pointer;
+}
+.settings-menu ul li:hover{
+    background: #c0c0c066;
+}
+.settings-menu .label{
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 10px 5px;
+    color: #fff8dc;
+    font-size: 1em;
+    cursor: pointer;
+    border-bottom: 1px solid #fff;
+    padding-bottom: 10px;
+    margin-bottom: 5px;
+}
+.settings-menu .check{
+    position: relative;
+    width: 24px;
+    height: 24px;
+}
+.settings-menu .check.active::before{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    content: '\f058';
+    font-family: "Ocho";
+}
+.settings-menu .arrow{
+    position: absolute;
+    right: 5px;
+    pointer-events: none;
+    width: 17px;
+    height: 17px;
+}
+.drop .back-icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.drop span{
+    margin-right: 15px;
+}
+.info-drop{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 5px;
+    padding: 5px 0;
+}
+.info-drop .channel-profile{
+    width: 50px;
+    height: 50px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    overflow: hidden;
+    outline: 5px solid #1e90ff66;
+}
 @font-face {
     font-family: "Ocho";
     src: url(icon.woff2) format("woff2"), 

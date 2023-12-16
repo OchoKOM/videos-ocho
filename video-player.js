@@ -1,21 +1,29 @@
 function video_player() {
-    const loader_spinner = document.querySelector('.loader'),
-    timeline = document.querySelector('.timeline'),
-    loaded_progress = document.querySelector('.loaded-progress'),
-    play_pause_btn = document.querySelector('.play-pause-btn'),
-    mute_btn = document.querySelector('.mute-btn'),
-    volume_slider = document.querySelector('.volume-slider'),
-    preview_thumb_el = document.querySelector('.preview-thumb'),
-    video = document.getElementById('main-video'),
-    preview_thumbnails = generate_thumbnails(video.src),
-    current_time_el = document.querySelector('.current-time'),
-    total_time_el = document.querySelector('.total-time'),
-    auto_play = document.querySelector('.auto-play'),
-    pip_btn = document.querySelector('.pip-btn'),
-    cinema_btn = document.querySelector('.cinema-btn'),
-    fullscreen_btn = document.querySelector('.fullscreen-btn'),
-    video_container = document.querySelector('.player'),
-    play_pause_icon = play_pause_btn.querySelector('svg');
+    const player = document.querySelector('.player'),
+        loader_spinner = document.querySelector('.loader'),
+        timeline = document.querySelector('.timeline'),
+        loaded_progress = document.querySelector('.loaded-progress'),
+        play_pause_btn = document.querySelector('.play-pause-btn'),
+        mute_btn = document.querySelector('.mute-btn'),
+        volume_slider = document.querySelector('.volume-slider'),
+        preview_thumb_el = document.querySelector('.preview-thumb'),
+        video = document.getElementById('main-video'),
+        preview_thumbnails = generate_thumbnails(video.src),
+        current_time_el = document.querySelector('.current-time'),
+        total_time_el = document.querySelector('.total-time'),
+        auto_play = document.querySelector('.auto-play'),
+        settings_btn = document.querySelector('.settings-btn'),
+        settings_menu = document.querySelector('.settings-menu'),
+        main_menus_ = settings_menu.querySelectorAll('.main-section .drop-item'),
+        menus = settings_menu.querySelectorAll('.drop'),
+        back_btns = settings_menu.querySelectorAll('.drop .back-icon'),
+        quality_ul = settings_menu.querySelector('.quality-drop ul'),
+        playbacks = settings_menu.querySelectorAll('.speed-drop li'),
+        pip_btn = document.querySelector('.pip-btn'),
+        cinema_btn = document.querySelector('.cinema-btn'),
+        fullscreen_btn = document.querySelector('.fullscreen-btn'),
+        video_container = document.querySelector('.player'),
+        play_pause_icon = play_pause_btn.querySelector('svg');
 
     document.addEventListener('keydown', e => {
         const tag_name = document.activeElement.tagName.toLocaleLowerCase();
@@ -130,6 +138,9 @@ function video_player() {
             loader_spinner.classList.add('active');
         })
     })
+    video.addEventListener("play", () => {
+        loader_spinner.classList.add('active');
+    })
     video.addEventListener("canplay", () => {
         loader_spinner.classList.add('active');
     })
@@ -152,16 +163,16 @@ function video_player() {
         if (e.offsetX > (timeline.clientWidth - 80)) {
             timeline.style.setProperty('--overflow-pos', "-80px");
             timeline.style.setProperty('--preview-position', 1);
-        }else if (e.offsetX < 80) {
+        } else if (e.offsetX < 80) {
             timeline.style.setProperty('--preview-position', 0);
             timeline.style.setProperty('--overflow-pos', "80px");
-        }else{
+        } else {
             timeline.style.setProperty('--overflow-pos', '0px');
             timeline.style.setProperty('--preview-position', preview_position);
         }
-        preview_thumbnails.then(async thumbnails =>{
+        preview_thumbnails.then(async thumbnails => {
             thumbnails.forEach(async thumbnail => {
-                if(await thumbnail.data){
+                if (await thumbnail.data) {
                     let seconds = thumbnail.sec;
                     seconds.forEach(sec => {
                         if (sec['index'] === Math.floor(video.duration * preview_position)) {
@@ -197,7 +208,7 @@ function video_player() {
         minimumIntegerDigits: 2,
     })
     function format_duration(time) {
-        time = isNaN(time)? 0 : time; 
+        time = isNaN(time) ? 0 : time;
         const seconds = Math.floor(time % 60)
         const minutes = Math.floor(time / 60) % 60
         const hours = Math.floor(time / 3600)
@@ -218,23 +229,23 @@ function video_player() {
         let context = canvas.getContext('2d', { antialias: false })
         // Définit la couleur de remplissage du rectangle
         context.fillStyle = '#ffffff66'
-      
+
         // Récupère la hauteur et la largeur du canvas
         let height = canvas.height
         let width = canvas.width
         // Vérifie que la hauteur et la largeur sont définies
         if (!height || !width)
-          throw "La largeur ou la hauteur du canvas n'est pas définie."
+            throw "La largeur ou la hauteur du canvas n'est pas définie."
         // Efface le contenu précédent du canvas
         context.clearRect(0, 0, width, height)
-      
+
         // Parcourt les différentes plages tamponnées de la vidéo
         for (let i = 0; i < buffered.length; i++) {
-          // Calcule la position de début et de fin de chaque plage tamponnée en fonction de la durée totale de la vidéo et de la largeur du canvas
-          let leadingEdge = (buffered.start(i) / duration) * width
-          let trailingEdge = (buffered.end(i) / duration) * width
-          // Dessine un rectangle rempli pour chaque plage tamponnée
-          context.fillRect(leadingEdge, 0, trailingEdge - leadingEdge, height)
+            // Calcule la position de début et de fin de chaque plage tamponnée en fonction de la durée totale de la vidéo et de la largeur du canvas
+            let leadingEdge = (buffered.start(i) / duration) * width
+            let trailingEdge = (buffered.end(i) / duration) * width
+            // Dessine un rectangle rempli pour chaque plage tamponnée
+            context.fillRect(leadingEdge, 0, trailingEdge - leadingEdge, height)
         }
     }
 
@@ -253,8 +264,8 @@ function video_player() {
     }
     function save_autoplay() {
         // Sauvearder les preferences de lecture automatique ici
-        auto_play.classList.contains('active') ? 
-        sessionStorage.setItem('auto-play', 'on') : sessionStorage.removeItem('auto-play')
+        auto_play.classList.contains('active') ?
+            sessionStorage.setItem('auto-play', 'on') : sessionStorage.removeItem('auto-play')
     }
 
     //! View modes
@@ -290,13 +301,131 @@ function video_player() {
         document.pictureInPictureElement === null ?
             video.requestPictureInPicture() : document.exitPictureInPicture();
     }
+    // ! Settings 
+    // activer la section des parametres
+    settings_btn.addEventListener("click", toggle_settings);
+    player.addEventListener('mouseleave', remove_settings);
+    function toggle_settings() {
+        settings_btn.classList.toggle('active');
+        settings_menu.classList.toggle('active');
+        settings_menu.classList.contains('active') ? settings_void() : remove_settings();
+    }
+    // Fonction pour enlever les parametres
+    function remove_settings() {
+        remove_active_class(settings_btn)
+        remove_active_class(settings_menu)
+        remove_active_classes(menus)
+    }
+
+    function settings_void() {
+        main_menus_.forEach(menu => {
+            menu.addEventListener('click', () => {
+                const menu_id = menu.getAttribute('data-drop');
+                remove_active_classes(menus)
+                document.getElementById(menu_id).classList.add('active');
+            })
+        });
+        back_btns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                remove_active_classes(menus);
+            })
+        });
+
+        quality_void()
+        caption_void()
+        playback_speed_void()
+    }
+    // qualite
+    let quality_array = [];
+
+    // Afficher les paramètres de qualité
+    const sizes = document.querySelectorAll('[size]');
+
+    // Convertir NodeList en tableau
+    const sizesArray = Array.from(sizes);
+
+    // Créer un tableau d'objets avec les données de taille
+    const qualityDataArray = sizesArray.map(size => {
+        return {
+            data_quality: Number(size.getAttribute('size')),
+            source: size.getAttribute('src'),
+            current_quality: video.getAttribute('size'),
+            active: Number(video.getAttribute('size')) === Number(size.getAttribute('size')) ? ' active' : '',
+            tagName: size.tagName.toLowerCase(),
+        };
+    });
+
+    // Trier le tableau d'objets par taille décroissante
+    qualityDataArray.sort((a, b) => b.data_quality - a.data_quality);
+
+    // Parcourir le tableau trié et ajouter les éléments à la liste
+    qualityDataArray.forEach(data => {
+        const size_li = `
+        <li data-quality="${data.data_quality}">
+            <div class="check${data.active}"></div>
+            <span>${data.data_quality}p</span>
+        </li>
+    `;
+        const source_html = `<source src="${data.source}" size="${data.data_quality}">`;
+
+        if (data.tagName === 'video') video.innerHTML += source_html;
+        quality_ul.innerHTML += size_li;
+        quality_array.push(data.data_quality);
+    });
+
+    function quality_void() {
+        const quality_li = quality_ul.querySelectorAll('li');
+        quality_li.forEach(e => {
+            const all_checks = e.parentNode.querySelectorAll('.check');
+            e.addEventListener('click', () => {
+                remove_active_classes(all_checks)
+                e.querySelector('.check').classList.add('active');
+                const size = Number(e.getAttribute('data-quality'));
+                const sources = video.querySelectorAll('source');
+                sources.forEach(source => {
+                    if (Number(source.getAttribute('size')) === size
+                        && Number(video.getAttribute('size')) !== size) {
+                        let current_time = video.currentTime;
+                        let duration = video.duration
+                        video.src = source.src;
+                        video.currentTime = current_time;
+                        loader_spinner.classList.remove('active')
+                        video.autoplay = true;
+                        video.setAttribute('size', size);
+                    }
+                });
+            })
+        })
+    }
+    function caption_void() {
+
+    }
+    function playback_speed_void() {
+        playbacks.forEach(e => {
+            const all_checks = e.parentNode.querySelectorAll('.check');
+            e.addEventListener('click', () => {
+                remove_active_classes(all_checks)
+                e.querySelector('.check').classList.add('active');
+                let video_speed = Number(e.getAttribute('data-speed'))
+                video.playbackRate = video_speed;
+            })
+        })
+    }
+    function remove_active_classes(elements) {
+        elements.forEach(element => {
+            remove_active_class(element)
+        });
+    }
+    function remove_active_class(element) {
+        element.classList.contains('active') && element.classList.remove('active');
+    }
 }
 function generate_thumbnails(src) {
     return new Promise((resolve, reject) => {
         let thumb = false;
         let thumbnails = []
         let thumbnailWidth = 160
-        let thumbnailHeight = thumbnailWidth * 9/16
+        let thumbnailHeight = thumbnailWidth * 9 / 16
         let horizontalItemCount = 5
         let verticalItemCount = 5
 
@@ -386,4 +515,4 @@ function generate_thumbnails(src) {
     });
 }
 
-window.onload = video_player();
+video_player();

@@ -91,7 +91,7 @@
     position: absolute;
     margin: auto;
     inset: 0;
-    border-radius: 10px;
+    border-radius: inherit;
     box-shadow: var(--hx) 0px 0px 100px;
     filter: brightness(200%);
     background: var(--hx);
