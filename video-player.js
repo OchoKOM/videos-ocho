@@ -153,7 +153,7 @@ function video_player() {
     video.addEventListener("timeupdate", () => {
         current_time_el.textContent = format_duration(video.currentTime);
         total_time_el.textContent = format_duration(video.duration);
-        let progress_position = (video.currentTime / video.duration) || 1
+        let progress_position = (video.currentTime / video.duration) || 0
         timeline.style.setProperty('--progress-position', progress_position);
     })
     setInterval(() => {
@@ -173,6 +173,7 @@ function video_player() {
             timeline.style.setProperty('--overflow-pos', '0px');
             timeline.style.setProperty('--preview-position', preview_position);
         }
+        timeline.style.setProperty('--preview-hover-position', preview_position);
         preview_thumbnails.then(async thumbnails => {
             thumbnails.forEach(async thumbnail => {
                 if (await thumbnail.data) {
