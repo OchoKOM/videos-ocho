@@ -15,14 +15,22 @@
   <div class="container">
     <div class="player">
       <div class="light"></div>
-      <video src="video.mp4" loop id="main-video" autoplay size="720">
+      <video src="video.mp4" loop id="main-video" size="720">
         <source src="video_1080.mp4" size="1080">
         <source src="video_1440.webm" size="1440">
         <source src="video_360.mp4" size="360">
+        <track kind="subtitles" src="subtitles/subtitle-track-[Chinese].vtt" srclang="zh">
+        <track kind="subtitles" src="subtitles/subtitle-track-[English].vtt" srclang="en">
+        <track kind="subtitles" src="subtitles/subtitle-track-[Esperanto].vtt" srclang="eo">
+        <track kind="subtitles" src="subtitles/subtitle-track-[French].vtt" srclang="fr">
+        <track kind="subtitles" src="subtitles/subtitle-track-[Spanish].vtt" srclang="es">
       </video>
       <svg class="loader" viewBox="25 25 50 50" stroke-width="5">
         <circle cx="50" cy="50" r="20"></circle>
       </svg>
+      <p class="caption-text">
+        <mark>Text</mark>
+      </p>
       <div class="video-controls-container">
         <div class="timeline-container">
           <div class="timeline">

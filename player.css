@@ -89,6 +89,22 @@ body {
 .player.paused .video-controls-container {
     opacity: 1;
 }
+/* Caption text */
+.caption-text{
+    position: absolute;
+    left: 50%;
+    transform: translateY(-50%);
+    bottom: 5px;
+    z-index: 200;
+    transition: 150ms ease-in-out;
+    -webkit-user-select: none;
+    user-select: none;
+}
+.player:hover .caption-text,
+.player:focus-within .caption-text,
+.player.paused .caption-text {
+    bottom: 50px;
+}
 
 .video-controls-container .controls {
     display: flex;
