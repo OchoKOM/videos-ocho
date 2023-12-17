@@ -45,12 +45,16 @@ Notre lecteur vidéo HTML custom est une solution légère et performante pour i
 </head>
 <body>
     <!-- Intégration du lecteur vidéo -->
-    <ocho src="votre-video.mp4" size="720">
-        <!-- Remplacer "votre-video.mp4" par le chemin vers votre video -->
-        <!-- <source src="votre-video_1080.mp4" size="1080"> -->
-        <!-- Ajouter des sous-titres et remplacer fr par le code iso de votre langue -->
-        <!-- <track kind="subtitles" label="French" srclang="fr" src="votre-sous-titre.vtt">-->
-    </ocho>
+        <!-- Remplacer "votre-video.mp4" par le chemin vers votre video 
+        et size par la resolution de votre video -->
+        <ocho src="votre-video.mp4" size="720">
+            <!-- Ajoutre des sources de differente qualilté 
+            et remplacer size par la resolution de votre nouvelle source  -->
+            <!-- <source src="votre-video_1080.mp4" size="1080"> -->
+            <!-- Ajouter des sous-titres et remplacer fr par le code iso de votre langue 
+            Remplacer "votre-sous-titre.vtt" par le chemin vers votre fichier vtt -->
+            <!-- <track kind="subtitles" label="French" srclang="fr" src="votre-sous-titre.vtt">-->
+        </ocho>
 
     <script src="video-player.js"></script>
 </body>
