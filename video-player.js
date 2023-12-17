@@ -324,18 +324,19 @@ async function video_player() {
       let video = document.createElement('video');
       ocho.classList.add('player');
       video.classList.add('main-video');
-      video.size = ocho.getAttribute('size') ? ocho.getAttribute('size') : 0;
+      let ocho_size = ocho.getAttribute('size') ? ocho.getAttribute('size') : 0;
+      video.setAttribute('size', ocho_size)
       video.src = ocho.getAttribute('src') ? ocho.getAttribute('src') : '';
       let sources = ocho.querySelectorAll('source');
       let tracks = ocho.querySelectorAll('track');
-      sources.forEach(source => {
-        video.innerHTML += source;
-      });
-      tracks.forEach(track => {
-        video.innerHTML += track;
-      });
       ocho.innerHTML = '';
       ocho.appendChild(video);
+      sources.forEach(source => {
+        video.appendChild(source)
+      });
+      tracks.forEach(track => {
+        video.appendChild(track)
+      });
       ocho.innerHTML += player_controls;
     })
     resolve()
@@ -657,7 +658,7 @@ async function video_player() {
   // ! Settings 
   // activer la section des parametres
   settings_btn.addEventListener("click", toggle_settings);
-  player.addEventListener('mouseleave', remove_settings);
+  window.addEventListener('blur', remove_settings);
   function toggle_settings() {
     settings_btn.classList.toggle('active');
     settings_menu.classList.toggle('active');
@@ -686,8 +687,7 @@ async function video_player() {
     })
     loop_mode_check.addEventListener('change', (e) => {
       console.log(e);
-      video.loop = Boolean(loop_mode_check.checked)
-      console.log(video.loop);
+      video.loop = Boolean(loop_mode_check.checked);
     })
     main_menus_.forEach(menu => {
       menu.addEventListener('click', () => {
@@ -730,21 +730,23 @@ async function video_player() {
 
   // Parcourir le tableau trié et ajouter les éléments à la liste
   qualityDataArray.forEach(data => {
-    let hd = ''
-    if (data.data_quality >= 1018) {
-      hd = ' HD'
-    }
-    const size_li = `
-        <li data-quality="${data.data_quality}">
-            <div class="check${data.active}"></div>
-            <span>${data.data_quality}p${hd}</span>
-        </li>
-    `;
-    const source_html = `<source src="${data.source}" size="${data.data_quality}">`;
+    if (!quality_array.includes(data.data_quality)) {
+      let hd = ''
+      if (data.data_quality >= 1018) {
+        hd = ' HD'
+      }
+      const size_li = `
+         <li data-quality="${data.data_quality}">
+             <div class="check${data.active}"></div>
+             <span>${data.data_quality}p${hd}</span>
+         </li>
+     `;
+      const source_html = `<source src="${data.source}" size="${data.data_quality}">`;
 
-    if (data.tagName === 'video') video.innerHTML += source_html;
-    quality_ul.innerHTML += size_li;
-    quality_array.push(data.data_quality);
+      if (data.tagName === 'video') { video.innerHTML += source_html; }
+      quality_ul.innerHTML += size_li;
+      quality_array.push(data.data_quality);
+    }
   });
 
   function quality_void() {
