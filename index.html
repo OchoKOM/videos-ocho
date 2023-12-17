@@ -82,13 +82,26 @@
         <div class="settings-menu">
           <div class="wrapper">
             <ul class="main-section">
-              <li class="drop-item" data-drop="quality-drop">
+              <li class="ambiant-light desktop-item">
+                <label for="ambiant-light-check">
                   <span>
-                    <svg viewBox="0 0 48 48" fill="currentColor" height="24">
-                      <use xlink:href="#tune-icon"></use>
+                    <svg viewBox="0 0 24 24" fill="currentColor" height="24">
+                      <use xlink:href="#cinema-light"></use>
                     </svg>
                   </span>
-                  <span>Qualité</span>
+                  <span>Eclairage de cinema</span>
+                  <div class="icon arrow">
+                    <input type="checkbox" id="ambiant-light-check">
+                  </div>
+                </label>
+              </li>
+              <li class="drop-item" data-drop="quality-drop">
+                <span>
+                  <svg viewBox="0 0 48 48" fill="currentColor" height="24">
+                    <use xlink:href="#tune-icon"></use>
+                  </svg>
+                </span>
+                <span>Qualité</span>
                 <div class="icon arrow">
                   <svg viewBox="0 0 48 48" fill="currentColor">
                     <use xlink:href="#chevron-right-icon"></use>
@@ -129,7 +142,7 @@
                   </svg>
                 </div>
               </li>
-              <li class="drop-item"  data-drop="info-drop">
+              <li class="drop-item" data-drop="info-drop">
                 <span id="loopToggle">
                   <svg viewBox="0 0 48 48" fill="currentColor" height="24">
                     <use xlink:href="#info-fill"></use>
@@ -146,8 +159,8 @@
             <div class="drop quality-drop" id="quality-drop">
               <div class="label">
                 <span class="back-icon">
-                  <svg viewBox="0 0 48 48" height="24" fill="currentColor">
-                    <use xlink:href="#arrow-left-icon"></use>
+                  <svg viewBox="0 0 24 24" height="24" fill="currentColor">
+                    <use xlink:href="#chevron-left-icon"></use>
                   </svg>
                 </span>
                 <span>Qualité</span>
@@ -157,15 +170,15 @@
             <div class="drop desktop-item" id="captions-drop">
               <div class="label">
                 <span class="back-icon">
-                  <svg viewBox="0 0 48 48" height="24" fill="currentColor">
-                    <use xlink:href="#arrow-left-icon"></use>
+                  <svg viewBox="0 0 24 24" height="24" fill="currentColor">
+                    <use xlink:href="#chevron-left-icon"></use>
                   </svg>
                 </span>
                 <span>Sous-titre</span>
               </div>
               <ul>
                 <li data-track="Off">
-                  <div class="check active"></div> 
+                  <div class="check active"></div>
                   <span>Non disponible</span>
                 </li>
               </ul>
@@ -173,8 +186,8 @@
             <div class="drop speed-drop desktop-item" id="speed-drop">
               <div class="label">
                 <span class="back-icon">
-                  <svg viewBox="0 0 48 48" height="24" fill="currentColor">
-                    <use xlink:href="#arrow-left-icon"></use>
+                  <svg viewBox="0 0 24 24" height="24" fill="currentColor">
+                    <use xlink:href="#chevron-left-icon"></use>
                   </svg>
                 </span>
                 <span>Vitesse de lecture</span>
@@ -209,8 +222,8 @@
             <div class="drop" id="info-drop">
               <div class="label">
                 <span class="back-icon">
-                  <svg viewBox="0 0 48 48" height="24" fill="currentColor">
-                    <use xlink:href="#arrow-left-icon"></use>
+                  <svg viewBox="0 0 24 24" height="24" fill="currentColor">
+                    <use xlink:href="#chevron-left-icon"></use>
                   </svg>
                 </span>
                 <span>Infos sur la chaine</span>
@@ -230,18 +243,21 @@
     </div>
   </div>
   <footer>
-    <label for="footer-check-box"><input type="checkbox" hidden id="footer-check-box">Afficher/Masquer la description du projet</label>
-    
+    <label for="footer-check-box"><input type="checkbox" hidden id="footer-check-box">Afficher/Masquer la description du
+      projet</label>
+
     <div class="footer-content">
-        <h3>Martin Ocho</h3>
-        <p>
-          Notre projet de lecteur vidéo HTML custom représente une approche minimaliste et performante pour la lecture de vidéos en ligne, développée entièrement en utilisant JavaScript vanilla, sans recourir à des plugins, bibliothèques externes ou frameworks.
-        </p>
+      <h3>Martin Ocho</h3>
+      <p>
+        Notre projet de lecteur vidéo HTML custom représente une approche minimaliste et performante pour la lecture de
+        vidéos en ligne, développée entièrement en utilisant JavaScript vanilla, sans recourir à des plugins,
+        bibliothèques externes ou frameworks.
+      </p>
     </div>
     <div class="footer-bottom">
-        <p>copyright &copy;2024 OchoKOM. designed by <span>Martin Ocho</span></p>
+      <p>copyright &copy;2024 OchoKOM. designed by <span>Martin Ocho</span></p>
     </div>
-</footer>
+  </footer>
   <svg style="display: none;">
     <symbol id="play-icon-fill" viewbox="0 0 24 24">
       <path d="M8,5.14V19.14L19,12.14L8,5.14Z" />
@@ -273,6 +289,10 @@
       <path
         d="m19.4 44-1-6.3q-.95-.35-2-.95t-1.85-1.25l-5.9 2.7L4 30l5.4-3.95q-.1-.45-.125-1.025Q9.25 24.45 9.25 24q0-.45.025-1.025T9.4 21.95L4 18l4.65-8.2 5.9 2.7q.8-.65 1.85-1.25t2-.9l1-6.35h9.2l1 6.3q.95.35 2.025.925Q32.7 11.8 33.45 12.5l5.9-2.7L44 18l-5.4 3.85q.1.5.125 1.075.025.575.025 1.075t-.025 1.05q-.025.55-.125 1.05L44 30l-4.65 8.2-5.9-2.7q-.8.65-1.825 1.275-1.025.625-2.025.925l-1 6.3ZM24 30.5q2.7 0 4.6-1.9 1.9-1.9 1.9-4.6 0-2.7-1.9-4.6-1.9-1.9-4.6-1.9-2.7 0-4.6 1.9-1.9 1.9-1.9 4.6 0 2.7 1.9 4.6 1.9 1.9 4.6 1.9Zm0-3q-1.45 0-2.475-1.025Q20.5 25.45 20.5 24q0-1.45 1.025-2.475Q22.55 20.5 24 20.5q1.45 0 2.475 1.025Q27.5 22.55 27.5 24q0 1.45-1.025 2.475Q25.45 27.5 24 27.5Zm0-3.5Zm-2.2 17h4.4l.7-5.6q1.65-.4 3.125-1.25T32.7 32.1l5.3 2.3 2-3.6-4.7-3.45q.2-.85.325-1.675.125-.825.125-1.675 0-.85-.1-1.675-.1-.825-.35-1.675L40 17.2l-2-3.6-5.3 2.3q-1.15-1.3-2.6-2.175-1.45-.875-3.2-1.125L26.2 7h-4.4l-.7 5.6q-1.7.35-3.175 1.2-1.475.85-2.625 2.1L10 13.6l-2 3.6 4.7 3.45q-.2.85-.325 1.675-.125.825-.125 1.675 0 .85.125 1.675.125.825.325 1.675L8 30.8l2 3.6 5.3-2.3q1.2 1.2 2.675 2.05Q19.45 35 21.1 35.4Z" />
     </symbol>
+    <symbol id="cinema-light" viewbox="0 0 24 24">
+      <path
+        d="M21 7v10H3V7h18m1-1H2v12h20V6zM11.5 2v3h1V2h-1zm1 17h-1v3h1v-3zM3.79 3 6 5.21l.71-.71L4.5 2.29 3.79 3zm2.92 16.5L6 18.79 3.79 21l.71.71 2.21-2.21zM19.5 2.29 17.29 4.5l.71.71L20.21 3l-.71-.71zm0 19.42.71-.71L18 18.79l-.71.71 2.21 2.21z" />
+    </symbol>
     <symbol id="cinema-tall-icon-fill" viewbox="0 0 24 24">
       <path d="M19 6H5c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 10H5V8h14v8z" />
     </symbol>
@@ -285,8 +305,8 @@
     <symbol id="fullscreen-close-icon-fill" viewbox="0 0 24 24">
       <path d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z" />
     </symbol>
-    <symbol id="arrow-left-icon" viewbox="0 0 48 48">
-      <path d="M24 40 8 24 24 8l2.1 2.1-12.4 12.4H40v3H13.7l12.4 12.4Z" />
+    <symbol id="chevron-left-icon" viewbox="0 0 24 24">
+      <path d="M14.96 18.96 8 12l6.96-6.96.71.71L9.41 12l6.25 6.25-.7.71z" />
     </symbol>
     <symbol id="chevron-right-icon" viewbox="0 0 48 48">
       <path d="m15.2 43.9-2.8-2.85L29.55 23.9 12.4 6.75l2.8-2.85 20 20Z" />

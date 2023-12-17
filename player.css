@@ -35,6 +35,8 @@ body {
 .player.cinema {
     max-width: initial;
     width: 100%;
+    transition: 150ms ease-in-out;
+    border-radius: 0;
 }
 
 .player.cinema {
@@ -433,7 +435,8 @@ body {
     width: 200px;
     transition: 0.2s;
 }
-.settings-menu ul li{
+.settings-menu ul li,
+.settings-menu ul li > label{
     position: relative;
     display: flex;
     align-items: center;
@@ -443,6 +446,10 @@ body {
     font-size: 0.8em;
     color: #fff8dc;
     cursor: pointer;
+}
+.settings-menu ul li > label{
+    font-size: 1em;
+    padding: 0;
 }
 .settings-menu ul li:hover{
     background: #c0c0c066;
