@@ -509,6 +509,7 @@ async function video_player() {
   timeline.addEventListener('pointermove', (e) => {
     total_time_el.textContent = format_duration(video.duration);
     let preview_position = (e.layerX / timeline.clientWidth) || 1;
+    (preview_position <= 0) && (preview_position = 0 )
     preview_thumb_el.setAttribute('data-time', format_duration(video.duration * preview_position))
     if (e.offsetX > (timeline.clientWidth - 80)) {
       timeline.style.setProperty('--overflow-pos', "-80px");

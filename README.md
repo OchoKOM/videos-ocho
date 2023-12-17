@@ -40,6 +40,8 @@ Notre lecteur vidéo HTML custom est une solution légère et performante pour i
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- lier les fichier style -->
+    <link rel="stylesheet" href="player.css">
     <link rel="stylesheet" href="styles.css">
     <title>Mon Lecteur Vidéo</title>
 </head>
