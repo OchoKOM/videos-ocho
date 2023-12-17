@@ -1,10 +1,7 @@
 const languages = {
     aa: 'Afar', ab: 'Аҧсуа', ae: 'Avesta', af: 'Afrikaans', ak: 'Akan', am: 'አማርኛ', an: 'Aragonés', ar: 'العربية', as: 'অসমীয়া', av: 'Авар мацӀ', ay: 'Aymar aru', az: 'Azərbaycan dili', ba: 'Башҡорт теле', be: 'Беларуская', bg: 'Български', bh: 'भोजपुरी', bi: 'Bislama', bm: 'Bamanankan', bn: 'বাংলা', bo: 'བོད་ཡིག', br: 'Brezhoneg', bs: 'Bosanski', ca: 'Català', ce: 'Нохчийн мотт', ch: 'Chamoru', co: 'Corsu', cr: 'ᓀᐦᐃᔭᐍᐏᐣ', cs: 'Čeština', cu: 'Словѣньскъ / ⰔⰎⰑⰂⰡⰐⰠⰔⰍⰟ', cv: 'Чӑваш чӗлхи', cy: 'Cymraeg', da: 'Dansk', de: 'Deutsch', dv: 'ދިވެހިބަސް', dz: 'རྫོང་ཁ', ee: 'Ɛʋɛgbɛ', el: 'Ελληνικά', en: 'English', eo: 'Esperanto', es: 'Español', et: 'Eesti keel', eu: 'Euskara', fa: 'فارسی', ff: 'Fulfulde', fi: 'Suomi', fj: 'Na Vosa Vakaviti', fo: 'Føroyskt', fr: 'Français', fy: 'Frysk', ga: 'Gaeilge', gd: 'Gàidhlig', gl: 'Galego', gn: 'Avañe\'ẽ', gu: 'ગુજરાતી', gv: 'Gaelg', ha: 'هَوُسَ', he: 'עברית', hi: 'हिन्दी', ho: 'Hiri Motu', hr: 'Hrvatski', ht: 'Kreyòl Ayisyen', hu: 'Magyar', hy: 'Հայերեն', hz: 'Otsiherero', ia: 'Interlingua', id: 'Bahasa Indonesia', ie: 'Interlingue', ig: 'Igbo', ii: 'ꆇꉙ', ik: 'Iñupiaq', io: 'Ido', is: 'Íslenska', it: 'Italiano', iu: 'ᐃᓄᒃᑎᑐᑦ', ja: '日本語', jv: 'ꦧꦱꦗꦮ', ka: 'ქართული', kg: 'KiKongo', ki: 'Gĩkũyũ', kj: 'Kuanyama', kk: 'Қазақ тілі', kl: 'Kalaallisut', km: 'ភាសាខ្មែរ', kn: 'ಕನ್ನಡ', ko: '한국어', kr: 'Kanuri', ks: 'कश्मीरी / كشميري', ku: 'Kurdî', kv: 'Коми кыв', kw: 'Kernewek', ky: 'Кыргыз тили', la: 'Latina', lb: 'Lëtzebuergesch', lg: 'Luganda', li: 'Limburgs', ln: 'Lingála', lo: 'ພາສາລາວ', lt: 'Lietuvių', lu: 'Tshiluba', lv: 'Latviešu', mg: 'Malagasy', mh: 'Kajin Majel / Ebon', mi: 'Māori', mk: 'Македонски', ml: 'മലയാളം', mn: 'Монгол хэл', mr: 'मराठी', ms: 'Bahasa Melayu', mt: 'Malti', my: 'မြန်မာဘာသာ', na: 'Dorerin Naoero', nb: 'Norsk bokmål', nd: 'Sindebele', ne: 'नेपाली', ng: 'Oshiwambo', nl: 'Nederlands', nn: 'Norsk nynorsk', no: 'Norsk', nr: 'Sindebele', nv: 'Diné bizaad', ny: 'Chichewa', oc: 'Occitan', oj: 'Anishinaabemowin', om: 'Afaan Oromoo', or: 'ଓଡ଼ିଆ', os: 'Ирон æвзаг', pa: 'ਪੰਜਾਬੀ', pi: 'पाऴि', pl: 'Polski', ps: 'پښتو', pt: 'Português', qu: 'Runa Simi', rm: 'Rumantsch', rn: 'Kirundi', ro: 'Română', ru: 'Русский', rw: 'Kinyarwanda', sa: 'संस्कृतम्', sc: 'Sardu', sd: 'سنڌي', se: 'Davvisámegiella', sg: 'Sängö', si: 'සිංහල', sk: 'Slovenčina', sl: 'Slovenščina', sm: 'Gagana Samoa', sn: 'ChiShona', so: 'Soomaaliga', sq: 'Shqip', sr: 'Српски', ss: 'SiSwati', st: 'Sesotho', su: 'Basa Sunda', sv: 'Svenska', ty: 'Reo Tahiti', ta: 'தமிழ்', tt: 'Tatarça', te: 'తెలుగు', tg: 'тоҷикӣ', th: 'ไทย', ti: 'ትግርኛ', tk: 'Türkmençe', tl: 'Tagalog', tn: 'Setswana', to: 'Lea faka-Tonga', tr: 'Türkçe', ts: 'Xitsonga', tw: 'Twi', ug: 'ئۇيغۇرچە / Uyghurche', uk: 'Українська', ur: 'اردو', uz: 'Oʻzbek tili', ve: 'Tshivenda', vi: 'Tiếng Việt', vo: 'Volapük', wa: 'Walon', wo: 'Wollof', xh: 'isiXhosa', yi: 'ייִדיש', yo: 'Yorùbá', za: 'Cuengh', zh: '中文', zu: 'isiZulu',
 };
-const iso_en = {
-    aa: 'Afar', ab: 'Abkhazian', ae: 'Avestan', af: 'Afrikaans', ak: 'Akan', am: 'Amharic', an: 'Aragonese', ar: 'Arabic', as: 'Assamese', av: 'Avaric', ay: 'Aymara', az: 'Azerbaijani', ba: 'Bashkir', be: 'Belarusian', bg: 'Bulgarian', bh: 'Bihari', bi: 'Bislama', bm: 'Bambara', bn: 'Bengali', bo: 'Tibetan', br: 'Breton', bs: 'Bosnian', ca: 'Catalan', ce: 'Chechen', ch: 'Chamorro', co: 'Corsican', cr: 'Cree', cs: 'Czech', cu: 'Church Slavic', cv: 'Chuvash', cy: 'Welsh', da: 'Danish', de: 'German', dv: 'Divehi', dz: 'Dzongkha', ee: 'Ewe', el: 'Greek', en: 'English', eo: 'Esperanto', es: 'Spanish', et: 'Estonian', eu: 'Basque', fa: 'Persian', ff: 'Fulah', fi: 'Finnish', fj: 'Fijian', fo: 'Faroese', fr: 'French', fy: 'Western Frisian', ga: 'Irish', gd: 'Scottish Gaelic', gl: 'Galician', gn: 'Guarani', gu: 'Gujarati', gv: 'Manx', ha: 'Hausa', he: 'Hebrew', hi: 'Hindi', ho: 'Hiri Motu', hr: 'Croatian', ht: 'Haitian', hu: 'Hungarian', hy: 'Armenian', hz: 'Herero', ia: 'Interlingua', id: 'Indonesian', ie: 'Interlingue', ig: 'Igbo', ii: 'Sichuan Yi', ik: 'Inupiaq', io: 'Ido', is: 'Icelandic', it: 'Italian', iu: 'Inuktitut', ja: 'Japanese', jv: 'Javanese', ka: 'Georgian', kg: 'Kongo', ki: 'Kikuyu', kj: 'Kwanyama', kk: 'Kazakh', kl: 'Kalaallisut', km: 'Khmer', kn: 'Kannada', ko: 'Korean', kr: 'Kanuri', ks: 'Kashmiri', ku: 'Kurdish', kv: 'Komi', kw: 'Cornish', ky: 'Kirghiz', la: 'Latin', lb: 'Luxembourgish', lg: 'Ganda', li: 'Limburgish', ln: 'Lingala', lo: 'Lao', lt: 'Lithuanian', lu: 'Luba-Katanga', lv: 'Latvian', mg: 'Malagasy', mh: 'Marshallese', mi: 'Maori', mk: 'Macedonian', ml: 'Malayalam', mn: 'Mongolian', mr: 'Marathi', ms: 'Malay', mt: 'Maltese', my: 'Burmese', na: 'Nauru', nb: 'Norwegian Bokmål', nd: 'North Ndebele', ne: 'Nepali', ng: 'Ndonga', nl: 'Dutch', nn: 'Norwegian Nynorsk', no: 'Norwegian', nr: 'South Ndebele', nv: 'Navajo', ny: 'Chichewa', oc: 'Occitan', oj: 'Ojibwa', om: 'Oromo', or: 'Oriya', os: 'Ossetian', pa: 'Punjabi', pi: 'Pali', pl: 'Polish', ps: 'Pashto', pt: 'Portuguese', qu: 'Quechua', rm: 'Romansh', rn: 'Kirundi', ro: 'Romanian', ru: 'Russian', rw: 'Kinyarwanda', sa: 'Sanskrit', sc: 'Sardinian', sd: 'Sindhi', se: 'Northern Sami', sg: 'Sango', si: 'Sinhala', sk: 'Slovak', sl: 'Slovenian', sm: 'Samoan', sn: 'Shona', so: 'Somali', sq: 'Albanian', sr: 'Serbian', ss: 'Swati', st: 'Southern Sotho', su: 'Sundanese', sw: 'Swahili', sv: 'Swedish', ty: 'Tahitian', ta: 'Tamil', tt: 'Tatar', te: 'Telugu', tg: 'Tajik', th: 'Thai', ti: 'Tigrinya', tk: 'Turkmen', tl: 'Tagalog', tn: 'Tswana', to: 'Tonga', tr: 'Turkish', ts: 'Tsonga', tw: 'Twi', ug: 'Uighur', uk: 'Ukrainian', ur: 'Urdu', uz: 'Uzbek', ve: 'Venda', vi: 'Vietnamese', vo: 'Volapük', wa: 'Walloon', wo: 'Wolof', xh: 'Xhosa', yi: 'Yiddish', yo: 'Yoruba', za: 'Zhuang', zh: 'Chinese', zu: 'Zulu',
-};
-  
+
 function video_player() {
     const player = document.querySelector('.player'),
         loader_spinner = document.querySelector('.loader'),
@@ -19,9 +16,13 @@ function video_player() {
         current_time_el = document.querySelector('.current-time'),
         total_time_el = document.querySelector('.total-time'),
         auto_play = document.querySelector('.auto-play'),
+        subtitle_btn = document.querySelector('.caption-btn'),
+        subtitle_ul = document.querySelector('.captions-drop ul'),
         settings_btn = document.querySelector('.settings-btn'),
         settings_menu = document.querySelector('.settings-menu'),
         main_menus_ = settings_menu.querySelectorAll('.main-section .drop-item'),
+        cinema_light_check = document.getElementById('cinema-light-check'),
+        loop_mode_check = document.getElementById('loop-check'),
         menus = settings_menu.querySelectorAll('.drop'),
         back_btns = settings_menu.querySelectorAll('.drop .back-icon'),
         quality_ul = settings_menu.querySelector('.quality-drop ul'),
@@ -157,6 +158,7 @@ function video_player() {
     video.onloadeddata = () => {
         total_time_el.textContent = format_duration(video.duration);
     }
+    video.addEventListener("timeupdate", ambiant_light)
     video.addEventListener("timeupdate", () => {
         current_time_el.textContent = format_duration(video.currentTime);
         total_time_el.textContent = format_duration(video.duration);
@@ -332,6 +334,24 @@ function video_player() {
     }
 
     function settings_void() {
+        let check_cinema = sessionStorage.getItem('cinema-light');
+        cinema_light_check.checked = Boolean(Number(check_cinema));
+        cinema_light_check.addEventListener('change', () => {
+            cinema_light_check.checked ?
+                sessionStorage.setItem('cinema-light', 1) :
+                sessionStorage.removeItem('cinema-light');
+            if (!cinema_light_check.checked && video.parentNode.querySelector(".light")) {
+                video.removeEventListener('timeupdate' , ambiant_light);
+                video.parentNode.querySelector(".light").style.boxShadow = 'none';
+                video.parentNode.querySelector(".light").remove();
+            }
+            cinema_light_check.checked && video.addEventListener("timeupdate", ambiant_light);
+        })
+        loop_mode_check.addEventListener('change', (e) => {
+            console.log(e);
+            video.loop =  Boolean(loop_mode_check.checked)
+            console.log(video.loop);
+        })
         main_menus_.forEach(menu => {
             menu.addEventListener('click', () => {
                 const menu_id = menu.getAttribute('data-drop');
@@ -346,10 +366,9 @@ function video_player() {
         });
 
         quality_void()
-        caption_void()
         playback_speed_void()
     }
-    // qualite
+    // qualites
     let quality_array = [];
 
     // Afficher les paramètres de qualité
@@ -409,7 +428,7 @@ function video_player() {
                         temp_video.currentTime = current_time;
                         temp_video.volume = 0
                         temp_video.autoplay = true;
-                        temp_video.addEventListener('canplay', ()=>{
+                        temp_video.addEventListener('canplay', () => {
                             video.src = source.src;
                             video.currentTime = temp_video.currentTime;
                             video.autoplay = true;
@@ -421,9 +440,115 @@ function video_player() {
             })
         })
     }
-    function caption_void() {
+    // sous-titres
+    let tracks = document.querySelectorAll('track');
+    let caption_text = document.querySelector('.caption-text');
 
+    caption_void()
+    if (tracks.length > 1) {
+        const caption_active = sessionStorage.getItem('caption')
+        if (caption_active) {
+            let lang = sessionStorage.getItem('lang');
+            select_captions(lang);
+        }
+        subtitle_btn.addEventListener('click', () => {
+            let lang = sessionStorage.getItem('lang') ? sessionStorage.getItem('lang') :
+                document.querySelectorAll('[data-track]')[1].getAttribute('data-track');
+            (!subtitle_btn.classList.contains('active')) ? select_captions(lang) :
+                select_captions('Off');
+        })
     }
+    let text_tracks = video.textTracks;
+    for (let i = 0; i < text_tracks.length; i++) {
+        const track = text_tracks[i];
+        track.addEventListener('cuechange', () => {
+            if (track.mode === 'showing') {
+                let activeCue = track.activeCues[0];
+                caption_text.innerHTML = Boolean(activeCue) ?
+                    `<mark>${activeCue.text}</mark>` :
+                    '';
+            }
+        })
+    }
+    function caption_void() {
+        let track_li = `
+        <li data-track="Off">
+            <div class="check active"></div>
+            <span>Desactivé</span>
+        </li>
+        `;
+        if (!tracks.length) {
+            track_li = `
+            <li data-track="Off">
+                <div class="check active"></div>
+                <span>Non disponible</span>
+            </li>
+            `;
+        }
+
+        // Convertir NodeList en tableau
+        const tracksArray = Array.from(tracks);
+
+        // Tri des tracks par srclang
+        tracksArray.sort((a, b) => {
+            const langA = a.srclang.toUpperCase(); // Convertir en majuscules pour assurer une comparaison insensible à la casse
+            const langB = b.srclang.toUpperCase();
+            if (langA < langB) {
+                return -1;
+            }
+            if (langA > langB) {
+                return 1;
+            }
+            return 0;
+        });
+
+        tracksArray.forEach(track => {
+            track.label = languages[`${track.srclang}`];
+            track_li += `
+            <li data-track="${track.srclang}">
+                <div class="check"></div>
+                <span>${track.label}</span>
+            </li>
+            `;
+        });
+
+        subtitle_ul.innerHTML = track_li;
+        const subtitle_li = subtitle_ul.querySelectorAll('li');
+        subtitle_li.forEach(li => {
+            li.addEventListener('click', () => {
+                select_captions(li.getAttribute('data-track'))
+            });
+        });
+    }
+
+    function select_captions(lang) {
+        let li = document.querySelector(`[data-track=${lang}]`)
+        const all_checks = li.parentNode.querySelectorAll('.check');
+        remove_active_classes(all_checks);
+        li.querySelector('.check').classList.add('active');
+        change_caption(li);
+    }
+
+    function change_caption(li) {
+        let label = li.getAttribute('data-track');
+        let text_tracks = video.textTracks;
+        for (let i = 0; i < text_tracks.length; i++) {
+            let track = text_tracks[i];
+            track.mode = "disabled";
+            if (track.language === label) {
+                track.mode = "showing";
+                sessionStorage.setItem('lang', track.language)
+                sessionStorage.setItem('caption', track.language)
+                subtitle_btn.classList.add('active')
+            }
+            if (label.toLowerCase() === 'off') {
+                sessionStorage.removeItem('caption')
+                subtitle_btn.classList.remove('active')
+                caption_text.innerHTML = ''
+            }
+        }
+    }
+    // Vitesse de lecture
     function playback_speed_void() {
         playbacks.forEach(e => {
             const all_checks = e.parentNode.querySelectorAll('.check');
@@ -538,65 +663,68 @@ function generate_thumbnails(src) {
         });
     });
 }
-function ambiant_light(video) {
-    video.addEventListener('timeupdate', () => {
-        let temp_video = document.createElement('video');
-        temp_video.src = video.src;
-        temp_video.currentTime = Math.floor(video.currentTime);
-        // Créer un élément canvas pour dessiner le fond
-        var canvas = document.createElement("canvas");
-        var ctx = canvas.getContext("2d");
+function ambiant_light(e) {
+    let check_cinema = sessionStorage.getItem('cinema-light');
+    video = e.target
+    if (!check_cinema) {
+        return
+    }
+    let temp_video = document.createElement('video');
+    temp_video.src = video.src;
+    temp_video.currentTime = Math.floor(video.currentTime);
+    // Créer un élément canvas pour dessiner le fond
+    var canvas = document.createElement("canvas");
+    var ctx = canvas.getContext("2d");
 
-        temp_video.addEventListener('seeked', () => {
-            // Définir la taille du canvas selon la taille de l'image
-            canvas.width = temp_video.videoWidth;
-            canvas.height = temp_video.videoHeight;
+    temp_video.addEventListener('seeked', () => {
+        // Définir la taille du canvas selon la taille de l'image
+        canvas.width = temp_video.videoWidth;
+        canvas.height = temp_video.videoHeight;
 
-            // Dessiner l'image sur le canvas
-            ctx.drawImage(temp_video, 0, 0);
+        // Dessiner l'image sur le canvas
+        ctx.drawImage(temp_video, 0, 0);
 
-            // Obtenir les données des pixels de l'image
-            var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-            var pixels = imageData.data;
+        // Obtenir les données des pixels de l'image
+        var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        var pixels = imageData.data;
 
-            // Parcourir les pixels et calculer la moyenne des couleurs
-            var r = 0,
-                g = 0,
-                b = 0,
-                n = 0;
-            for (var i = 0; i < pixels.length; i += 4) {
-                r += pixels[i]; // rouge
-                g += pixels[i + 1]; // vert
-                b += pixels[i + 2]; // bleu
-                n++; // nombre de pixels
+        // Parcourir les pixels et calculer la moyenne des couleurs
+        var r = 0,
+            g = 0,
+            b = 0,
+            n = 0;
+        for (var i = 0; i < pixels.length; i += 4) {
+            r += pixels[i]; // rouge
+            g += pixels[i + 1]; // vert
+            b += pixels[i + 2]; // bleu
+            n++; // nombre de pixels
+        }
+        r = Math.round(r / n); // moyenne du rouge
+        g = Math.round(g / n); // moyenne du vert
+        b = Math.round(b / n); // moyenne du bleu
+
+        // Convertir les valeurs RGB en une chaîne de couleur hexadécimale
+        var rgbToHex = function (rgb) {
+            var hex = Number(rgb).toString(16);
+            if (hex.length < 2) {
+                hex = "0" + hex;
             }
-            r = Math.round(r / n); // moyenne du rouge
-            g = Math.round(g / n); // moyenne du vert
-            b = Math.round(b / n); // moyenne du bleu
+            return hex;
+        };
+        var hex = "#" + rgbToHex(r) + rgbToHex(g) + rgbToHex(b);
 
-            // Convertir les valeurs RGB en une chaîne de couleur hexadécimale
-            var rgbToHex = function (rgb) {
-                var hex = Number(rgb).toString(16);
-                if (hex.length < 2) {
-                    hex = "0" + hex;
-                }
-                return hex;
-            };
-            var hex = "#" + rgbToHex(r) + rgbToHex(g) + rgbToHex(b);
+        // Créer un élément div pour afficher le fond
+        var light = video.parentNode.querySelector(".light") || document.createElement('div');
+        let height_ratio = temp_video.videoWidth + "/" + temp_video.videoHeight;
+        // Définir le style du light selon la couleur moyenne et la luminosité
+        light.style.setProperty('--hx', hex)
+        light.style.setProperty('--ratio', height_ratio)
+        video.style.setProperty('--hx', hex);
+        if (light !== video.parentNode.querySelector(".light")) {
+            light.classList.add('light');
+            video.parentNode.insertBefore(light, video);
+        }
 
-            // Créer un élément div pour afficher le fond
-            var light = video.parentNode.querySelector(".light") || document.createElement('div');
-            let height_ratio = temp_video.videoWidth + "/" + temp_video.videoHeight;
-            // Définir le style du light selon la couleur moyenne et la luminosité
-            light.style.setProperty('--hx', hex)
-            light.style.setProperty('--ratio', height_ratio)
-            video.style.setProperty('--hx', hex);
-            if (light !== video.parentNode.querySelector(".light")) {
-                light.classList.add('light');
-                video.parentNode.insertBefore(light, video);
-            }
-
-        })
     })
 }
 video_player();
