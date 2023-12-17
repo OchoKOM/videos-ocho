@@ -411,6 +411,7 @@ async function video_player() {
   }
   function toggle_play() {
     video.paused ? play_video() : pause_video();
+    settings_btn.classList.contains('active') && remove_settings();
   }
 
   function play_video() {
@@ -452,6 +453,7 @@ async function video_player() {
       let stored_volume = parseFloat(localStorage.getItem('volume')) || 1
       video.volume = isFinite(stored_volume) ? stored_volume : 1
     }
+    settings_btn.classList.contains('active') && remove_settings();
   }
   video.addEventListener('volumechange', volume_change);
   volume_slider.addEventListener('change', () => {
@@ -486,7 +488,6 @@ async function video_player() {
       loader_spinner.classList.add('active');
     })
   })
-  video.oncanplaythrough
   video.addEventListener("canplaythrough", () => {
     loader_spinner.classList.add('active');
   })
@@ -536,7 +537,6 @@ async function video_player() {
         }
       });
     })
-
   })
   timeline.addEventListener('pointerdown', () => {
     timeline.addEventListener('click', skip_time);
@@ -547,12 +547,12 @@ async function video_player() {
   })
   function skip_time(e) {
     if (e.target !== timeline) {
-      console.log(e.target);
       return
     }
     let time_percent = (e.offsetX / timeline.clientWidth);
     timeline.style.setProperty('--progress-position', time_percent);
     video.currentTime = video.duration * time_percent;
+    settings_btn.classList.contains('active') && remove_settings();
   }
 
 
@@ -616,6 +616,7 @@ async function video_player() {
     auto_play.classList.toggle('active');
     video.autoplay = auto_play.classList.contains('active');
     save_autoplay();
+    settings_btn.classList.contains('active') && remove_settings();
   }
   function save_autoplay() {
     // Sauvearder les preferences de lecture automatique ici
@@ -636,10 +637,13 @@ async function video_player() {
     }
     video_container.classList.toggle('cinema');
     cinema_btn.querySelector('svg').innerHTML = video_container.classList.contains('cinema') ? cinema_svg['on'] : cinema_svg['off'];
+    settings_btn.classList.contains('active') && remove_settings();
   }
   function toggle_fullscreen_mode() {
     document.fullscreenElement === null ?
-      video_container.requestFullscreen() : document.exitFullscreen();
+    video_container.requestFullscreen() : document.exitFullscreen();
+    settings_btn.classList.contains('active') && remove_settings();
+    settings_btn.classList.contains('active') && remove_settings();
   }
   function change_fullscreen() {
     const fullscreen_svg = {
@@ -655,6 +659,7 @@ async function video_player() {
     }
     document.pictureInPictureElement === null ?
       video.requestPictureInPicture() : document.exitPictureInPicture();
+      settings_btn.classList.contains('active') && remove_settings();
   }
   // ! Settings 
   // activer la section des parametres
@@ -796,6 +801,7 @@ async function video_player() {
         document.querySelectorAll('[data-track]')[1].getAttribute('data-track');
       (!subtitle_btn.classList.contains('active')) ? select_captions(lang) :
         select_captions('Off');
+        settings_btn.classList.contains('active') && remove_settings();
     })
   }
   let text_tracks = video.textTracks;
