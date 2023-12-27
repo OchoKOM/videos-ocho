@@ -1,59 +1,71 @@
-*,
-*::before,
-*::after {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-        Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-}
-
-body {
-    background: #0f0f0f;
+ocho {
+    font-family: system-ui, -apple-system, 
+    BlinkMacSystemFont, 'Segoe UI', 
+    Roboto, Oxygen, Ubuntu, Cantarell, 
+    'Open Sans', 'Helvetica Neue', sans-serif;
     color: #f0f0f0;
-}
-
-.container {
     position: relative;
-    width: 100%;
-    top: 70px;
-}
-
-.player {
-    position: relative;
-    background: #80808062;
+    background: #00000062;
     width: 90%;
     max-width: 850px;
+    max-height: 90vh;
     border-radius: 10px;
     display: flex;
     justify-content: center;
     margin-inline: auto;
     background: #000000dd;
+    transition: 150ms ease-in-out;
+}
+ocho,
+ocho *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.player.fullscreen,
-.player.cinema {
+
+ocho.fullscreen,
+ocho.cinema {
     max-width: initial;
     width: 100%;
     transition: 150ms ease-in-out;
     border-radius: 0;
 }
 
-.player.cinema {
+ocho.cinema {
     max-height: 80vh;
 }
-
-.player.fullscreen {
+ocho.fullscreen {
     max-height: 100vh;
 }
+.light {
+    position: absolute;
+    margin: auto;
+    inset: 0;
+    border-radius: inherit;
+    box-shadow: var(--hx) 0px 0px 100px;
+    filter: brightness(200%);
+    background: var(--hx);
+    opacity: 0.5;
+    width: 100%;
+    max-width: 850px;
+    max-height: 80vh;
+    aspect-ratio: var(--ratio);
+    transition: 0.5s;
+    z-index: -1;
+}
+ocho video {
+    width: 100%;
+    border-radius: inherit;
+    transition: 150ms ease-in-out;
+}
 
-.player.cinema video {
-    height: 100%;
+ocho.cinema video {
     max-width: 850px;
     border-radius: inherit;
 }
 
-.player.fullscreen video {
+ocho.fullscreen video {
     max-width: initial;
     max-height: 100%;
     width: 100%;
@@ -84,9 +96,9 @@ body {
     border-radius: inherit;
 }
 
-.player:hover .video-controls-container,
-.player:focus-within .video-controls-container,
-.player.paused .video-controls-container {
+ocho:hover .video-controls-container,
+ocho:focus-within .video-controls-container,
+ocho.paused .video-controls-container {
     opacity: 1;
 }
 
@@ -104,9 +116,9 @@ video::cue {
     user-select: none;
 }
 
-.player:hover .caption-text,
-.player:focus-within .caption-text,
-.player.paused .caption-text {
+ocho:hover .caption-text,
+ocho:focus-within .caption-text,
+ocho.paused .caption-text {
     bottom: 60px;
 }
 
@@ -142,6 +154,7 @@ video::cue {
     padding: 0.25rem;
     align-items: center;
     overflow: hidden;
+    width: 100%;
 }
 
 .video-controls-container .controls button {
@@ -164,6 +177,14 @@ video::cue {
 
 .video-controls-container .controls button:hover {
     opacity: 1;
+}
+.video-controls-container .controls .next-btn,
+.video-controls-container .controls .prev-btn{
+    display: none;
+}
+.video-controls-container .controls .next-btn.active,
+.video-controls-container .controls .prev-btn.active{
+    display: flex;
 }
 
 .volume-container {
@@ -218,6 +239,7 @@ video::cue {
     cursor: pointer;
     display: flex;
     align-items: center;
+    min-width: calc(100% - 1rem);
 }
 
 .timeline {
@@ -274,7 +296,7 @@ video::cue {
     height: 200%;
     aspect-ratio: 1;
     top: -50%;
-    left: calc(var(--progress-position) * 100%);
+    left: calc(var(--progress-position, 0) * 100%);
     background: dodgerblue;
     border-radius: 50%;
     transition: transform 150ms ease-in-out;
@@ -642,15 +664,20 @@ video::cue {
     overflow: hidden;
     outline: 5px solid #1e90ff66;
 }
+.info-drop .channel-profile img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 
 @font-face {
     font-family: "Ocho";
-    src: url(icon.woff2) format("woff2"),
-        url(icon.ttf) format("truetype");
+    src: url(fonts/icon.woff2) format("woff2"),
+        url(fonts/icon.ttf) format("truetype");
 }
 
 @media (max-width:400px) {
-    .player {
+    ocho {
         width: 100%;
         border-radius: 0;
     }

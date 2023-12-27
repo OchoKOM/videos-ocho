@@ -22,46 +22,56 @@ async function video_player() {
           </div>
         </div>
         <div class="controls">
-          <button class="play-pause-btn">
+          <button class="prev-btn desktop-item" title="Précédent">
+            <svg fill="currentColor" height="24">
+              <use xlink:href="#prev-icon"></use>
+            </svg>
+          </button>
+          <button class="play-pause-btn" title="Lecture (k)">
             <svg fill="currentColor" height="24">
               <use xlink:href="#play-icon-fill"></use>
             </svg>
           </button>
+          <button class="next-btn desktop-item" title="Suivant">
+            <svg fill="currentColor" height="24">
+              <use xlink:href="#next-icon"></use>
+            </svg>
+          </button>
           <div class="volume-container">
-            <button class="mute-btn">
+            <button class="mute-btn" title="Son (m)">
               <svg fill="currentColor" height="24">
                 <use xlink:href="#volume-high-icon"></use>
               </svg>
             </button>
-            <input type="range" min="0" max="1" step="any" value="1" class="volume-slider desktop-item">
+            <input type="range" title="Volume" min="0" max="1" step="any" value="1" class="volume-slider desktop-item">
           </div>
           <div class="duration-container">
             <span class="current-time">0:00</span>
             <span>/</span>
             <span class="total-time">-</span>
           </div>
-          <div class="auto-play desktop-item"></div>
-          <button class="caption-btn desktop-item">
+          <div class="auto-play desktop-item" title="Lecture automatique"></div>
+          <button class="caption-btn desktop-item" title="Sous-titres">
             <svg fill="currentColor" height="24">
               <use xlink:href="#subtitle-icon"></use>
             </svg>
           </button>
-          <button class="settings-btn">
+          <button class="settings-btn" title="Sous-titres">
             <svg fill="currentColor" height="24">
               <use xlink:href="#cog-icon"></use>
             </svg>
           </button>
-          <button class="pip-btn  desktop-item">
+          <button class="pip-btn  desktop-item" title="Mode lecteur reduit (i)">
             <svg fill="currentColor" height="24">
               <use xlink:href="#pip-icon-fill"></use>
             </svg>
           </button>
-          <button class="cinema-btn  desktop-item">
+          <button class="cinema-btn  desktop-item" title="Mode cinéma (t)">
             <svg fill="currentColor" height="24">
               <use xlink:href="#cinema-tall-icon-fill"></use>
             </svg>
           </button>
-          <button class="fullscreen-btn">
+          <button class="fullscreen-btn" title="Mode plein écran (f)">
             <svg fill="currentColor" height="24">
               <use xlink:href="#fullscreen-open-icon-fill"></use>
             </svg>
@@ -80,7 +90,7 @@ async function video_player() {
                   <span>Eclairage de cinema</span>
                   <div class="icon arrow">
                     <div class="cl-switch">
-                      <input type="checkbox" id="cinema-light-check">
+                      <input type="checkbox" class="cinema-light-check">
                       <span></span>
                     </div>
                   </div>
@@ -99,7 +109,7 @@ async function video_player() {
                   </svg>
                 </div>
               </li>
-              <li class="drop-item" data-drop="captions-drop">
+              <li class="drop-item  desktop-item" data-drop="captions-drop">
                 <span>
                   <svg viewBox="0 0 48 48" height="24" fill="currentColor">
                     <use xlink:href="#caption-icon"></use>
@@ -122,14 +132,14 @@ async function video_player() {
                   <span>Lecture en boucle</span>
                   <div class="icon arrow">
                     <div class="cl-switch">
-                      <input type="checkbox" id="loop-check">
+                      <input type="checkbox" class="loop-check" >
                       <span></span>
                     </div>
                   </div>
                 </label>
               </li>
               <li class="drop-item desktop-item" data-drop="speed-drop">
-                <span id="loopToggle">
+                <span>
                   <svg viewBox="0 0 48 48" fill="currentColor" height="24">
                     <use xlink:href="#playback-speed"></use>
                   </svg>
@@ -141,8 +151,8 @@ async function video_player() {
                   </svg>
                 </div>
               </li>
-              <li class="drop-item" data-drop="info-drop">
-                <span id="loopToggle">
+              <li class="drop-item  desktop-item" data-drop="info-user-drop">
+                <span>
                   <svg viewBox="0 0 48 48" fill="currentColor" height="24">
                     <use xlink:href="#info-fill"></use>
                   </svg>
@@ -166,7 +176,7 @@ async function video_player() {
               </div>
               <ul></ul>
             </div>
-            <div class="drop captions-drop" id="captions-drop">
+            <div class="drop captions-drop  desktop-item">
               <div class="label">
                 <span class="back-icon">
                   <svg viewBox="0 0 24 24" height="24" fill="currentColor">
@@ -179,7 +189,7 @@ async function video_player() {
 
               </ul>
             </div>
-            <div class="drop speed-drop desktop-item" id="speed-drop">
+            <div class="drop speed-drop desktop-item">
               <div class="label">
                 <span class="back-icon">
                   <svg viewBox="0 0 24 24" height="24" fill="currentColor">
@@ -215,7 +225,7 @@ async function video_player() {
                 </li>
               </ul>
             </div>
-            <div class="drop" id="info-drop">
+            <div class="drop info-user-drop  desktop-item">
               <div class="label">
                 <span class="back-icon">
                   <svg viewBox="0 0 24 24" height="24" fill="currentColor">
@@ -245,9 +255,14 @@ async function video_player() {
     <symbol id="pause-icon-fill" viewbox="0 0 24 24">
       <path d="M14,19H18V5H14M6,19H10V5H6V19Z" />
     </symbol>
+    <symbol id="prev-icon" viewbox="0 0 48 48">
+      <path d="M11 36V12h3v24Zm26 0L19.7 24 37 12Zm-3-12Zm0 6.25v-12.5L24.95 24Z"/>
+    </symbol>
+    <symbol id="next-icon" viewbox="0 0 48 48">
+      <path d="M34 36V12h3v24Zm-23 0V12l17.3 12Zm3-12Zm0 6.25L23.05 24 14 17.75Z"/>
+    </symbol>
     <symbol id="volume-high-icon" viewbox="0 0 48 48">
-      <path
-        d="M28 41.45v-3.1q4.85-1.4 7.925-5.375T39 23.95q0-5.05-3.05-9.05-3.05-4-7.95-5.35v-3.1q6.2 1.4 10.1 6.275Q42 17.6 42 23.95t-3.9 11.225Q34.2 40.05 28 41.45ZM6 30V18h8L24 8v32L14 30Zm21 2.4V15.55q2.75.85 4.375 3.2T33 24q0 2.85-1.65 5.2T27 32.4Zm-6-16.8L15.35 21H9v6h6.35L21 32.45ZM16.3 24Z" />
+      <path d="M28 41.45v-3.1q4.85-1.4 7.925-5.375T39 23.95q0-5.05-3.05-9.05-3.05-4-7.95-5.35v-3.1q6.2 1.4 10.1 6.275Q42 17.6 42 23.95t-3.9 11.225Q34.2 40.05 28 41.45ZM6 30V18h8L24 8v32L14 30Zm21 2.4V15.55q2.75.85 4.375 3.2T33 24q0 2.85-1.65 5.2T27 32.4Zm-6-16.8L15.35 21H9v6h6.35L21 32.45ZM16.3 24Z" />
     </symbol>
     <symbol id="volume-low-icon" viewbox="0 0 48 48">
       <path
@@ -317,606 +332,730 @@ async function video_player() {
     </symbol>
   </svg>
     `
+  let style_sheet = document.createElement('link');
+  let current_index = 0;
+  let new_index = 0;
+  style_sheet.rel = 'stylesheet';
+  style_sheet.href = 'player.css';
+  document.head.prepend(style_sheet);
   document.body.innerHTML += player_svgs;
   await new Promise((resolve, reject) => {
     let ocho_player = document.querySelectorAll('ocho');
     ocho_player.forEach(ocho => {
-      let video = document.createElement('video');
-      ocho.classList.add('player');
+      if (ocho.getAttribute('type') === "playlist") {
+        let playlist = document.getElementById(ocho.getAttribute('playlist'))
+        let playlist_item = playlist.querySelectorAll('ocho-pi');
+        for (let i = 0; i < playlist_item.length; i++) {
+          const element = playlist_item[i];
+          if (i === current_index) {
+            load_ocho_player(element)
+          }
+        }
+      } else {
+        load_ocho_player(ocho)
+      }
+      ocho.innerHTML += player_controls;
+      function load_ocho_player(player) {
+        let video = document.createElement('video');
+        ocho.classList.add('player');
+        video.classList.add('main-video');
+        let player_size = player.getAttribute('size') ? player.getAttribute('size') : 0;
+        video.src = player.getAttribute('src') ? player.getAttribute('src') : '';
+        video.setAttribute('size', player_size);
+        let sources = player.querySelectorAll('source');
+        let tracks = player.querySelectorAll('track');
+        ocho.innerHTML = '';
+        ocho.appendChild(video);
+        sources.forEach(source => {
+          video.appendChild(source)
+        });
+        tracks.forEach(track => {
+          video.appendChild(track)
+        });
+      }
+    })
+    resolve()
+  });
+  const players = document.querySelectorAll('.player')
+  players.forEach(player => {
+    const loader_spinner = player.querySelector('.loader'),
+      timeline = player.querySelector('.timeline'),
+      loaded_progress = player.querySelector('.loaded-progress'),
+      play_pause_btn = player.querySelector('.play-pause-btn'),
+      mute_btn = player.querySelector('.mute-btn'),
+      volume_slider = player.querySelector('.volume-slider'),
+      preview_thumb_el = player.querySelector('.preview-thumb'),
+      video = player.querySelector('.main-video'),
+      current_time_el = player.querySelector('.current-time'),
+      total_time_el = player.querySelector('.total-time'),
+      auto_play = player.querySelector('.auto-play'),
+      subtitle_btn = player.querySelector('.caption-btn'),
+      subtitle_ul = player.querySelector('.captions-drop ul'),
+      settings_btn = player.querySelector('.settings-btn'),
+      settings_menu = player.querySelector('.settings-menu'),
+      main_menus_ = settings_menu.querySelectorAll('.main-section .drop-item'),
+      cinema_light_check = player.querySelector('.cinema-light-check'),
+      loop_mode_check = player.querySelector('.loop-check'),
+      menus = settings_menu.querySelectorAll('.drop'),
+      back_btns = settings_menu.querySelectorAll('.drop .back-icon'),
+      quality_ul = settings_menu.querySelector('.quality-drop ul'),
+      playbacks = settings_menu.querySelectorAll('.speed-drop li'),
+      pip_btn = player.querySelector('.pip-btn'),
+      cinema_btn = player.querySelector('.cinema-btn'),
+      fullscreen_btn = player.querySelector('.fullscreen-btn'),
+      video_container = player,
+      play_pause_icon = play_pause_btn.querySelector('svg')
+    let preview_thumbnails;
+
+    document.addEventListener('keydown', e => {
+      const tag_name = document.activeElement.tagName.toLocaleLowerCase();
+      if (tag_name === 'input') return
+      switch (e.key.toLocaleLowerCase()) {
+        case ' ':
+          if (tag_name === 'button') return
+        case 'k':
+          toggle_play()
+          break;
+        case 'm':
+          toggle_mute()
+          break;
+        case 'arrowleft':
+        case 'j':
+          skip(-5)
+          break;
+        case 'arrowright':
+        case 'l':
+          skip(5)
+          break;
+        case 'i':
+          toggle_pip()
+          break;
+        case 't':
+          toggle_cinema_mode()
+          break;
+        case 'f':
+          toggle_fullscreen_mode()
+          break;
+
+      }
+    })
+
+    //! Play/pause
+    const play_pause_svg = {
+      play: '<use xlink:href="#play-icon-fill"></use>',
+      pause: '<use xlink:href="#pause-icon-fill"></use>'
+    }
+    function toggle_play() {
+      video.paused ? play_video() : pause_video();
+      settings_btn.classList.contains('active') && remove_settings();
+    }
+
+    function play_video() {
+      video_container.classList.remove('paused');
+      // Change the play icon xlink:href
+      play_pause_icon.innerHTML = play_pause_svg['pause'];
+      // Change the play icon title
+      play_pause_icon.title = video.paused ? 'Lire(k)' : 'Pause(k)';
+      // Change the video state
+      video.play();
+      loader_spinner.classList.add('active');
+    }
+    loader_spinner.classList.add('active');
+
+    // Fonction pause
+    function pause_video() {
+      video_container.classList.add('paused');
+      // Change the play icon xlink:href
+      play_pause_icon.innerHTML = play_pause_svg['play'];
+      // Change the play icon title
+      play_pause_icon.title = video.paused ? 'Lire(k)' : 'Pause(k)';
+      // Change the video state
+      video.pause();
+    }
+
+    video.addEventListener('click', toggle_play)
+    play_pause_btn.addEventListener('click', toggle_play)
+    video.addEventListener('play', play_video)
+    video.addEventListener('pause', pause_video);
+
+    // ! Next/prev
+    next_or_prev();
+    function next_or_prev() {
+      if (video_container.getAttribute("type") &&
+      video_container.getAttribute("type").toLocaleLowerCase() === "playlist") {
+        let playlist_id = video_container.getAttribute('playlist');
+        let playlist = document.getElementById(playlist_id);
+        let playlist_items = playlist.querySelectorAll('ocho-pi');
+        let next_btn = video_container.querySelector('.next-btn');
+        let prev_btn = video_container.querySelector('.prev-btn');
+        remove_active_class(prev_btn);
+        remove_active_class(next_btn);
+        if (playlist_items.length > 1) {
+          for (let i = 0; i < playlist_items.length; i++) {
+            if (i === current_index) {
+              (i > 0) && prev_btn.classList.add('active');
+              (i < (playlist_items.length - 1)) && next_btn.classList.add('active');
+              video.onended = ()=>{
+                if (auto_play.classList.contains('active') && !video.loop) {
+                  next();
+                }
+              }
+              prev_btn.onclick = ()=>{prev()};
+              next_btn.onclick = ()=>{next()};
+              function next() {
+                let caption_text = player.querySelector('.caption-text');
+                caption_text && (caption_text.innerHTML = '');
+                remove_active_class(subtitle_btn)
+                if (new_index !== current_index && new_index === current_index-1) {
+                  new_index = current_index;
+                  current_index+= 1;
+                  reload_ocho_player(playlist_items[current_index])
+                }else if (new_index === current_index) {
+                  current_index += 1;
+                  reload_ocho_player(playlist_items[current_index])
+                }
+                settings_btn.classList.contains('active') && remove_settings();
+              }
+              function prev() {
+                let caption_text = player.querySelector('.caption-text');
+                caption_text && (caption_text.innerHTML = '');
+                remove_active_class(subtitle_btn)
+                if (new_index !== current_index && new_index === current_index+1) {
+                  new_index = current_index;
+                  current_index-= 1;
+                  reload_ocho_player(playlist_items[current_index])
+                }else if (new_index === current_index) {
+                  current_index -= 1;
+                  reload_ocho_player(playlist_items[current_index])
+                }
+                settings_btn.classList.contains('active') && remove_settings();
+              }
+            }
+          }
+        }
+      }
+    }
+    function reload_ocho_player(player) {
+      if (typeof player === 'undefined') {
+        return;
+      }
+      (video_container.querySelector('.light')) && video_container.querySelector('.light').remove();
+      video_container.classList.add('player');
       video.classList.add('main-video');
-      let ocho_size = ocho.getAttribute('size') ? ocho.getAttribute('size') : 0;
-      video.setAttribute('size', ocho_size)
-      video.src = ocho.getAttribute('src') ? ocho.getAttribute('src') : '';
-      let sources = ocho.querySelectorAll('source');
-      let tracks = ocho.querySelectorAll('track');
-      ocho.innerHTML = '';
-      ocho.appendChild(video);
+      let sources = player.querySelectorAll('source');
+      let tracks = player.querySelectorAll('track');
+      video.innerHTML = '';
       sources.forEach(source => {
         video.appendChild(source)
       });
       tracks.forEach(track => {
         video.appendChild(track)
       });
-      ocho.innerHTML += player_controls;
+      let player_size = player.getAttribute('size') ? player.getAttribute('size') : 0;
+      video.src = player.getAttribute('src') ? player.getAttribute('src') : '';
+      video.setAttribute('size', player_size);
+      next_or_prev();
+    }
+
+    // ! Volume
+    mute_btn.addEventListener('click', toggle_mute)
+    function toggle_mute() {
+      if (video.volume !== 0) {
+        localStorage.setItem('volume', video.volume)
+        video.volume = 0
+      } else {
+        let stored_volume = parseFloat(localStorage.getItem('volume')) || 1
+        video.volume = isFinite(stored_volume) ? stored_volume : 1
+      }
+      settings_btn.classList.contains('active') && remove_settings();
+    }
+    video.addEventListener('volumechange', volume_change);
+    volume_slider.addEventListener('change', () => {
+      volume_slide(volume_slider.value);
+    });
+    volume_slider.addEventListener('mousemove', () => {
+      volume_slide(volume_slider.value);
+    });
+    function volume_change() {
+      let volume_svg = [
+        '<use xlink:href="#volume-muted-icon"></use>',
+        '<use xlink:href="#volume-low-icon"></use>',
+        '<use xlink:href="#volume-high-icon"></use>',
+      ];
+
+      volume_slider.value = video.volume;
+      let video_volume = video.volume;
+      // Détermine le niveau sonore en fonction des conditions
+      video_volume = video_volume > 0.5 ? 2 : (video_volume !== 0 ? 1 : 0);
+      // Mettre à jour l'icône du bouton de sourdine en fonction du niveau sonore
+      mute_btn.querySelector('svg').innerHTML = volume_svg[video_volume];
+    }
+
+    function volume_slide(level) {
+      video.volume = level;
+    }
+
+    // ! Duration
+    video.addEventListener("waiting", () => {
+      loader_spinner.classList.remove('active');
+      video.addEventListener("canplay", () => {
+        loader_spinner.classList.add('active');
+      })
     })
-    resolve()
-  });
-  const player = document.querySelector('.player'),
-    loader_spinner = document.querySelector('.loader'),
-    timeline = document.querySelector('.timeline'),
-    loaded_progress = document.querySelector('.loaded-progress'),
-    play_pause_btn = document.querySelector('.play-pause-btn'),
-    mute_btn = document.querySelector('.mute-btn'),
-    volume_slider = document.querySelector('.volume-slider'),
-    preview_thumb_el = document.querySelector('.preview-thumb'),
-    video = document.querySelector('.main-video'),
-    preview_thumbnails = generate_thumbnails(video.src),
-    current_time_el = document.querySelector('.current-time'),
-    total_time_el = document.querySelector('.total-time'),
-    auto_play = document.querySelector('.auto-play'),
-    subtitle_btn = document.querySelector('.caption-btn'),
-    subtitle_ul = document.querySelector('.captions-drop ul'),
-    settings_btn = document.querySelector('.settings-btn'),
-    settings_menu = document.querySelector('.settings-menu'),
-    main_menus_ = settings_menu.querySelectorAll('.main-section .drop-item'),
-    cinema_light_check = document.getElementById('cinema-light-check'),
-    loop_mode_check = document.getElementById('loop-check'),
-    menus = settings_menu.querySelectorAll('.drop'),
-    back_btns = settings_menu.querySelectorAll('.drop .back-icon'),
-    quality_ul = settings_menu.querySelector('.quality-drop ul'),
-    playbacks = settings_menu.querySelectorAll('.speed-drop li'),
-    pip_btn = document.querySelector('.pip-btn'),
-    cinema_btn = document.querySelector('.cinema-btn'),
-    fullscreen_btn = document.querySelector('.fullscreen-btn'),
-    video_container = document.querySelector('.player'),
-    play_pause_icon = play_pause_btn.querySelector('svg');
-
-  document.addEventListener('keydown', e => {
-    const tag_name = document.activeElement.tagName.toLocaleLowerCase();
-    if (tag_name === 'input') return
-    switch (e.key.toLocaleLowerCase()) {
-      case ' ':
-        if (tag_name === 'button') return
-      case 'k':
-        toggle_play()
-        break;
-      case 'm':
-        toggle_mute()
-        break;
-      case 'arrowleft':
-      case 'j':
-        skip(-5)
-        break;
-      case 'arrowright':
-      case 'l':
-        skip(5)
-        break;
-      case 'i':
-        toggle_pip()
-        break;
-      case 't':
-        toggle_cinema_mode()
-        break;
-      case 'f':
-        toggle_fullscreen_mode()
-        break;
-
-    }
-  })
-
-  //! Play/pause
-  const play_pause_svg = {
-    play: '<use xlink:href="#play-icon-fill"></use>',
-    pause: '<use xlink:href="#pause-icon-fill"></use>'
-  }
-  function toggle_play() {
-    video.paused ? play_video() : pause_video();
-    settings_btn.classList.contains('active') && remove_settings();
-  }
-
-  function play_video() {
-    video_container.classList.remove('paused');
-    // Change the play icon xlink:href
-    play_pause_icon.innerHTML = play_pause_svg['pause'];
-    // Change the play icon title
-    play_pause_icon.title = video.paused ? 'Lire(k)' : 'Pause(k)';
-    // Change the video state
-    video.play();
-    loader_spinner.classList.add('active');
-  }
-  loader_spinner.classList.add('active');
-
-  // Fonction pause
-  function pause_video() {
-    video_container.classList.add('paused');
-    // Change the play icon xlink:href
-    play_pause_icon.innerHTML = play_pause_svg['play'];
-    // Change the play icon title
-    play_pause_icon.title = video.paused ? 'Lire(k)' : 'Pause(k)';
-    // Change the video state
-    video.pause();
-  }
-
-  video.addEventListener('click', toggle_play)
-  play_pause_btn.addEventListener('click', toggle_play)
-  video.addEventListener('play', play_video)
-  video.addEventListener('pause', pause_video)
-
-  // ! Volume
-
-  mute_btn.addEventListener('click', toggle_mute)
-  function toggle_mute() {
-    if (video.volume !== 0) {
-      localStorage.setItem('volume', video.volume)
-      video.volume = 0
-    } else {
-      let stored_volume = parseFloat(localStorage.getItem('volume')) || 1
-      video.volume = isFinite(stored_volume) ? stored_volume : 1
-    }
-    settings_btn.classList.contains('active') && remove_settings();
-  }
-  video.addEventListener('volumechange', volume_change);
-  volume_slider.addEventListener('change', () => {
-    volume_slide(volume_slider.value);
-  });
-  volume_slider.addEventListener('mousemove', () => {
-    volume_slide(volume_slider.value);
-  });
-  function volume_change() {
-    let volume_svg = [
-      '<use xlink:href="#volume-muted-icon"></use>',
-      '<use xlink:href="#volume-low-icon"></use>',
-      '<use xlink:href="#volume-high-icon"></use>',
-    ];
-
-    volume_slider.value = video.volume;
-    let video_volume = video.volume;
-    // Détermine le niveau sonore en fonction des conditions
-    video_volume = video_volume > 0.5 ? 2 : (video_volume !== 0 ? 1 : 0);
-    // Mettre à jour l'icône du bouton de sourdine en fonction du niveau sonore
-    mute_btn.querySelector('svg').innerHTML = volume_svg[video_volume];
-  }
-
-  function volume_slide(level) {
-    video.volume = level;
-  }
-
-  // ! Duration
-  video.addEventListener("waiting", () => {
-    loader_spinner.classList.remove('active');
-    video.addEventListener("canplay", () => {
+    video.addEventListener("canplaythrough", () => {
       loader_spinner.classList.add('active');
     })
-  })
-  video.addEventListener("canplaythrough", () => {
-    loader_spinner.classList.add('active');
-  })
-  video.addEventListener("loadeddata", () => {
-    total_time_el.textContent = format_duration(video.duration);
-  })
-  video.onloadeddata = () => {
-    total_time_el.textContent = format_duration(video.duration);
-  }
-  video.addEventListener("timeupdate", ambiant_light)
-  video.addEventListener("timeupdate", () => {
-    current_time_el.textContent = format_duration(video.currentTime);
-    total_time_el.textContent = format_duration(video.duration);
-    let progress_position = (video.currentTime / video.duration) || 0
-    timeline.style.setProperty('--progress-position', progress_position);
-  })
-  setInterval(() => {
-    draw_progress(loaded_progress, video.buffered, video.duration);
-  }, 1000);
-  timeline.addEventListener('pointermove', (e) => {
-    total_time_el.textContent = format_duration(video.duration);
-    let preview_position = (e.layerX / timeline.clientWidth) || 1;
-    (preview_position <= 0) && (preview_position = 0 )
-    preview_thumb_el.setAttribute('data-time', format_duration(video.duration * preview_position))
-    if (e.offsetX > (timeline.clientWidth - 80)) {
-      timeline.style.setProperty('--overflow-pos', "-80px");
-      timeline.style.setProperty('--preview-position', 1);
-    } else if (e.offsetX < 80) {
-      timeline.style.setProperty('--preview-position', 0);
-      timeline.style.setProperty('--overflow-pos', "80px");
-    } else {
-      timeline.style.setProperty('--overflow-pos', '0px');
-      timeline.style.setProperty('--preview-position', preview_position);
-    }
-    timeline.style.setProperty('--preview-hover-position', preview_position);
-    preview_thumbnails.then(async thumbnails => {
-      thumbnails.forEach(async thumbnail => {
-        if (await thumbnail.data) {
-          let seconds = thumbnail.sec;
-          seconds.forEach(sec => {
-            if (sec['index'] === Math.floor(video.duration * preview_position)) {
-              preview_thumb_el.style.setProperty('--thumbnail-bg', `url(${thumbnail.data})`);
-              preview_thumb_el.style.setProperty('--thumblail-pos-x', `${sec.backgroundPositionX}px`);
-              preview_thumb_el.style.setProperty('--thumblail-pos-y', `${sec.backgroundPositionY}px`);
-            }
-          });
-        }
-      });
+    video.addEventListener("loadeddata", () => {
+      total_time_el.textContent = format_duration(video.duration);
+      let resolution = video.videoHeight > video.videoWidth ? video.videoWidth : video.videoHeight
+      video.setAttribute('size', resolution);
     })
-  })
-  timeline.addEventListener('pointerdown', () => {
-    timeline.addEventListener('click', skip_time);
-    timeline.addEventListener('pointermove', skip_time);
-    document.addEventListener('pointerup', () => {
-      timeline.removeEventListener('pointermove', skip_time);
-    })
-  })
-  function skip_time(e) {
-    if (e.target !== timeline) {
-      return
+    video.onloadeddata = () => {
+      total_time_el.textContent = format_duration(video.duration);
     }
-    let time_percent = (e.offsetX / timeline.clientWidth);
-    timeline.style.setProperty('--progress-position', time_percent);
-    video.currentTime = video.duration * time_percent;
-    settings_btn.classList.contains('active') && remove_settings();
-  }
-
-
-  const leading_zero_formatter = new Intl.NumberFormat(undefined, {
-    minimumIntegerDigits: 2,
-  })
-  function format_duration(time) {
-    time = isNaN(time) ? 0 : time;
-    const seconds = Math.floor(time % 60)
-    const minutes = Math.floor(time / 60) % 60
-    const hours = Math.floor(time / 3600)
-    let formated = `${hours}:${leading_zero_formatter.format(minutes)}:${leading_zero_formatter.format(seconds)}`
-    if (hours === 0) {
-      formated = `${minutes}:${leading_zero_formatter.format(seconds)}`;
-    }
-    return formated;
-  }
-  function skip(time) {
-    video.currentTime += time;
-  }
-  video.addEventListener('progress', () => {
-    draw_progress(loaded_progress, video.buffered, video.duration);
-  })
-  video.onprogress = () => {
-    draw_progress(loaded_progress, video.buffered, video.duration);
-  }
-  function draw_progress(canvas, buffered, duration) {
-    // Récupère le contexte du canvas
-    let context = canvas.getContext('2d', { antialias: false })
-    // Définit la couleur de remplissage du rectangle
-    context.fillStyle = '#ffffff66'
-
-    // Récupère la hauteur et la largeur du canvas
-    let height = canvas.height
-    let width = canvas.width
-    // Vérifie que la hauteur et la largeur sont définies
-    if (!height || !width)
-      throw "La largeur ou la hauteur du canvas n'est pas définie."
-    // Efface le contenu précédent du canvas
-    context.clearRect(0, 0, width, height)
-
-    // Parcourt les différentes plages tamponnées de la vidéo
-    for (let i = 0; i < buffered.length; i++) {
-      // Calcule la position de début et de fin de chaque plage tamponnée en fonction de la durée totale de la vidéo et de la largeur du canvas
-      let leadingEdge = (buffered.start(i) / duration) * width
-      let trailingEdge = (buffered.end(i) / duration) * width
-      // Dessine un rectangle rempli pour chaque plage tamponnée
-      context.fillRect(leadingEdge, 0, trailingEdge - leadingEdge, height)
-    }
-  }
-
-  // ! autoplay 
-  function auto_play_get() {
-    const saved_autoplay = sessionStorage.getItem('auto-play');
-    video.autoplay = saved_autoplay ? true : false;
-    saved_autoplay ? auto_play.classList.add('active') : auto_play.classList.remove('active')
-  }
-  auto_play_get();
-  auto_play.addEventListener('click', toggle_autoplay)
-  function toggle_autoplay() {
-    auto_play.classList.toggle('active');
-    video.autoplay = auto_play.classList.contains('active');
-    save_autoplay();
-    settings_btn.classList.contains('active') && remove_settings();
-  }
-  function save_autoplay() {
-    // Sauvearder les preferences de lecture automatique ici
-    auto_play.classList.contains('active') ?
-      sessionStorage.setItem('auto-play', 'on') : sessionStorage.removeItem('auto-play')
-  }
-
-  //! View modes
-  cinema_btn.addEventListener('click', toggle_cinema_mode)
-  document.addEventListener('fullscreenchange', change_fullscreen)
-  fullscreen_btn.addEventListener('click', toggle_fullscreen_mode)
-  pip_btn.addEventListener('click', toggle_pip)
-
-  function toggle_cinema_mode() {
-    const cinema_svg = {
-      on: '<use xlink:href="#cinema-wide-icon-fill"></use>',
-      off: '<use xlink:href="#cinema-tall-icon-fill"></use>'
-    }
-    video_container.classList.toggle('cinema');
-    cinema_btn.querySelector('svg').innerHTML = video_container.classList.contains('cinema') ? cinema_svg['on'] : cinema_svg['off'];
-    settings_btn.classList.contains('active') && remove_settings();
-  }
-  function toggle_fullscreen_mode() {
-    document.fullscreenElement === null ?
-    video_container.requestFullscreen() : document.exitFullscreen();
-    settings_btn.classList.contains('active') && remove_settings();
-    settings_btn.classList.contains('active') && remove_settings();
-  }
-  function change_fullscreen() {
-    const fullscreen_svg = {
-      on: '<use xlink:href="#fullscreen-close-icon-fill"></use>',
-      off: '<use xlink:href="#fullscreen-open-icon-fill"></use>'
-    }
-    video_container.classList.toggle('fullscreen');
-    fullscreen_btn.querySelector('svg').innerHTML = video_container.classList.contains('fullscreen') ? fullscreen_svg['on'] : fullscreen_svg['off'];
-  }
-  function toggle_pip() {
-    if (document.fullscreenElement !== null) {
-      document.exitFullscreen()
-    }
-    document.pictureInPictureElement === null ?
-      video.requestPictureInPicture() : document.exitPictureInPicture();
-      settings_btn.classList.contains('active') && remove_settings();
-  }
-  // ! Settings 
-  // activer la section des parametres
-  settings_btn.addEventListener("click", toggle_settings);
-  window.addEventListener('blur', remove_settings);
-  function toggle_settings() {
-    settings_btn.classList.toggle('active');
-    settings_menu.classList.toggle('active');
-    settings_menu.classList.contains('active') ? settings_void() : remove_settings();
-  }
-  // Fonction pour enlever les parametres
-  function remove_settings() {
-    remove_active_class(settings_btn)
-    remove_active_class(settings_menu)
-    remove_active_classes(menus)
-  }
-
-  function settings_void() {
-    let check_cinema = sessionStorage.getItem('cinema-light');
-    cinema_light_check.checked = Boolean(Number(check_cinema));
-    cinema_light_check.addEventListener('change', () => {
-      cinema_light_check.checked ?
-        sessionStorage.setItem('cinema-light', 1) :
-        sessionStorage.removeItem('cinema-light');
-      if (!cinema_light_check.checked && video.parentNode.querySelector(".light")) {
-        video.removeEventListener('timeupdate', ambiant_light);
-        video.parentNode.querySelector(".light").style.boxShadow = 'none';
-        video.parentNode.querySelector(".light").remove();
+    video.addEventListener("timeupdate", ambiant_light)
+    video.addEventListener("timeupdate", async () => {
+      current_time_el.textContent = format_duration(video.currentTime);
+      total_time_el.textContent = format_duration(video.duration);
+      let progress_position = (video.currentTime / video.duration) || 0
+      timeline.style.setProperty('--progress-position', progress_position);
+      if (current_index !== new_index) {
+        await new Promise((resolve, reject) => {
+          preview_thumb_el.style.setProperty('--thumbnail-bg', '');
+          preview_thumbnails = generate_thumbnails(video.src);
+          new_index = current_index;
+          resolve();
+        })
       }
-      cinema_light_check.checked && video.addEventListener("timeupdate", ambiant_light);
     })
-    loop_mode_check.addEventListener('change', (e) => {
-      console.log(e);
-      video.loop = Boolean(loop_mode_check.checked);
-    })
-    main_menus_.forEach(menu => {
-      menu.addEventListener('click', () => {
-        const menu_id = menu.getAttribute('data-drop');
-        remove_active_classes(menus)
-        document.getElementById(menu_id).classList.add('active');
-      })
-    });
-    back_btns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        remove_active_classes(menus);
-      })
-    });
-
-    quality_void()
-    playback_speed_void()
-  }
-  // qualites
-  let quality_array = [];
-
-  // Afficher les paramètres de qualité
-  const sizes = document.querySelectorAll('[size]');
-
-  // Convertir NodeList en tableau
-  const sizesArray = Array.from(sizes);
-
-  // Créer un tableau d'objets avec les données de taille
-  const qualityDataArray = sizesArray.map(size => {
-    return {
-      data_quality: Number(size.getAttribute('size')),
-      source: size.getAttribute('src'),
-      current_quality: video.getAttribute('size'),
-      active: Number(video.getAttribute('size')) === Number(size.getAttribute('size')) ? ' active' : '',
-      tagName: size.tagName.toLowerCase(),
-    };
-  });
-
-  // Trier le tableau d'objets par taille décroissante
-  qualityDataArray.sort((a, b) => b.data_quality - a.data_quality);
-
-  // Parcourir le tableau trié et ajouter les éléments à la liste
-  qualityDataArray.forEach(data => {
-    if (!quality_array.includes(data.data_quality)) {
-      let hd = ''
-      if (data.data_quality >= 1018) {
-        hd = ' HD'
+    setInterval(() => {
+      draw_progress(loaded_progress, video.buffered, video.duration);
+    }, 1000);
+    preview_thumbnails = generate_thumbnails(video.src);
+    timeline.addEventListener('pointermove', async (e) => {
+      total_time_el.textContent = format_duration(video.duration);
+      let preview_position = (e.layerX / timeline.clientWidth) || 1;
+      (preview_position <= 0) && (preview_position = 0)
+      preview_thumb_el.setAttribute('data-time', format_duration(video.duration * preview_position))
+      if (e.offsetX > (timeline.clientWidth - 80)) {
+        timeline.style.setProperty('--overflow-pos', "-80px");
+        timeline.style.setProperty('--preview-position', 1);
+      } else if (e.offsetX < 80) {
+        timeline.style.setProperty('--preview-position', 0);
+        timeline.style.setProperty('--overflow-pos', "80px");
+      } else {
+        timeline.style.setProperty('--overflow-pos', '0px');
+        timeline.style.setProperty('--preview-position', preview_position);
       }
-      const size_li = `
-         <li data-quality="${data.data_quality}">
-             <div class="check${data.active}"></div>
-             <span>${data.data_quality}p${hd}</span>
-         </li>
-     `;
-      const source_html = `<source src="${data.source}" size="${data.data_quality}">`;
-
-      if (data.tagName === 'video') { video.innerHTML += source_html; }
-      quality_ul.innerHTML += size_li;
-      quality_array.push(data.data_quality);
-    }
-  });
-
-  function quality_void() {
-    const quality_li = quality_ul.querySelectorAll('li');
-    quality_li.forEach(e => {
-      const all_checks = e.parentNode.querySelectorAll('.check');
-      e.addEventListener('click', () => {
-        remove_active_classes(all_checks)
-        e.querySelector('.check').classList.add('active');
-        const size = Number(e.getAttribute('data-quality'));
-        const sources = video.querySelectorAll('source');
-        sources.forEach(source => {
-          if (Number(source.getAttribute('size')) === size
-            && Number(video.getAttribute('size')) !== size) {
-            let current_time = video.currentTime;
-            let temp_video = document.createElement('video');
-            temp_video.src = source.src
-            temp_video.currentTime = current_time;
-            temp_video.volume = 0
-            temp_video.autoplay = true;
-            temp_video.addEventListener('canplay', () => {
-              video.src = source.src;
-              video.currentTime = temp_video.currentTime;
-              video.autoplay = true;
-              video.setAttribute('size', size);
-              temp_video.remove();
-            })
+      timeline.style.setProperty('--preview-hover-position', preview_position);
+      preview_thumbnails.then(async thumbnails => {
+        thumbnails.forEach(async thumbnail => {
+          if (await thumbnail.data) {
+            let seconds = thumbnail.sec;
+            seconds.forEach(sec => {
+              if (sec['index'] === Math.floor(video.duration * preview_position)) {
+                preview_thumb_el.style.setProperty('--thumbnail-bg', `url(${thumbnail.data})`);
+                preview_thumb_el.style.setProperty('--thumblail-pos-x', `${sec.backgroundPositionX}px`);
+                preview_thumb_el.style.setProperty('--thumblail-pos-y', `${sec.backgroundPositionY}px`);
+              }
+            });
           }
         });
       })
     })
-  }
-  // sous-titres
-  let tracks = document.querySelectorAll('track');
-  let caption_text = document.querySelector('.caption-text');
-
-  caption_void()
-  if (tracks.length > 1) {
-    const caption_active = sessionStorage.getItem('caption')
-    if (caption_active) {
-      let lang = sessionStorage.getItem('lang');
-      select_captions(lang);
-    }
-    subtitle_btn.addEventListener('click', () => {
-      let lang = sessionStorage.getItem('lang') ? sessionStorage.getItem('lang') :
-        document.querySelectorAll('[data-track]')[1].getAttribute('data-track');
-      (!subtitle_btn.classList.contains('active')) ? select_captions(lang) :
-        select_captions('Off');
-        settings_btn.classList.contains('active') && remove_settings();
-    })
-  }
-  let text_tracks = video.textTracks;
-  for (let i = 0; i < text_tracks.length; i++) {
-    const track = text_tracks[i];
-    track.addEventListener('cuechange', () => {
-      if (track.mode === 'showing') {
-        let activeCue = track.activeCues[0];
-        caption_text.innerHTML = Boolean(activeCue) ?
-          `<mark>${activeCue.text}</mark>` :
-          '';
-      }
-    })
-  }
-  function caption_void() {
-    let track_li = `
-        <li data-track="Off">
-            <div class="check active"></div>
-            <span>Desactivé</span>
-        </li>
-        `;
-    if (!tracks.length) {
-      track_li = `
-            <li data-track="Off">
-                <div class="check active"></div>
-                <span>Non disponible</span>
-            </li>
-            `;
-    }
-
-    // Convertir NodeList en tableau
-    const tracksArray = Array.from(tracks);
-
-    // Tri des tracks par srclang
-    tracksArray.sort((a, b) => {
-      const langA = a.srclang.toUpperCase(); // Convertir en majuscules pour assurer une comparaison insensible à la casse
-      const langB = b.srclang.toUpperCase();
-      if (langA < langB) {
-        return -1;
-      }
-      if (langA > langB) {
-        return 1;
-      }
-      return 0;
-    });
-
-    tracksArray.forEach(track => {
-      track.label = languages[`${track.srclang}`];
-      track_li += `
-            <li data-track="${track.srclang}">
-                <div class="check"></div>
-                <span>${track.label}</span>
-            </li>
-            `;
-    });
-
-    subtitle_ul.innerHTML = track_li;
-    const subtitle_li = subtitle_ul.querySelectorAll('li');
-    subtitle_li.forEach(li => {
-      li.addEventListener('click', () => {
-        select_captions(li.getAttribute('data-track'))
-      });
-    });
-  }
-
-  function select_captions(lang) {
-    let li = document.querySelector(`[data-track=${lang}]`)
-    const all_checks = li.parentNode.querySelectorAll('.check');
-    remove_active_classes(all_checks);
-    li.querySelector('.check').classList.add('active');
-    change_caption(li);
-  }
-
-  function change_caption(li) {
-    let label = li.getAttribute('data-track');
-    let text_tracks = video.textTracks;
-    for (let i = 0; i < text_tracks.length; i++) {
-      let track = text_tracks[i];
-      track.mode = "disabled";
-      if (track.language === label) {
-        track.mode = "showing";
-        sessionStorage.setItem('lang', track.language)
-        sessionStorage.setItem('caption', track.language)
-        subtitle_btn.classList.add('active')
-      }
-      if (label.toLowerCase() === 'off') {
-        sessionStorage.removeItem('caption')
-        subtitle_btn.classList.remove('active')
-        caption_text.innerHTML = ''
-      }
-    }
-  }
-  // Vitesse de lecture
-  function playback_speed_void() {
-    playbacks.forEach(e => {
-      const all_checks = e.parentNode.querySelectorAll('.check');
-      e.addEventListener('click', () => {
-        remove_active_classes(all_checks)
-        e.querySelector('.check').classList.add('active');
-        let video_speed = Number(e.getAttribute('data-speed'))
-        video.playbackRate = video_speed;
+    timeline.addEventListener('pointerdown', () => {
+      timeline.addEventListener('click', skip_time);
+      timeline.addEventListener('pointermove', skip_time);
+      document.addEventListener('pointerup', () => {
+        timeline.removeEventListener('pointermove', skip_time);
       })
     })
+    function skip_time(e) {
+      if (e.target !== timeline) {
+        return
+      }
+      let time_percent = (e.offsetX / timeline.clientWidth);
+      timeline.style.setProperty('--progress-position', time_percent);
+      video.currentTime = video.duration * time_percent;
+      settings_btn.classList.contains('active') && remove_settings();
+    }
+
+
+    const leading_zero_formatter = new Intl.NumberFormat(undefined, {
+      minimumIntegerDigits: 2,
+    })
+    function format_duration(time) {
+      time = isNaN(time) ? 0 : time;
+      const seconds = Math.floor(time % 60)
+      const minutes = Math.floor(time / 60) % 60
+      const hours = Math.floor(time / 3600)
+      let formated = `${hours}:${leading_zero_formatter.format(minutes)}:${leading_zero_formatter.format(seconds)}`
+      if (hours === 0) {
+        formated = `${minutes}:${leading_zero_formatter.format(seconds)}`;
+      }
+      return formated;
+    }
+    function skip(time) {
+      video.currentTime += time;
+    }
+    video.addEventListener('progress', () => {
+      draw_progress(loaded_progress, video.buffered, video.duration);
+    })
+    video.onprogress = () => {
+      draw_progress(loaded_progress, video.buffered, video.duration);
+    }
+    function draw_progress(canvas, buffered, duration) {
+      // Récupère le contexte du canvas
+      let context = canvas.getContext('2d', { antialias: false })
+      // Définit la couleur de remplissage du rectangle
+      context.fillStyle = '#ffffff66'
+
+      // Récupère la hauteur et la largeur du canvas
+      let height = canvas.height
+      let width = canvas.width
+      // Vérifie que la hauteur et la largeur sont définies
+      if (!height || !width)
+        throw "La largeur ou la hauteur du canvas n'est pas définie."
+      // Efface le contenu précédent du canvas
+      context.clearRect(0, 0, width, height)
+
+      // Parcourt les différentes plages tamponnées de la vidéo
+      for (let i = 0; i < buffered.length; i++) {
+        // Calcule la position de début et de fin de chaque plage tamponnée en fonction de la durée totale de la vidéo et de la largeur du canvas
+        let leadingEdge = (buffered.start(i) / duration) * width
+        let trailingEdge = (buffered.end(i) / duration) * width
+        // Dessine un rectangle rempli pour chaque plage tamponnée
+        context.fillRect(leadingEdge, 0, trailingEdge - leadingEdge, height)
+      }
+    }
+
+    // ! autoplay 
+    function auto_play_get() {
+      const saved_autoplay = sessionStorage.getItem('auto-play');
+      video.autoplay = saved_autoplay ? true : false;
+      saved_autoplay ? auto_play.classList.add('active') : auto_play.classList.remove('active')
+    }
+    auto_play_get();
+    auto_play.addEventListener('click', toggle_autoplay)
+    function toggle_autoplay() {
+      auto_play.classList.toggle('active');
+      video.autoplay = auto_play.classList.contains('active');
+      save_autoplay();
+      settings_btn.classList.contains('active') && remove_settings();
+    }
+    function save_autoplay() {
+      // Sauvearder les preferences de lecture automatique ici
+      auto_play.classList.contains('active') ?
+        sessionStorage.setItem('auto-play', 'on') : sessionStorage.removeItem('auto-play')
+    }
+
+    //! View modes
+    cinema_btn.addEventListener('click', toggle_cinema_mode)
+    document.addEventListener('fullscreenchange', change_fullscreen)
+    fullscreen_btn.addEventListener('click', toggle_fullscreen_mode)
+    pip_btn.addEventListener('click', toggle_pip)
+
+    function toggle_cinema_mode() {
+      const cinema_svg = {
+        on: '<use xlink:href="#cinema-wide-icon-fill"></use>',
+        off: '<use xlink:href="#cinema-tall-icon-fill"></use>'
+      }
+      video_container.classList.toggle('cinema');
+      cinema_btn.querySelector('svg').innerHTML = video_container.classList.contains('cinema') ? cinema_svg['on'] : cinema_svg['off'];
+      settings_btn.classList.contains('active') && remove_settings();
+    }
+    function toggle_fullscreen_mode() {
+      document.fullscreenElement === null ?
+        video_container.requestFullscreen() : document.exitFullscreen();
+      settings_btn.classList.contains('active') && remove_settings();
+      settings_btn.classList.contains('active') && remove_settings();
+    }
+    function change_fullscreen() {
+      const fullscreen_svg = {
+        on: '<use xlink:href="#fullscreen-close-icon-fill"></use>',
+        off: '<use xlink:href="#fullscreen-open-icon-fill"></use>'
+      }
+      video_container.classList.toggle('fullscreen');
+      fullscreen_btn.querySelector('svg').innerHTML = video_container.classList.contains('fullscreen') ? fullscreen_svg['on'] : fullscreen_svg['off'];
+    }
+    function toggle_pip() {
+      if (document.fullscreenElement !== null) {
+        document.exitFullscreen()
+      }
+      document.pictureInPictureElement === null ?
+        video.requestPictureInPicture() : document.exitPictureInPicture();
+      settings_btn.classList.contains('active') && remove_settings();
+    }
+    // ! Settings 
+    // activer la section des parametres
+    settings_btn.addEventListener("click", toggle_settings);
+    window.addEventListener('blur', remove_settings);
+    function toggle_settings() {
+      settings_btn.classList.toggle('active');
+      settings_menu.classList.toggle('active');
+      settings_menu.classList.contains('active') ? settings_void() : remove_settings();
+    }
+    // Fonction pour enlever les parametres
+    function remove_settings() {
+      remove_active_class(settings_btn)
+      remove_active_class(settings_menu)
+      remove_active_classes(menus)
+    }
+    function settings_void() {
+      let check_cinema = sessionStorage.getItem('cinema-light');
+      cinema_light_check.checked = Boolean(Number(check_cinema));
+      cinema_light_check.addEventListener('change', () => {
+        cinema_light_check.checked ?
+          sessionStorage.setItem('cinema-light', 1) :
+          sessionStorage.removeItem('cinema-light');
+        if (!cinema_light_check.checked && video.parentNode.querySelector(".light")) {
+          video.removeEventListener('timeupdate', ambiant_light);
+          video.parentNode.querySelector(".light").style.boxShadow = 'none';
+          video.parentNode.querySelector(".light").remove();
+        }
+        cinema_light_check.checked && video.addEventListener("timeupdate", ambiant_light);
+      })
+      loop_mode_check.addEventListener('change', (e) => {
+        console.log(e);
+        video.loop = Boolean(loop_mode_check.checked);
+      })
+      main_menus_.forEach(menu => {
+        menu.addEventListener('click', () => {
+          const menu_id = "." + menu.getAttribute('data-drop');
+          remove_active_classes(menus)
+          video_container.querySelector(menu_id).classList.add('active');
+        })
+      });
+      back_btns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          remove_active_classes(menus);
+        })
+      });
+      caption_void()
+      quality_void()
+      playback_speed_void()
+    }
+
+
+    // qualites
+    function quality_void() {
+      let quality_array = [];
+      quality_ul.innerHTML = '';
+      // Afficher les paramètres de qualité
+      const sizes = player.querySelectorAll('[size]');
+
+      // Convertir NodeList en tableau
+      const sizesArray = Array.from(sizes);
+
+      // Créer un tableau d'objets avec les données de taille
+      const qualityDataArray = sizesArray.map(size => {
+        return {
+          data_quality: Number(size.getAttribute('size')),
+          source: size.getAttribute('src'),
+          current_quality: video.getAttribute('size'),
+          active: Number(video.getAttribute('size')) === Number(size.getAttribute('size')) ? ' active' : '',
+          tagName: size.tagName.toLowerCase(),
+        };
+      });
+
+      // Trier le tableau d'objets par taille décroissante
+      qualityDataArray.sort((a, b) => b.data_quality - a.data_quality);
+
+      // Parcourir le tableau trié et ajouter les éléments à la liste
+      qualityDataArray.forEach(data => {
+        if (data.source === video.getAttribute('src')) {
+          data.data_quality = video.getAttribute('size');
+          data.active = ' active'
+        }
+        if (!quality_array.includes(data.data_quality)) {
+          let hd = ''
+          if (data.data_quality >= 1018) {
+            hd = ' HD'
+          }
+          const size_li = `
+             <li data-quality="${data.data_quality}">
+                 <div class="check${data.active}"></div>
+                 <span>${data.data_quality}p${hd}</span>
+             </li>
+         `;
+          const source_html = `<source src="${data.source}" size="${data.data_quality}">`;
+
+          if (data.tagName === 'video' && !video.innerHTML.includes(source_html)) { video.innerHTML += source_html; }
+          quality_ul.innerHTML += size_li;
+          quality_array.push(data.data_quality);
+        }
+      });
+      const quality_li = quality_ul.querySelectorAll('li');
+      quality_li.forEach(e => {
+        const all_checks = e.parentNode.querySelectorAll('.check');
+        e.addEventListener('click', () => {
+          remove_active_classes(all_checks)
+          e.querySelector('.check').classList.add('active');
+          const size = Number(e.getAttribute('data-quality'));
+          const sources = video.querySelectorAll('source');
+          sources.forEach(source => {
+            if (Number(source.getAttribute('size')) === size
+              && Number(video.getAttribute('size')) !== size) {
+              let current_time = video.currentTime;
+              let temp_video = document.createElement('video');
+              temp_video.src = source.src
+              temp_video.currentTime = current_time;
+              temp_video.volume = 0
+              temp_video.autoplay = true;
+              temp_video.addEventListener('canplay', () => {
+                video.src = source.src;
+                video.currentTime = temp_video.currentTime;
+                video.autoplay = true;
+                video.setAttribute('size', size);
+                temp_video.remove();
+              })
+            }
+          });
+        })
+      })
+    }
+    // sous-titres
+    caption_void();
+    function caption_void() {
+      let tracks = player.querySelectorAll('track');
+      let caption_text = player.querySelector('.caption-text');
+      if (tracks.length > 1) {
+        const caption_active = sessionStorage.getItem('caption')
+        if (caption_active) {
+          let lang = sessionStorage.getItem('lang');
+          select_captions(lang);
+        }
+        subtitle_btn.addEventListener('click', () => {
+          let lang = sessionStorage.getItem('lang') ? sessionStorage.getItem('lang') :
+            player.querySelectorAll('[data-track]')[1].getAttribute('data-track');
+          (!subtitle_btn.classList.contains('active')) ? select_captions(lang) :
+            select_captions('Off');
+          settings_btn.classList.contains('active') && remove_settings();
+        })
+      }
+      let text_tracks = video.textTracks;
+      for (let i = 0; i < text_tracks.length; i++) {
+        const track = text_tracks[i];
+        track.addEventListener('cuechange', () => {
+          if (track.mode === 'showing') {
+            let activeCue = track.activeCues[0];
+            caption_text.innerHTML = Boolean(activeCue) ?
+              `<mark>${activeCue.text}</mark>` :
+              '';
+          }
+        })
+      }
+      let track_li = `
+          <li data-track="Off">
+              <div class="check active"></div>
+              <span>Desactivé</span>
+          </li>
+          `;
+      if (!tracks.length) {
+        track_li = `
+              <li data-track="Off">
+                  <div class="check active"></div>
+                  <span>Non disponible</span>
+              </li>
+              `;
+      }
+
+      // Convertir NodeList en tableau
+      const tracksArray = Array.from(tracks);
+
+      // Tri des tracks par srclang
+      tracksArray.sort((a, b) => {
+        const langA = a.srclang.toUpperCase(); // Convertir en majuscules pour assurer une comparaison insensible à la casse
+        const langB = b.srclang.toUpperCase();
+        if (langA < langB) {
+          return -1;
+        }
+        if (langA > langB) {
+          return 1;
+        }
+        return 0;
+      });
+
+      tracksArray.forEach(track => {
+        track.label = languages[`${track.srclang}`];
+        track_li += `
+              <li data-track="${track.srclang}">
+                  <div class="check"></div>
+                  <span>${track.label}</span>
+              </li>
+              `;
+      });
+
+      subtitle_ul.innerHTML = track_li;
+      const subtitle_li = subtitle_ul.querySelectorAll('li');
+      subtitle_li.forEach(li => {
+        li.addEventListener('click', () => {
+          select_captions(li.getAttribute('data-track'))
+        });
+      });
+    }
+
+    function select_captions(lang) {
+      let li = player.querySelector(`[data-track=${lang}]`);
+      if (!li) {
+        return;
+      }
+      const all_checks = li.parentNode.querySelectorAll('.check');
+      remove_active_classes(all_checks);
+      li.querySelector('.check').classList.add('active');
+      change_caption(li);
+    }
+
+    function change_caption(li) {
+      let caption_text = player.querySelector('.caption-text');
+      let label = li.getAttribute('data-track');
+      let text_tracks = video.textTracks;
+      for (let i = 0; i < text_tracks.length; i++) {
+        let track = text_tracks[i];
+        track.mode = "disabled";
+        if (track.language === label) {
+          track.mode = "showing";
+          sessionStorage.setItem('lang', track.language)
+          sessionStorage.setItem('caption', track.language)
+          subtitle_btn.classList.add('active')
+        }
+        if (label.toLowerCase() === 'off') {
+          sessionStorage.removeItem('caption')
+          subtitle_btn.classList.remove('active')
+          caption_text.innerHTML = ''
+        }
+      }
+    }
+    // Vitesse de lecture
+    function playback_speed_void() {
+      playbacks.forEach(e => {
+        const all_checks = e.parentNode.querySelectorAll('.check');
+        e.addEventListener('click', () => {
+          remove_active_classes(all_checks)
+          e.querySelector('.check').classList.add('active');
+          let video_speed = Number(e.getAttribute('data-speed'))
+          video.playbackRate = video_speed;
+        })
+      })
+    }
+    function remove_active_classes(elements) {
+      elements.forEach(element => {
+        remove_active_class(element)
+      });
+    }
+    function remove_active_class(element) {
+      element.classList.contains('active') && element.classList.remove('active');
+    }
+
+  });
+  function show_aside() {
+    
   }
-  function remove_active_classes(elements) {
-    elements.forEach(element => {
-      remove_active_class(element)
-    });
-  }
-  function remove_active_class(element) {
-    element.classList.contains('active') && element.classList.remove('active');
-  }
+  show_aside();
 }
 function generate_thumbnails(src) {
   return new Promise((resolve, reject) => {
+    // Initialisation des variables
     let thumb = false;
     let thumbnails = []
     let thumbnailWidth = 160
@@ -924,13 +1063,16 @@ function generate_thumbnails(src) {
     let horizontalItemCount = 5
     let verticalItemCount = 5
 
+    // Création d'une vidéo pour la prévisualisation
     let preview_video = document.createElement('video')
     preview_video.preload = 'metadata'
     preview_video.width = '250'
     preview_video.height = '250'
     preview_video.src = src;
 
+    // Événement lors du chargement des données de la vidéo
     preview_video.addEventListener('loadeddata', async function () {
+      // Initialisation des variables liées à la génération des images
       var count = 1,
         id = 1,
         x = 0,
@@ -938,18 +1080,22 @@ function generate_thumbnails(src) {
         array = [],
         duration = parseInt(preview_video.duration);
 
+      // Création d'un tableau contenant les indices des images
       for (var i = 1; i <= duration; i++) {
         array.push(i)
       }
 
       var canvas, i, j;
 
+      // Boucle principale pour générer les images en mosaïque
       for (i = 0, j = array.length; i < j; i += horizontalItemCount) {
         for (var startIndex of array.slice(i, i + horizontalItemCount)) {
+          // Calcul des positions de fond
           var backgroundPositionX = x * thumbnailWidth,
             backgroundPositionY = y * thumbnailHeight,
             item = thumbnails.find(x => x.id === id);
 
+          // Création d'un nouvel élément ou mise à jour de l'élément existant dans le tableau des miniatures
           if (!item) {
             canvas = document.createElement('canvas');
             canvas.width = thumbnailWidth * horizontalItemCount;
@@ -975,16 +1121,37 @@ function generate_thumbnails(src) {
           var context = canvas.getContext('2d');
           preview_video.currentTime = startIndex;
 
+          // Attente de la préparation de l'image avant de passer à la suivante
           await new Promise(function (resolve) {
             var event = function () {
-              context.drawImage(preview_video, backgroundPositionX, backgroundPositionY, thumbnailWidth, thumbnailHeight);
+              // Utilisation du bon rapport hauteur/largeur sans étirement
+              var videoRatio = preview_video.videoWidth / preview_video.videoHeight;
+              var targetWidth, targetHeight, offsetX, offsetY;
+
+              if (videoRatio > 16 / 9) {
+                targetWidth = thumbnailWidth;
+                targetHeight = thumbnailWidth / videoRatio;
+                offsetX = 0;
+                offsetY = (thumbnailHeight - targetHeight) / 2;
+              } else {
+                targetWidth = thumbnailHeight * videoRatio;
+                targetHeight = thumbnailHeight;
+                offsetX = (thumbnailWidth - targetWidth) / 2;
+                offsetY = 0;
+              }
+
+              // Dessin de l'image sur le canvas
+              context.fillStyle = '#00000062';
+              context.fillRect(backgroundPositionX, backgroundPositionY, thumbnailWidth, thumbnailHeight);
+              context.drawImage(preview_video, 0, 0, preview_video.videoWidth, preview_video.videoHeight, backgroundPositionX + offsetX, backgroundPositionY + offsetY, targetWidth, targetHeight);
+
               x++;
               preview_video.removeEventListener('canplay', event);
               resolve()
             };
             preview_video.addEventListener('canplay', event);
           });
-          // fin de la generation de l'image
+          // Fin de la génération de l'image
           count++;
         };
         x = 0;
@@ -997,6 +1164,7 @@ function generate_thumbnails(src) {
         }
       }
 
+      // Conversion des canvases en blobs et création d'URLs pour les images
       thumbnails.forEach(function (item) {
         item.canvas.toBlob(blob => {
           item.data = URL.createObjectURL(blob)
@@ -1004,11 +1172,13 @@ function generate_thumbnails(src) {
         delete item.canvas;
       });
 
+      // Marquer la fin du processus de génération des miniatures
       thumb = true;
       resolve(thumbnails);
     });
   });
 }
+
 function ambiant_light(e) {
   let check_cinema = sessionStorage.getItem('cinema-light');
   video = e.target

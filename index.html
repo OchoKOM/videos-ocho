@@ -12,7 +12,7 @@
 </head>
 
 <body>
-  <div class="container">
+  <div class="container watch">
       <ocho src="video.mp4" size="720">
         <source src="video_1080.mp4" size="1080">
         <source src="video_1440.webm" size="1440">
@@ -23,6 +23,9 @@
         <track kind="subtitles" src="subtitles/subtitle-track-[French].vtt" srclang="fr" label="">
         <track kind="subtitles" src="subtitles/subtitle-track-[Spanish].vtt" srclang="es" label="">
       </ocho>
+      <aside class="aside home">
+    
+      </aside>
   </div>
   <footer>
     <label for="footer-check-box"><input type="checkbox" hidden id="footer-check-box">Afficher/Masquer la description du
@@ -43,6 +46,8 @@
  
   <script src="video-player.js"></script>
   <script src="index.js"></script>
+  <script>
+    aside_page();
+  </script>
 </body>
-
 </html>

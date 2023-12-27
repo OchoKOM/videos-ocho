@@ -5,6 +5,44 @@ function App() {
         play_video(video);
     });
 }
+function aside_page() {
+    let video_array = []
+    let container = document.querySelector('.aside');
+    for (let i = 0; i < 10; i++) {
+        let datas = {
+            id: i + 1,
+            title: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+            user: "Martin Ocho",
+            vues: Math.floor(Math.random() * 1000),
+            date: Math.floor(Math.random() * 1702123979),
+            cover: "img.webp"
+        }
+        video_array.push(datas);
+    }
+    video_array.forEach(async video => {
+        let video_section = document.createElement('div')
+        video_section.className = 'video-section loading';
+        video_section.innerHTML = `
+        <div class="mini-player">
+            <img src="${video.cover}" alt="" style="position:absolute;">
+            <video src="" muted autoplay loop poster="${video.cover}"></video>
+        </div>
+        <div class="video-details">
+            <div class="left-d"></div>
+            <div class="right-d">
+                <div class="v-title">${video.title}</div>
+                <div class="v-data">${video.user} • ${video.vues} vues • Il y a <span class="time"></span></div>
+            </div>
+        </div>
+        `
+        video_section.querySelector('img').onload = video_section.classList.remove('loading');
+        video_section.querySelector('.time').setAttribute('data-date', video.date)
+        time_stamp(video_section.querySelector('.time'));
+        if (container) {
+            container.appendChild(video_section);
+        }
+    });
+}
 function home_page() {
     let video_array = []
     for (let i = 0; i < 10; i++) {

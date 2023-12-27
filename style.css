@@ -1,4 +1,25 @@
-.container.home {
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+body {
+    background: #0f0f0f;
+    color: #f0f0f0;
+}
+
+.container {
+    position: relative;
+    width: 100%;
+    top: 70px;
+}
+.container.home,
+.aside  {
     display: grid;
     gap: 20px;
     grid-template-columns: repeat(auto-fill, 300px);
@@ -6,8 +27,24 @@
     place-content: center;
     padding: 10px;
 }
-
-.container .video-section {
+.container.watch{
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+    transition: 150ms ease-in-out;
+}
+.container.watch:has(.player.cinema){
+    flex-wrap: wrap;
+}
+ocho{
+    margin-inline: auto;
+}
+.aside  {
+    grid-template-columns: repeat(auto-fill, 350px);
+    font-size: .9em;
+}
+.container .video-section,
+.aside .video-section {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -15,8 +52,10 @@
     max-width: 350px;
     height: max-content;
 }
-
-.container .video-section .mini-player {
+.aside .video-section {
+    flex-direction: initial;
+}
+.video-section .mini-player {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -27,27 +66,36 @@
     position: relative;
 }
 
-.container .video-section .video-details {
+.video-section .video-details {
     display: flex;
     gap: 10px;
     width: 100%;
     position: relative;
 }
+.aside .video-section .video-details {
+    width: calc(50% - 15px);
+}
 
-.container .video-section .video-details .left-d {
+.video-section .video-details .left-d {
     background: #80808062;
     width: 40px;
     height: 40px;
     border-radius: 50%;
     position: relative;
 }
+.aside .video-section .video-details .left-d {
+    display: none;
+}
 
-.container .video-section .video-details .right-d {
+.video-section .video-details .right-d {
     width: calc(100% - 40px);
     display: flex;
     flex-direction: column;
     gap: 5px;
     position: relative;
+}
+.aside .video-section .video-details .right-d {
+    width: 100%;
 }
 
 .video-section.loading video,
@@ -103,7 +151,18 @@
     transition: 0.5s;
     z-index: -1;
 }
-
+.container.watch .container.watch .aside {
+    grid-template-columns: repeat(auto-fill, 100%);
+    padding: 20px 15px;
+    max-width: initial;
+    width: 100%;
+}
+.container.watch .aside .video-section {
+    max-width: initial;
+}
+.container.watch .aside .mini-player {
+    max-width: 250px;
+}
 video,
 img {
     background: transparent;
@@ -114,13 +173,43 @@ img {
     width: 100%;
     max-height: 80vh;
     transition: 0.5s;
+    object-fit: cover;
 }
 
 video:fullscreen {
     background: radial-gradient(var(--hx), #000);
 }
+.container.watch:has(.player.cinema) .aside {
+    grid-template-columns: repeat(auto-fill, 100%);
+    padding: 20px 15px;
+    max-width: initial;
+    width: 100%;
+}
+.container.watch:has(.player.cinema) .aside .video-section {
+    max-width: initial;
+}
+.container.watch:has(.player.cinema) .aside .mini-player {
+    max-width: 250px;
+}
+@media (max-width:900px) {
+    .container.watch {
+        flex-wrap: wrap;
+    }
+    .container.watch .aside {
+        grid-template-columns: repeat(auto-fill, 100%);
+        padding: 20px 15px;
+        max-width: initial;
+        width: 100%;
+    }
+    .container.watch .aside .video-section {
+        max-width: initial;
+    }
+    .container.watch .aside .mini-player {
+        max-width: 250px;
+    }
+}
 @media (max-width:400px) {
-    .container.home {
+    .container.home,.container.watch .aside {
         grid-template-columns: repeat(auto-fill, 100%);
         padding: 0;
     }
@@ -133,5 +222,20 @@ video:fullscreen {
     .container .video-section .video-details .left-d {
         width: 30px;
         height: 30px;
+    }
+    .container.watch .aside .video-section {
+        flex-direction: column;
+    }
+    .container.watch .aside .mini-player {
+        max-width: initial;
+    }
+    .aside .video-section .video-details {
+        width: 100%;
+    }
+    .aside .video-section .video-details .left-d {
+        display: initial;
+    }
+    .aside .video-section .video-details .right-d {
+        width: calc(100% - 45px);
     }
 }
