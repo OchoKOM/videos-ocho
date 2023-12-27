@@ -13,17 +13,23 @@
 
 <body>
   <div class="container watch">
-      <ocho src="video.mp4" size="720">
-        <source src="video_1080.mp4" size="1080">
-        <source src="video_1440.webm" size="1440">
-        <source src="video_360.mp4" size="360">
-        <track kind="subtitles" src="subtitles/subtitle-track-[Chinese].vtt" srclang="zh" label="">
-        <track kind="subtitles" src="subtitles/subtitle-track-[English].vtt" srclang="en" label="">
-        <track kind="subtitles" src="subtitles/subtitle-track-[Esperanto].vtt" srclang="eo" label="">
-        <track kind="subtitles" src="subtitles/subtitle-track-[French].vtt" srclang="fr" label="">
-        <track kind="subtitles" src="subtitles/subtitle-track-[Spanish].vtt" srclang="es" label="">
+      <ocho size="1080" type="playlist" playlist="list">
       </ocho>
-      <aside class="aside home">
+      <ocho-pl id="list">
+        <ocho-pi src="Pete & Bas - Stepped Into the Building.mp4" size="1080"></ocho-pi>
+        <ocho-pi src="video.mp4" size="720">
+          <source src="video_1080.mp4" size="1080">
+          <source src="video_1440.webm" size="1440">
+          <source src="video_360.mp4" size="360">
+          <track kind="subtitles" src="subtitles/subtitle-track-[Chinese].vtt" srclang="zh" label="">
+          <track kind="subtitles" src="subtitles/subtitle-track-[English].vtt" srclang="en" label="">
+          <track kind="subtitles" src="subtitles/subtitle-track-[Esperanto].vtt" srclang="eo" label="">
+          <track kind="subtitles" src="subtitles/subtitle-track-[French].vtt" srclang="fr" label="">
+          <track kind="subtitles" src="subtitles/subtitle-track-[Spanish].vtt" srclang="es" label="">
+        </ocho-pi>
+        <ocho-pi src="video2.mp4" size="1080"></ocho-pi>
+    </ocho-pl>
+      <aside class="aside">
     
       </aside>
   </div>
