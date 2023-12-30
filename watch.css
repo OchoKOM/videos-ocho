@@ -1,0 +1,175 @@
+.watch main{
+    max-width: 720px;
+}
+main > .video-details{
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    padding-inline: 20px;
+}
+.video-title{
+    font-size: 1.4em;
+    font-weight: 700;
+}
+.video-channel{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+.video-channel .channel-info{
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+.video-channel .channel-section{
+    display: flex;
+    gap: 10px;
+}
+.video-channel .channel-profile{
+    height: 40px;
+    width: 40px;
+    background: #80808062;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.channel-profile img {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+}
+.video-channel .channel-name{
+    display: flex;
+    flex-direction: column;
+}
+.video-channel .channel-name .name{
+    display: flex;
+    font-weight: 700;
+}
+.video-channel .channel-name .channel-subs{
+    font-size: .7em;
+    color: #ffffffbf;
+}
+.video-channel .sub-btn{
+    border: none;
+    outline: none;
+    background: #d0d0d0;
+    color: #000;
+    padding: 8px 15px;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+.video-actions{
+    position: relative;
+    display: flex;
+    padding: 10px;
+    gap: 20px;
+}
+.video-actions .react-btn{
+    all: initial;
+    color: inherit;
+}
+.video-actions .react-section{
+    display: flex;
+    background: #5a5a6a3b;
+    border-radius: 20px;
+    padding: 0 5px;
+    font-size: 1.5em;
+}
+.video-actions .like-btn input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.video-actions .like-btn {
+    display: flex;
+    position: relative;
+    cursor: pointer;
+    font-size: .7em;
+    -webkit-user-select: none;
+    user-select: none;
+    transition: 100ms;
+    padding: 5px 7px;
+    align-items: center;
+    gap: 5px
+}
+
+.video-actions svg {
+    top: 0;
+    left: 0;
+    height: 1em;
+    width: 1em;
+    transition: 100ms;
+    animation: dislike_401 400ms ease;
+}
+
+.video-actions .like-btn:has(input:checked) svg {
+    fill: #1C7DFF;
+    stroke-width: 1.2;
+    stroke: #212121;
+    animation: like_401 400ms ease;
+}
+
+.video-actions .like-btn:hover {
+    transform: scale(1.1);
+}
+
+@keyframes like_401 {
+    0% {
+        transform: scale(0);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes dislike_401 {
+    0% {
+        transform: scale(0);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+.video-actions .react-num{
+    font-size: .9em;
+    color: #7b8894;
+}
+.video-actions .react-num::before{
+    content: attr(data-num);
+}
+
+.video-description, .video-comments{
+    background: #80808033;
+    border-radius: 10px;
+    font-size: .9em;
+}
+.video-description{
+    padding: 7px 10px;
+}
+.video-description .desc-header, 
+.video-description hr,.desc-header span{
+    display: none;
+}
+.video-description .desc-body-h, .desc-body-h .body-h-section{
+    display: flex;
+    gap: .5em;
+    font-weight: 700;
+}

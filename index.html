@@ -8,6 +8,7 @@
   <title>Player</title>
   <link rel="stylesheet" href="player.css" />
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="watch.css" />
   <link rel="stylesheet" href="footer.css">
 </head>
 
@@ -30,35 +31,36 @@
       </ocho-pl>
       <div class="video-details">
         <span class="video-title">Pete & Bas - Stepped Into the Building</span>
-        <br />
-        <span class="video-channel">
+        <div class="video-channel">
           <div class="channel-info">
-            <span class="channel-profile"></s>
+            <div class="channel-section">
+              <div class="channel-profile"></div>
               <span class="channel-name">
                 <div class="name">Pete & Bas</div>
-                <div class="channel-subs">10M d'abonnés</div>
+                <div class="channel-subs">10 M d'abonnés</div>
               </span>
-              <button title="S'abonner">S'aboner</button>
+            </div>
+            <button type="button" title="S'abonner" class="sub-btn">S'aboner</button>
           </div>
           <div class="video-actions">
             <div class="react-section like" data-user="1">
-              <label class="like-btn like">
-                <input type="checkbox" name="like" id="like-check">
-                <svg height="24" fill="#999">
+              <label class="like-btn like" title="J'aime ce conenu">
+                <input type="checkbox" name="like" id="like-check" title="J'aime ce conenu">
+                <svg height="30" fill="#999">
                   <use xlink:href="#thumb-up"></use>
                 </svg>
                 <span class="react-num" data-num="1"></span>
               </label>
               <label class="like-btn dislike">
-                <input type="checkbox" name="like" id="dislike-check">
-                <svg height="24" fill="#999">
+                <input type="checkbox" name="like" id="dislike-check" title="Je n'aime pas ce conenu">
+                <svg height="30" fill="#999">
                   <use xlink:href="#thumb-down"></use>
                 </svg>
                 <span class="react-num" data-num=""></span>
               </label>
             </div>
             <div class="react-section">
-              <button title="Partager" class="react-btn">
+              <button type="button" title="Partager" class="react-btn">
                 <svg height="20" viewBox="0 0 24 24" fill="currentColor">
                   <use xlink:href="#share-arrow"></use>
                 </svg>
@@ -66,7 +68,7 @@
               </button>
             </div>
           </div>
-        </span>
+        </div>
         <div class="video-description">
           <div class="desc-header">
             <h2>Description</h2>
@@ -104,7 +106,39 @@
           </div>
           <hr>
           <div class="desc-body">
-            <!-- Commentaires -->
+            <div class="comment">
+              <div class="single-comment">
+                <div class="comment-content">
+                  <div class="left-c"></div>
+                  <div class="right-c">
+                    <h3 class="c-header">Lorem, ipsum dolor.</h3>
+                    <div class="c-body">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloribus repellendus voluptates quod quos veritatis aperiam vel provident facilis. Ipsa rem eligendi tenetur tempore doloremque suscipit fugiat reiciendis obcaecati adipisci ad. Optio molestiae rem odio? Quae facilis vel illo natus iure delectus quos. Expedita distinctio et architecto debitis voluptatum quas iusto?</div>
+                  </div>
+                  <div class="comment-replies">
+                    <div class="desc-header">
+                      <h2>Reponses</h2>
+                      <span>&times;</span>
+                    </div>
+                    <div class="desc-body">
+                      <div class="single-reply">
+                        <div class="left-c"></div>
+                        <div class="right-c">
+                            <h3 class="c-header">Lorem, ipsum dolor.</h3>
+                            <div class="c-body">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi eius magni minima delectus ipsa, et provident commodi iure id doloremque nisi quod sapiente esse, obcaecati similique. Velit earum accusamus quod.</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="single-reply">
+                      <div class="left-c"></div>
+                      <div class="right-c">
+                          <h3 class="c-header">Lorem, ipsum dolor.</h3>
+                          <div class="c-body">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi eius magni minima delectus ipsa, et provident commodi iure id doloremque nisi quod sapiente esse, obcaecati similique. Velit earum accusamus quod.</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
