@@ -34,16 +34,79 @@
         <span class="video-channel">
           <div class="channel-info">
             <span class="channel-profile"></s>
-            <span class="channel-name">
-              <div class="name">Pete & Bas</div>
-              <div class="channel-subs">10M d'abonnés</div>
-            </span>
-            <button title="S'abonner">S'aboner</button>
+              <span class="channel-name">
+                <div class="name">Pete & Bas</div>
+                <div class="channel-subs">10M d'abonnés</div>
+              </span>
+              <button title="S'abonner">S'aboner</button>
           </div>
           <div class="video-actions">
-            
+            <div class="react-section like" data-user="1">
+              <label class="like-btn like">
+                <input type="checkbox" name="like" id="like-check">
+                <svg height="24" fill="#999">
+                  <use xlink:href="#thumb-up"></use>
+                </svg>
+                <span class="react-num" data-num="1"></span>
+              </label>
+              <label class="like-btn dislike">
+                <input type="checkbox" name="like" id="dislike-check">
+                <svg height="24" fill="#999">
+                  <use xlink:href="#thumb-down"></use>
+                </svg>
+                <span class="react-num" data-num=""></span>
+              </label>
+            </div>
+            <div class="react-section">
+              <button title="Partager" class="react-btn">
+                <svg height="20" viewBox="0 0 24 24" fill="currentColor">
+                  <use xlink:href="#share-arrow"></use>
+                </svg>
+                <span>Partager</span>
+              </button>
+            </div>
           </div>
         </span>
+        <div class="video-description">
+          <div class="desc-header">
+            <h2>Description</h2>
+            <span>&times;</span>
+          </div>
+          <hr>
+          <div class="desc-body">
+            <div class="desc-body-h">
+              <span class="body-h-section">
+                <div>90 k</div>
+                <span>J'aime</span>
+              </span>
+              <span class="body-h-section">
+                <div>700 000</div>
+                <span>Vues</span>
+              </span>
+              <span class="body-h-section">
+                <div>10 k</div>
+                <span>J'aime</span>
+              </span>
+              <span class="body-h-section">
+                <div>13/04</div>
+                <span>2024</span>
+              </span>
+            </div>
+            <div class="desc-body-text">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque deserunt facere laudantium laboriosam! Tempore fuga voluptatem sunt! Soluta, quibusdam quo? Consequuntur pariatur iste impedit eveniet incidunt repellat fugit laborum tenetur.
+            </div>
+          </div>
+        </div>
+        <div class="video-comments">
+          <div class="desc-header">
+            <h2>Commentaires</h2>
+            <span>&times;</span>
+          </div>
+          <hr>
+          <div class="desc-body">
+            <!-- Commentaires -->
+          </div>
+        </div>
       </div>
     </main>
 
