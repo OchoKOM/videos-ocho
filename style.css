@@ -30,6 +30,7 @@ body {
 .container.watch{
     display: flex;
     align-items: flex-start;
+    justify-content: center;
     width: 100%;
     transition: 150ms ease-in-out;
 }

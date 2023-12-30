@@ -13,8 +13,8 @@
 
 <body>
   <div class="container watch">
-      <ocho size="1080" type="playlist" playlist="list">
-      </ocho>
+    <main>
+      <ocho size="1080" type="playlist" playlist="list"></ocho>
       <ocho-pl id="list">
         <ocho-pi src="Pete & Bas - Stepped Into the Building.mp4" size="1080"></ocho-pi>
         <ocho-pi src="video.mp4" size="720">
@@ -27,11 +27,29 @@
           <track kind="subtitles" src="subtitles/subtitle-track-[French].vtt" srclang="fr" label="">
           <track kind="subtitles" src="subtitles/subtitle-track-[Spanish].vtt" srclang="es" label="">
         </ocho-pi>
-        <ocho-pi src="video2.mp4" size="1080"></ocho-pi>
-    </ocho-pl>
-      <aside class="aside">
-    
-      </aside>
+      </ocho-pl>
+      <div class="video-details">
+        <span class="video-title">Pete & Bas - Stepped Into the Building</span>
+        <br />
+        <span class="video-channel">
+          <div class="channel-info">
+            <span class="channel-profile"></s>
+            <span class="channel-name">
+              <div class="name">Pete & Bas</div>
+              <div class="channel-subs">10M d'abonnés</div>
+            </span>
+            <button title="S'abonner">S'aboner</button>
+          </div>
+          <div class="video-actions">
+            
+          </div>
+        </span>
+      </div>
+    </main>
+
+    <aside class="aside">
+
+    </aside>
   </div>
   <footer>
     <label for="footer-check-box"><input type="checkbox" hidden id="footer-check-box">Afficher/Masquer la description du
@@ -49,11 +67,12 @@
       <p>copyright &copy;2024 OchoKOM. designed by <span>Martin Ocho</span></p>
     </div>
   </footer>
- 
+
   <script src="video-player.js"></script>
   <script src="index.js"></script>
   <script>
     aside_page();
   </script>
 </body>
+
 </html>
