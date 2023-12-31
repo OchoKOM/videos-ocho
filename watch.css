@@ -17,9 +17,19 @@ main > .video-details{
     width: 100%;
     padding-inline: 20px;
     max-width: 720px;
+    position: relative;
 }
 .video-title{
     font-size: 1.4em;
+    font-weight: 700;
+}
+.mobile-desc-toggle{
+    color: #d0d0d0;
+    font-size: .9em;
+    display: none;
+}
+.mobile-desc-toggle .desc-toggle{
+    color: #fff;
     font-weight: 700;
 }
 .video-channel{
@@ -27,6 +37,7 @@ main > .video-details{
     align-items: center;
     justify-content: space-between;
     width: 100%;
+    transition: 150ms ease-in-out;
 }
 .video-channel .channel-info{
     display: flex;
@@ -172,12 +183,210 @@ main > .video-details{
 .video-description{
     padding: 7px 10px;
 }
-.video-description .desc-header, 
-.video-description hr,.desc-header span{
+.video-comments.summary{
     display: none;
 }
-.video-description .desc-body-h, .desc-body-h .body-h-section{
+.video-description .desc-header, 
+.video-description hr,.desc-header .close-desc{
+    display: none;
+}
+.video-description .desc-mobile-title{
+    display: none;
+    font-size: 1.2em;
+    font-weight: 700;
+}
+.video-description .desc-body-h, 
+.desc-body-h .body-h-section{
     display: flex;
     gap: .5em;
     font-weight: 700;
+}
+.video-comments > .desc-header{
+    padding: 10px;
+}
+.video-comments .nbr-count{
+    font-size: .8em;
+    font-weight: 400;
+    color: #d0d0d0;
+}
+.comments{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    gap: 20px;
+}
+.single-comment{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.comment-content, .single-reply{
+    display: flex;
+    gap: 5px;
+}
+.comments .left-c{
+    width: 30px;
+    height: 30px;
+    background: #80808062;
+    border-radius: 50%;
+}
+.comments .left-c img{
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+.comments .right-c{
+    width: 100%;
+    max-width: calc(100% - 40px);
+}
+.comment-replies{
+    width: calc(100% - 30px);
+    position: relative;
+    left: 30px;
+}
+@media (max-width:450px) {
+    main {
+        position: relative;
+        height: 100%;
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+    }
+    .watch:has(.video-comments.active), 
+    .watch:has(.video-description.active),  
+    main:has(.video-comments.active), 
+    main:has(.video-description.active)
+    {
+        position: fixed;
+    }
+    main > .video-details {
+        padding: 10px;
+        gap: 5px;
+        position: relative;
+        height: 100%;
+    }
+    .video-title{
+        font-size: 1.2em;
+        font-weight: 600;
+    }
+    .mobile-desc-toggle{
+        display: block;
+    }
+    .video-channel{
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: stretch;
+    }
+    .video-channel .channel-info{
+        justify-content: space-between;
+    }
+    .video-channel .channel-section {
+        align-items: center;
+        gap: .4em;
+    }
+    .video-channel .channel-name{
+        flex-direction: row;
+        gap: .5em;
+        align-items: center;
+    }
+    .video-channel .channel-name .name{
+        font-weight: 600;
+        font-size: 1em;
+    }
+    .video-channel .channel-name .channel-subs{
+        font-size: .8em;
+    }
+    .video-channel .sub-label{
+        display: none;
+    }
+    .video-channel .channel-profile {
+        height: 30px;
+        width: 30px;
+    }
+    .video-actions {
+        padding: 10px 0;
+    }
+    .video-description, .video-comments{
+        position: absolute;
+        top: 100%;
+        left: 0;
+        bottom: 0;
+        z-index: 200;
+        background: #131313;
+        overflow-y: auto;
+        height: 100%;
+        transition: 150ms ease-in-out;
+        visibility: hidden;
+        padding: 0;
+    }
+    .video-description.active, 
+    .video-comments.active{
+        top: 0;
+        visibility: visible;
+    }
+    .video-comments.summary{
+        display: block;
+        visibility: visible;
+        position: relative;
+        background: #80808026;
+    }
+    .video-description .desc-header, 
+    .video-description hr, .desc-header .close-desc,
+    .video-description .desc-mobile-title {
+        display: block;
+    }
+    .video-description .desc-header, 
+    .video-description .desc-body{
+        padding: 10px;
+    }
+    .video-description .desc-body{
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        overflow-x: auto;
+        height: 100%;
+        max-height: calc(100% - 120px);
+    }
+    .desc-header .close-desc {
+        position: absolute;
+        right: 5px;
+        top: 5px;
+        width: 30px;
+        height: 30px;
+        font-size: 1.7em;
+        background: #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+    .video-description .desc-body-h{
+        justify-content: space-evenly;
+    }
+    .desc-body-h .body-h-section {
+        flex-direction: column;
+        align-items: center;
+        font-weight: 400;
+        gap: .1em;
+    }
+    .desc-body-h .body-h-section div{
+        font-size: 1.15em;
+        font-weight: 700; 
+    }
+    .desc-body-h .body-h-section span{
+        font-size: .9em;
+        color: #ffffffbf;
+    }
+    .desc-body-text {
+        position: relative;
+        top: 0;
+        bottom: 100px;
+        padding: 5px 10px;
+        background: #80808026;
+        border-radius: 10px;
+        height: 100%;
+        overflow-x: auto;
+    }
 }
