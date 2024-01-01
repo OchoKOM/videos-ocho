@@ -175,18 +175,32 @@ function format_number(number, language = 'en') {
     return formattedNumber;
 }
 
+console.log(Math.floor(new Date(new Date('2023-04-13T18:30:00Z').getTime()).getMonth() + 1));
 function load_video_data(id) {
+  const leading_zero_formatter = new Intl.NumberFormat(undefined, {
+    minimumIntegerDigits: 2,
+  })
     let video_data = {
         titre:"Pete & Bas - Stepped Into the Building",
         descr: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Animi fugit, aspernatur sapiente velit natus officia, recusandae nisi itaque deserunt illum quos corrupti suscipit quibusdam, exercitationem expedita! Aliquam, modi veritatis soluta exercitationem aspernatur voluptatibus est. Similique, ab sapiente ratione eveniet officia ex hic modi obcaecati exercitationem delectus eius maiores tempore consectetur vero at earum deleniti labore non nam beatae repellendus? Saepe obcaecati eos sit quo eaque modi. Magni eum distinctio, ex doloremque iste fugit in ad est eligendi obcaecati, tempora illum asperiores at dolore similique consectetur nemo nesciunt. Suscipit laudantium architecto dolorem accusamus cumque, voluptatibus doloremque dolor quidem autem veritatis excepturi.",
         views: 700000,
-        views_formated: format_number(this.views, "fr")
+        views_formated: format_number(this.views, "fr"),
+        date: 1681410600,
+        formated_date: formatTime((new Date().getTime()/1000) - this.date),
+        year: (Math.floor(this.date/(3600 * 24 * 365 ))),
+        ddmm: `${(leading_zero_formatter.format(Math.floor(new Date(this.date * 1000).getMonth())))}/${(leading_zero_formatter.format(Math.floor(new Date(this.date * 1000).getDay())))}`  ,
+        channel :"Pete & Bas",
+        channel_profile: "profil.jpg",
+        channel_subs: format_number(10000347,"fr"),
+        likes: 90000,
+        likes_formated: format_number(likes,"fr"),
     };
+    
     let video_details_html = `
     <span class="video-title">${video_data.titre}</span>
     <span class="mobile-desc-toggle">
       <span class="views">${video_data.views_formated}</span> vues il y a
-      <span class="time">1 j</span>
+      <span class="time">${video_data.formated_date}</span>
       <span class="desc-toggle">...plus</span>
     </span>
     <div class="video-channel">
@@ -194,10 +208,8 @@ function load_video_data(id) {
         <div class="channel-section">
           <div class="channel-profile"></div>
           <span class="channel-name">
-            <div class="name">Pete & Bas</div>
-            <div class="channel-subs">
-              10 M <span class="sub-label"> d'abonnés</span>
-            </div>
+            <div class="name">${video_data.channel}</div>
+            <div class="channel-subs">${video_data.channel_subs} <span class="sub-label"> d'abonnés</span></div>
           </span>
         </div>
         <button type="button" title="S'abonner" class="sub-btn">
@@ -211,7 +223,7 @@ function load_video_data(id) {
             <svg height="30" fill="#999">
               <use xlink:href="#thumb-up"></use>
             </svg>
-            <span class="react-num" data-num="1"></span>
+            <span class="react-num" data-num="${video_data.likes}">${video_data.likes_formated}</span>
           </label>
           <label class="like-btn dislike">
             <input type="checkbox" name="like" id="dislike-check" title="Je n'aime pas ce conenu"/>
