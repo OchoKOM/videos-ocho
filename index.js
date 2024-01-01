@@ -190,7 +190,7 @@ function load_video_data(id) {
     this.views_formated = format_number(this.views, "fr");
     this.date = 1681410600;
     this.formated_date = formatTime((new Date().getTime() / 1000) - this.date);
-    this.year = Math.floor(this.date / (3600 * 24 * 365));
+    this.year = Math.floor(new Date(this.date * 1000).getFullYear());
     this.ddmm = `${(leading_zero_formatter.format(Math.floor(new Date(this.date * 1000).getMonth())))}/${(leading_zero_formatter.format(Math.floor(new Date(this.date * 1000).getDay())))}`;
     this.channel = "Pete & Bas";
     this.channel_profile = "profil.jpg";
