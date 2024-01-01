@@ -188,10 +188,10 @@ function load_video_data(id) {
     this.descr = "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Animi fugit, aspernatur sapiente velit natus officia, recusandae nisi itaque deserunt illum quos corrupti suscipit quibusdam, exercitationem expedita! Aliquam, modi veritatis soluta exercitationem aspernatur voluptatibus est. Similique, ab sapiente ratione eveniet officia ex hic modi obcaecati exercitationem delectus eius maiores tempore consectetur vero at earum deleniti labore non nam beatae repellendus? Saepe obcaecati eos sit quo eaque modi. Magni eum distinctio, ex doloremque iste fugit in ad est eligendi obcaecati, tempora illum asperiores at dolore similique consectetur nemo nesciunt. Suscipit laudantium architecto dolorem accusamus cumque, voluptatibus doloremque dolor quidem autem veritatis excepturi.";
     this.views = 700000;
     this.views_formated = format_number(this.views, "fr");
-    this.date = 1682274600;
+    this.date = 1681410600;
     this.formated_date = formatTime((new Date().getTime() / 1000) - this.date);
     this.year = Math.floor(new Date(this.date * 1000).getFullYear());
-    this.ddmm = `${(leading_zero_formatter.format(Math.floor(new Date(this.date * 1000).getDay())))}/${(leading_zero_formatter.format(Math.floor(new Date(this.date * 1000).getMonth() + 1)))}`;
+    this.ddmm = `${(leading_zero_formatter.format(Math.floor(new Date(this.date * 1000).getDate())))}/${(leading_zero_formatter.format(Math.floor(new Date(this.date * 1000).getMonth() + 1)))}`;
     this.channel = "Pete & Bas";
     this.channel_profile = "profil.jpg";
     this.channel_subs = format_number(10000347, "fr");
