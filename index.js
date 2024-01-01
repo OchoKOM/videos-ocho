@@ -423,7 +423,6 @@ function load_video_data(id) {
     })
   })
   close_descs = video_details.querySelectorAll('.close-desc');
-  console.log(close_descs.length);
   close_descs.forEach(close_desc=>{
     close_desc.addEventListener('click',()=>{
       comment_sect.classList.remove('active');
