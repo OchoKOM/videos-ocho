@@ -172,7 +172,7 @@ main > .video-details{
     color: #7b8894;
 }
 .video-actions .react-num::before{
-    content: attr(data-num);
+    content: attr(data-num-formated);
 }
 
 .video-description, 
@@ -223,6 +223,19 @@ main > .video-details{
     flex-direction: column;
     gap: 10px;
 }
+.comment-content{
+    transition: 150ms ease-in-out;
+    padding-block: 0;
+}
+.comment-content:has(textarea:focus),
+.comment-content:has(textarea:valid){
+    background: #0f61b4;
+    padding-block: 10px;
+    z-index: 300;
+}
+.comment-content textarea:focus {
+    outline: 2px solid #fff;
+}
 .comment-content, .single-reply{
     display: flex;
     gap: 5px;
@@ -266,16 +279,20 @@ main > .video-details{
     border-radius: 20px;
     font-size: .9em;
     resize: none;
-    max-height: 5em;
+    max-height: 10em;
     transition: 150ms ease-in-out;
 }
-.comments form:has(textarea:placeholder-shown) button{
+.comments form:has(textarea:placeholder-shown) button,
+.comments form:has(textarea:invalid) button{
     display: none;
 }
 .comment-replies{
     width: calc(100% - 30px);
     position: relative;
     left: 30px;
+}
+.comment-replies .reply-name{
+    color: dodgerblue;
 }
 @media (max-width:450px) {
     main {
@@ -349,7 +366,7 @@ main > .video-details{
         z-index: 200;
         background: #131313;
         overflow-y: auto;
-        height: 100%;
+        height: calc(100% - 70px);
         transition: 150ms ease-in-out;
         visibility: hidden;
         padding: 0;
@@ -365,6 +382,23 @@ main > .video-details{
         position: relative;
         background: #80808026;
     }
+    .comment-content{
+        position: relative;
+        transition: 150ms ease-in-out;
+    }
+    .comment-content:has(textarea:focus),
+    .comment-content:has(textarea:valid){
+        position: fixed;
+        background: #0f61b4;
+        width: 100%;
+        left: 0;
+        bottom: 0;
+        padding-block-start: 10px;
+        z-index: 300;
+    }
+    .comment-content textarea:focus {
+        outline: 2px solid #fff;
+    }
     .video-description .desc-header, 
     .video-description hr, .desc-header .close-desc,
     .video-description .desc-mobile-title {
@@ -373,6 +407,10 @@ main > .video-details{
     .video-description .desc-header, 
     .video-description .desc-body{
         padding: 10px;
+    }
+    .video-description.active .desc-body,
+    .video-comments.active .desc-body{
+        height: 100%;
     }
     .video-description .desc-body{
         position: relative;

@@ -419,7 +419,7 @@ async function video_player() {
 
     document.addEventListener('keydown', e => {
       const tag_name = document.activeElement.tagName.toLocaleLowerCase();
-      if (tag_name === 'input') return
+      if (tag_name === 'input' || tag_name === 'textarea') return
       switch (e.key.toLocaleLowerCase()) {
         case ' ':
           if (tag_name === 'button') return
