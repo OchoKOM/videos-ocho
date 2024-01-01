@@ -155,3 +155,187 @@ function play_video(video) {
     video.controlsList = 'nodownload';
     video.addEventListener('timeupdate', ambiant_light);
 }
+function format_number(number, language = 'en') {
+    // Définir les suffixes par langue
+    const suffixes = {
+        'en': ['', ' k', ' M', ' B', ' T'],
+        'fr': ['', ' k', ' M', ' Md', ' B', ' T'],  
+    };
+
+    // Récupérer les suffixes en fonction de la langue
+    const langSuffixes = suffixes[language] || suffixes['en'];
+
+    let tier = Math.log10(Math.abs(number)) / 3 | 0;
+
+    // Assurez-vous que le tier est dans la plage des suffixes
+    tier = Math.max(0, Math.min(langSuffixes.length - 1, tier));
+
+    // Formate le nombre en ajoutant le suffixe approprié
+    const formattedNumber = (number / Math.pow(1000, tier)).toFixed(2) + langSuffixes[tier];
+    return formattedNumber;
+}
+
+function load_video_data(id) {
+    let video_data = {
+        titre:"Pete & Bas - Stepped Into the Building",
+        descr: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Animi fugit, aspernatur sapiente velit natus officia, recusandae nisi itaque deserunt illum quos corrupti suscipit quibusdam, exercitationem expedita! Aliquam, modi veritatis soluta exercitationem aspernatur voluptatibus est. Similique, ab sapiente ratione eveniet officia ex hic modi obcaecati exercitationem delectus eius maiores tempore consectetur vero at earum deleniti labore non nam beatae repellendus? Saepe obcaecati eos sit quo eaque modi. Magni eum distinctio, ex doloremque iste fugit in ad est eligendi obcaecati, tempora illum asperiores at dolore similique consectetur nemo nesciunt. Suscipit laudantium architecto dolorem accusamus cumque, voluptatibus doloremque dolor quidem autem veritatis excepturi.",
+        views: 700000,
+        views_formated: format_number(this.views, "fr")
+    };
+    let video_details_html = `
+    <span class="video-title">${video_data.titre}</span>
+    <span class="mobile-desc-toggle">
+      <span class="views">${video_data.views_formated}</span> vues il y a
+      <span class="time">1 j</span>
+      <span class="desc-toggle">...plus</span>
+    </span>
+    <div class="video-channel">
+      <div class="channel-info">
+        <div class="channel-section">
+          <div class="channel-profile"></div>
+          <span class="channel-name">
+            <div class="name">Pete & Bas</div>
+            <div class="channel-subs">
+              10 M <span class="sub-label"> d'abonnés</span>
+            </div>
+          </span>
+        </div>
+        <button type="button" title="S'abonner" class="sub-btn">
+          S'aboner
+        </button>
+      </div>
+      <div class="video-actions">
+        <div class="react-section like" data-user="1">
+          <label class="like-btn like" title="J'aime ce conenu">
+            <input type="checkbox" name="like" id="like-check" title="J'aime ce conenu"/>
+            <svg height="30" fill="#999">
+              <use xlink:href="#thumb-up"></use>
+            </svg>
+            <span class="react-num" data-num="1"></span>
+          </label>
+          <label class="like-btn dislike">
+            <input type="checkbox" name="like" id="dislike-check" title="Je n'aime pas ce conenu"/>
+            <svg height="30" fill="#999">
+              <use xlink:href="#thumb-down"></use>
+            </svg>
+            <span class="react-num" data-num=""></span>
+          </label>
+        </div>
+        <div class="react-section">
+          <button type="button" title="Partager" class="react-btn">
+            <svg height="20" viewBox="0 0 24 24" fill="currentColor">
+              <use xlink:href="#share-arrow"></use>
+            </svg>
+            <span>Partager</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="summary comment-toggle">
+      <div class="desc-header">
+        <h2 class="comment-toggle">
+          Commentaires <span class="nbr-count">30</span>
+        </h2>
+      </div>
+      <div class="desc-body">
+        <div class="comments">
+          <div class="single-comment">
+            <div class="comment-content">
+              <div class="left-c"></div>
+              <form class="right-c">
+                <textarea  title="Commenter" placeholder="Commenter" required></textarea>
+                <button type="submit" title="Envoyer">
+                  <svg height="24" width="24" fill="currentColor">
+                    <use xlink:href="#send-icon"></use>
+                  </svg>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="video-description">
+      <div class="desc-header">
+        <h2>Description</h2>
+        <span class="close-desc">&times;</span>
+      </div>
+      <hr />
+      <div class="desc-body">
+        <div class="desc-mobile-title">${video_data.titre}</div>
+        <div class="desc-body-h">
+          <span class="body-h-section">
+            <div>90 k</div>
+            <span>J'aime</span>
+          </span>
+          <span class="body-h-section">
+            <div>700 000</div>
+            <span>Vues</span>
+          </span>
+          <span class="body-h-section">
+            <div>13/04</div>
+            <span>2024</span>
+          </span>
+        </div>
+        <div class="desc-body-text">${video_data.descr}</div>
+      </div>
+    </div>
+    <div class="video-comments">
+      <div class="desc-header">
+        <h2>Commentaires <span class="nbr-count">30</span></h2>
+        <span class="close-desc">&times;</span>
+      </div>
+      <hr />
+      <div class="desc-body">
+        <div class="comments">
+          <div class="single-comment">
+            <div class="comment-content">
+              <div class="left-c"></div>
+              <div class="right-c">
+                <h3 class="c-header">Lorem, ipsum dolor.</h3>
+                <div class="c-body">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Necessitatibus natus facilis sint illo nulla odio
+                  repellendus sequi aperiam expedita sed.
+                </div>
+              </div>
+            </div>
+            <div class="comment-replies">
+              <div class="desc-header">
+                <h3>Reponses <span class="nbr-count">2</span></h3>
+              </div>
+              <div class="desc-body">
+                <div class="single-reply">
+                  <div class="left-c"></div>
+                  <div class="right-c">
+                    <h4 class="c-header">Lorem, ipsum dolor.</h4>
+                    <div class="c-body">
+                      Lorem ipsum dolor sit amet consectetur adipisicing
+                      elit. Eligendi eius magni minima delectus ipsa, et
+                      provident commodi iure id doloremque nisi quod
+                      sapiente esse, obcaecati similique. Velit earum
+                      accusamus quod.
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="single-reply">
+                <div class="left-c"></div>
+                <div class="right-c">
+                  <h4 class="c-header">Lorem, ipsum dolor.</h4>
+                  <div class="c-body">
+                    Lorem ipsum dolor sit amet consectetur adipisicing
+                    elit. Eligendi eius magni minima delectus ipsa, et
+                    provident commodi iure id doloremque nisi quod
+                    sapiente esse, obcaecati similique. Velit earum
+                    accusamus quod.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    `
+}

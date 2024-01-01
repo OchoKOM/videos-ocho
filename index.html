@@ -16,50 +16,23 @@
       <main>
         <ocho size="1080" type="playlist" playlist="list"></ocho>
         <ocho-pl id="list">
-          <ocho-pi
-            src="Pete & Bas - Stepped Into the Building.mp4"
-            size="1080"
-          ></ocho-pi>
+          <ocho-pi src="Pete & Bas - Stepped Into the Building.mp4" size="1080"></ocho-pi>
           <ocho-pi src="video.mp4" size="720">
             <source src="video_1080.mp4" size="1080" />
             <source src="video_1440.webm" size="1440" />
             <source src="video_360.mp4" size="360" />
             <track
-              kind="subtitles"
-              src="subtitles/subtitle-track-[Chinese].vtt"
-              srclang="zh"
-              label=""
-            />
+              kind="subtitles" src="subtitles/subtitle-track-[Chinese].vtt" srclang="zh" label="">
             <track
-              kind="subtitles"
-              src="subtitles/subtitle-track-[English].vtt"
-              srclang="en"
-              label=""
-            />
+              kind="subtitles" src="subtitles/subtitle-track-[English].vtt" srclang="en" label="">
             <track
-              kind="subtitles"
-              src="subtitles/subtitle-track-[Esperanto].vtt"
-              srclang="eo"
-              label=""
-            />
-            <track
-              kind="subtitles"
-              src="subtitles/subtitle-track-[French].vtt"
-              srclang="fr"
-              label=""
-            />
-            <track
-              kind="subtitles"
-              src="subtitles/subtitle-track-[Spanish].vtt"
-              srclang="es"
-              label=""
-            />
+              kind="subtitles" src="subtitles/subtitle-track-[Esperanto].vtt" srclang="eo" label="">
+            <track kind="subtitles" src="subtitles/subtitle-track-[French].vtt" srclang="fr" label=""/>
+            <track kind="subtitles" src="subtitles/subtitle-track-[Spanish].vtt" srclang="es" label=""/>
           </ocho-pi>
         </ocho-pl>
         <div class="video-details">
-          <span class="video-title"
-            >Pete & Bas - Stepped Into the Building</span
-          >
+          <span class="video-title">Pete & Bas - Stepped Into the Building</span>
           <span class="mobile-desc-toggle">
             <span class="views">700 k</span> vues il y a
             <span class="time">1 j</span>
@@ -117,8 +90,8 @@
               </div>
             </div>
           </div>
-          <div class="video-comments summary">
-            <div class="desc-header comment-toggle">
+          <div class="summary comment-toggle">
+            <div class="desc-header">
               <h2 class="comment-toggle">
                 Commentaires <span class="nbr-count">30</span>
               </h2>
@@ -130,7 +103,11 @@
                     <div class="left-c"></div>
                     <form class="right-c">
                       <textarea  title="Commenter" placeholder="Commenter" required></textarea>
-                      <input type="submit" title="Envoyer le commentaire">
+                      <button type="submit" title="Envoyer">
+                        <svg height="24" width="24" fill="currentColor">
+                          <use xlink:href="#send-icon"></use>
+                        </svg>
+                      </button>
                     </form>
                   </div>
                 </div>

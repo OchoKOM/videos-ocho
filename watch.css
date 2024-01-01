@@ -175,7 +175,8 @@ main > .video-details{
     content: attr(data-num);
 }
 
-.video-description, .video-comments{
+.video-description, 
+.video-comments, .summary{
     background: #80808026;
     border-radius: 10px;
     font-size: .9em;
@@ -183,7 +184,7 @@ main > .video-details{
 .video-description{
     padding: 7px 10px;
 }
-.video-comments.summary{
+.summary{
     display: none;
 }
 .video-description .desc-header, 
@@ -201,10 +202,12 @@ main > .video-details{
     gap: .5em;
     font-weight: 700;
 }
-.video-comments > .desc-header{
+.video-comments > .desc-header,
+.summary > .desc-header{
     padding: 10px;
 }
-.video-comments .nbr-count{
+.video-comments .nbr-count,
+.summary .nbr-count{
     font-size: .8em;
     font-weight: 400;
     color: #d0d0d0;
@@ -238,6 +241,36 @@ main > .video-details{
 .comments .right-c{
     width: 100%;
     max-width: calc(100% - 40px);
+}
+.comments form{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.comments form button{
+    display: block;
+    background: none;
+    border: none;
+    outline: none;
+    color: inherit;
+    padding: 0;
+}
+.comments form textarea{
+    border: none;
+    outline: none;
+    width: 100%;
+    height: var(--text-lines,2em);
+    background: var(--body-bg, #111);
+    color: var(--txt,#fff);
+    padding: .2em .8em;
+    border-radius: 20px;
+    font-size: .9em;
+    resize: none;
+    max-height: 5em;
+    transition: 150ms ease-in-out;
+}
+.comments form:has(textarea:placeholder-shown) button{
+    display: none;
 }
 .comment-replies{
     width: calc(100% - 30px);
@@ -306,7 +339,9 @@ main > .video-details{
     .video-actions {
         padding: 10px 0;
     }
-    .video-description, .video-comments{
+    .video-description, 
+    .video-comments,
+    .summary{
         position: absolute;
         top: 100%;
         left: 0;
@@ -324,7 +359,7 @@ main > .video-details{
         top: 0;
         visibility: visible;
     }
-    .video-comments.summary{
+    .summary{
         display: block;
         visibility: visible;
         position: relative;
