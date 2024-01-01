@@ -568,9 +568,9 @@ ocho.paused .caption-text {
 
 /* Input */
 .cl-switch>input {
-    appearance: none;
     -moz-appearance: none;
     -webkit-appearance: none;
+    appearance: none;
     z-index: -1;
     position: absolute;
 }
