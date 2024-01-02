@@ -237,6 +237,11 @@ main > .video-details{
     padding: .3em .9em;
     cursor: pointer;
 }
+.comment-replies .desc-header{
+    cursor: pointer;
+    -webkit-user-select: none;
+    user-select: none;
+}
 .comment-content{
     transition: 150ms ease-in-out;
     padding-block: 0;
