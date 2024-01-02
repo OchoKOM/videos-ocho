@@ -200,48 +200,68 @@ function load_video_data(id) {
   }
 
   const video_data = new VideoData();
-  let video_comments = [
+  let all_comment = [
     {
       id: 0,
       username: "Mister Douche",
       message: "C'est vraiment une vidéo superbe !",
-      timestamp: Math.round(Math.random() * 1000000000) / 1000000
+      timestamp: Math.round(Math.random() * 1000000000) / 1000000,
+      level: 0,
     }, {
       id: 1,
       username: "Yoann Boniface",
       message: "Je suis d'accord avec toi Pete.",
       timestamp: Math.round(Math.random() * 1000000000) / 1000000 + 10,
+      level: 0,
+    },{
+      from: 0,
+      id: 2,
+      username: "Ludovic Dupont",
+      message: "J'ai pas envie de dire quoi mais c'est vraiment top.",
+      level: 1,
+    }, {
+      from: 2,
+      id: 3,
+      username: "Pete & Bas",
+      message: "Merci beaucoup",
+      level: 2,
+    }, {
+      from: 1,
+      id: 4,
+      username: "Fabien Lefebvre",
+      message: "Oui oui oui, je comprends tout",
+      level: 1,
+    }, {
+      from: 4,
+      id: 5,
+      username: "Gauthier Leroy",
+      message: "Et si on ajoutait des couleurs ?",
+      level: 2,
     }
-  ].sort((a, b) => a.timestamp - b.timestamp);
-  let comment_replies = {
-    0: [
-      {
-        id: 2,
-        username: "Ludovic Dupont",
-        message: "J'ai pas envie de dire quoi mais c'est vraiment top."
-      }, {
-        id: 3,
-        username: "Pete & Bas",
-        message: "Merci beaucoup"
+  ]
+  let video_comments = []
+  let comment_replies = {}
+  all_comment.forEach(comment => {
+    if (comment.level == 0) {
+      video_comments.push(comment)
+    }else{
+      comment_replies[comment.from] = [
+        comment
+      ]
+    }
+  }); 
+  video_comments.sort((a, b) => a.timestamp - b.timestamp);
+  let replies_num = {};
+  for (const cle in comment_replies) {
+    const reply = comment_replies[cle];
+    const reply_id = reply[0].from;
+    let replies = 1;
+    if (reply[0].level === 1) {
+      for (const key in comment_replies[reply_id]) {
+        const element = comment_replies[reply_id][key];
+        replies++;
       }
-    ],
-    1: [
-      {
-        id: 4,
-        username: "Fabien Lefebvre",
-        message: "Oui oui oui, je comprends tout"
-      }, {
-        id: 5,
-        username: "Gauthier Leroy",
-        message: "Et si on ajoutait des couleurs ?"
-      }
-    ]
-  };
-  let replies_num = 0;
-  for (let i = 0; i < comment_replies.length; i++) {
-    const replies = comment_replies[i];
-    for (let j = 0; j < replies.length; j++) {
-      replies_num++
+      replies_num[reply_id] = replies
     }
   }
   let video_details_html = `
@@ -294,7 +314,7 @@ function load_video_data(id) {
     <div class="summary comment-toggle">
       <div class="desc-header">
         <h2 class="comment-toggle">
-          Commentaires <span class="nbr-count">${video_comments.length + replies_num}</span>
+          Commentaires <span class="nbr-count">${all_comment.length || ''}</span>
         </h2>
       </div>
       <div class="desc-body">
@@ -342,7 +362,7 @@ function load_video_data(id) {
     </div>
     <div class="video-comments">
       <div class="desc-header">
-        <h2>Commentaires <span class="nbr-count">${video_comments.length + replies_num}</span></h2>
+        <h2>Commentaires <span class="nbr-count">${all_comment.length || ''}</span></h2>
         <span class="close-desc">&times;</span>
       </div>
       <hr />
@@ -382,7 +402,7 @@ function load_video_data(id) {
             </div>
             <div class="comment-replies">
               <div class="desc-header">
-                <h3>Reponses <span class="nbr-count">${comment_replies[comment.id].length || ''}</span></h3>
+                <h3>Reponses <span class="nbr-count">${replies_num[comment.id] || ''}</span></h3>
               </div>
               <div class="desc-body"></div>
             </div>
@@ -461,6 +481,19 @@ function load_video_data(id) {
         </div>
         `
       comment_replie.innerHTML += replies_html;
+      comment_replies[reply.id].forEach(reply_reply => {
+        let replies_html = `
+        <div class="single-reply" id="reply-${reply_reply.id}-from-${reply.id}">
+          <div class="left-c"></div>
+          <div class="right-c">
+            <h4 class="c-header">${reply_reply.username}</h4>
+            <div class="c-body"><span class="reply-name">@${reply.username}</span> ${reply_reply.message}</div>
+            <button class="c-footer">Repondre</button>
+          </div>
+        </div>
+        `
+        comment_replie.innerHTML += replies_html;
+      });
       let replies_toggles = comment_replie.querySelectorAll('.c-footer');
       replies_toggles.forEach(replies_toggle => {
         if (replies_toggle.parentNode.parentNode.parentNode === comment_replie) {
