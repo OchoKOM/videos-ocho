@@ -196,6 +196,11 @@ main > .video-details{
     font-size: 1.2em;
     font-weight: 700;
 }
+.video-comments .desc-body{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
 .video-description .desc-body-h, 
 .desc-body-h .body-h-section{
     display: flex;
@@ -223,16 +228,28 @@ main > .video-details{
     flex-direction: column;
     gap: 10px;
 }
+.single-comment button{
+    border: none;
+    outline: none;
+    background: #1e8fff63;
+    color: inherit;
+    border-radius: 30px;
+    padding: .3em .9em;
+    cursor: pointer;
+}
 .comment-content{
     transition: 150ms ease-in-out;
     padding-block: 0;
 }
 .comment-content:has(textarea:focus),
-.comment-content:has(textarea:valid){
+.comment-content:has(textarea:valid),
+.single-reply:has(textarea:focus),
+.single-reply:has(textarea:valid){
     background: #0f61b4;
     padding-block: 10px;
     z-index: 300;
 }
+.single-reply textarea:focus,
 .comment-content textarea:focus {
     outline: 2px solid #fff;
 }
@@ -370,6 +387,7 @@ main > .video-details{
         transition: 150ms ease-in-out;
         visibility: hidden;
         padding: 0;
+        width: 100%;
     }
     .video-description.active, 
     .video-comments.active{
@@ -387,7 +405,9 @@ main > .video-details{
         transition: 150ms ease-in-out;
     }
     .comment-content:has(textarea:focus),
-    .comment-content:has(textarea:valid){
+    .comment-content:has(textarea:valid),
+    .single-reply:has(textarea:focus),
+    .single-reply:has(textarea:valid){
         position: fixed;
         background: #0f61b4;
         width: 100%;
@@ -396,6 +416,7 @@ main > .video-details{
         padding-block-start: 10px;
         z-index: 300;
     }
+    .single-reply textarea:focus,
     .comment-content textarea:focus {
         outline: 2px solid #fff;
     }

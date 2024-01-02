@@ -219,7 +219,7 @@ function load_video_data(id) {
         id: 2,
         username: "Ludovic Dupont",
         message: "J'ai pas envie de dire quoi mais c'est vraiment top."
-      },{
+      }, {
         id: 3,
         username: "Pete & Bas",
         message: "Merci beaucoup"
@@ -230,7 +230,7 @@ function load_video_data(id) {
         id: 4,
         username: "Fabien Lefebvre",
         message: "Oui oui oui, je comprends tout"
-      },{
+      }, {
         id: 5,
         username: "Gauthier Leroy",
         message: "Et si on ajoutait des couleurs ?"
@@ -244,7 +244,6 @@ function load_video_data(id) {
       replies_num++
     }
   }
-
   let video_details_html = `
     <span class="video-title">${video_data.titre}</span>
     <span class="mobile-desc-toggle">
@@ -378,6 +377,7 @@ function load_video_data(id) {
               <div class="right-c">
                 <h3 class="c-header">${comment.username}</h3>
                 <div class="c-body">${comment.message}</div>
+                <button class="c-footer">Repondre</button>
               </div>
             </div>
             <div class="comment-replies">
@@ -388,18 +388,35 @@ function load_video_data(id) {
             </div>
     `;
     single_comment.innerHTML = single_comment_html;
-    let comment_replie = single_comment.querySelector('.comment-replies .desc-body');
-    comment_replies[comment.id].forEach(reply => {
-      let replies_html = `
-        <div class="single-reply" id="reply-${reply.id}-from-${comment.id}">
+    let replies_toggle = single_comment.querySelector(".c-footer")
+    replies_toggle.addEventListener("click", () => {
+      replies_toggle.classList.toggle('active');
+      show_comment_replies(single_comment, comment);
+      if (replies_toggle.classList.contains('active')) {
+        let comment_replie = single_comment.querySelector('.comment-replies .desc-body');
+        let form = `
+        <div class="single-reply" id="reply-${Date.now()}-from-${comment.id}">
           <div class="left-c"></div>
-          <div class="right-c">
-            <h4 class="c-header">${reply.username}</h4>
-            <div class="c-body"><span class="reply-name">@${comment.username}</span> ${reply.message}</div>
-          </div>
+          <form class="right-c" method="post">
+            <textarea  title="Ajouter une reponse..." placeholder="Ajouter une reponse..." required></textarea>
+            <button type="submit" title="Envoyer">
+              <svg height="24" width="24" fill="currentColor">
+                <use xlink:href="#send-icon"></use>
+              </svg>
+            </button>
+          </form>
         </div>
         `
-      comment_replie.innerHTML += replies_html;
+        comment_replie.insertAdjacentHTML("afterbegin", form);
+        comment_replie.querySelector("textarea").focus()
+        update_textareas();
+      }
+    })
+    let comment_replies_toggle = single_comment.querySelector(".comment-replies .desc-header")
+    comment_replies_toggle.addEventListener("click", () => {
+      comment_replies_toggle.classList.toggle('active');
+      !!comment_replies_toggle.classList.contains('active') &&
+        show_comment_replies(single_comment, comment);
     })
     comment_section.appendChild(single_comment);
   })
@@ -408,27 +425,74 @@ function load_video_data(id) {
   let comment_toggles = document.querySelectorAll('.comment-toggle');
   let description = video_details.querySelector('.video-description');
   let comment_sect = video_details.querySelector('.video-comments');
-  descr_toggles.forEach(toggle=>{
+  descr_toggles.forEach(toggle => {
     description.classList.remove('active');
     comment_sect.classList.remove('active');
-    toggle.addEventListener('click',()=>{
+    toggle.addEventListener('click', () => {
       description.classList.add('active');
     })
   })
-  comment_toggles.forEach(toggle=>{
+  comment_toggles.forEach(toggle => {
     description.classList.remove('active');
     comment_sect.classList.remove('active');
-    toggle.addEventListener('click',()=>{
+    toggle.addEventListener('click', () => {
       comment_sect.classList.add('active');
     })
   })
   close_descs = video_details.querySelectorAll('.close-desc');
-  close_descs.forEach(close_desc=>{
-    close_desc.addEventListener('click',()=>{
+  close_descs.forEach(close_desc => {
+    close_desc.addEventListener('click', () => {
       comment_sect.classList.remove('active');
       description.classList.remove('active');
     })
   })
+  function show_comment_replies(comment, data) {
+    let comment_replie = comment.querySelector('.comment-replies .desc-body');
+    comment_replie.innerHTML = '';
+    comment_replies[data.id].forEach(reply => {
+      let replies_html = `
+        <div class="single-reply" id="reply-${reply.id}-from-${data.id}">
+          <div class="left-c"></div>
+          <div class="right-c">
+            <h4 class="c-header">${reply.username}</h4>
+            <div class="c-body"><span class="reply-name">@${data.username}</span> ${reply.message}</div>
+            <button class="c-footer">Repondre</button>
+          </div>
+        </div>
+        `
+      comment_replie.innerHTML += replies_html;
+      let replies_toggles = comment_replie.querySelectorAll('.c-footer');
+      replies_toggles.forEach(replies_toggle => {
+        if (replies_toggle.parentNode.parentNode.parentNode === comment_replie) {
+          replies_toggle.addEventListener("click", () => {
+            let new_replie = replies_toggle.parentNode.parentNode;
+            if (new_replie.parentNode.querySelector('textarea')) {
+              new_replie.parentNode.querySelector('textarea').parentNode.parentNode.remove()
+            }
+            let form_div = document.createElement('div')
+            form_div.className = 'single-reply',
+              form_div.id = `reply-${Date.now()}-from-${data.id}`
+            let form = `
+                <div class="left-c"></div>
+                <form class="right-c" method="post">
+                  <textarea  title="Ajouter une reponse..." placeholder="Ajouter une reponse..." required></textarea>
+                  <button type="submit" title="Envoyer">
+                    <svg height="24" width="24" fill="currentColor">
+                      <use xlink:href="#send-icon"></use>
+                    </svg>
+                  </button>
+                </form>
+              `
+            form_div.innerHTML = form;
+            new_replie.parentNode.insertBefore(form_div, new_replie.nextSibling);
+            form_div.querySelector("textarea").focus()
+            update_textareas();
+
+          })
+        }
+      });
+    })
+  }
 }
 function update_textareas() {
   let textareas = document.querySelectorAll('textarea')
