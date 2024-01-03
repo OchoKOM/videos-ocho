@@ -200,51 +200,15 @@ function load_video_data(id) {
   }
 
   const video_data = new VideoData();
-  let all_comment = [
-    {
-      id: 0,
-      username: "Mister Douche",
-      message: "C'est vraiment une vidéo superbe !",
-      timestamp: Math.round(Math.random() * 1000000000) / 1000000,
-      level: 0,
-    }, {
-      id: 1,
-      username: "Yoann Boniface",
-      message: "Je suis d'accord avec toi Pete.",
-      timestamp: Math.round(Math.random() * 1000000000) / 1000000 + 10,
-      level: 0,
-    }, {
-      from: 0,
-      id: 2,
-      username: "Ludovic Dupont",
-      message: "J'ai pas envie de dire quoi mais c'est vraiment top.",
-      level: 1,
-    }, {
-      from: 2,
-      id: 3,
-      username: "Pete & Bas",
-      message: "Merci beaucoup",
-      level: 2,
-    }, {
-      from: 1,
-      id: 4,
-      username: "Fabien Lefebvre",
-      message: "Oui oui oui, je comprends tout",
-      level: 1,
-    }, {
-      from: 4,
-      id: 5,
-      username: "Gauthier Leroy",
-      message: "Et si on ajoutait des couleurs ?",
-      level: 2,
-    }
-  ]
+  let all_comment = []
   let current_user = {
     id: 20,
     username: "Martin Ocho"
   }
   let video_comments = []
   let comment_replies = {}
+  let replies_num = {};
+
   all_comment.forEach(comment => {
     if (comment.level == 0) {
       video_comments.push(comment)
@@ -255,7 +219,6 @@ function load_video_data(id) {
     }
   });
   video_comments.sort((a, b) => a.timestamp - b.timestamp);
-  let replies_num = {};
   for (const cle in comment_replies) {
     const reply = comment_replies[cle];
     const reply_id = reply[0].from;
@@ -268,6 +231,7 @@ function load_video_data(id) {
       replies_num[reply_id] = replies
     }
   }
+
   let video_details_html = `
     <span class="video-title">${video_data.titre}</span>
     <span class="mobile-desc-toggle">
@@ -395,6 +359,7 @@ function load_video_data(id) {
       message: "",
       timestamp: Date.now(),
       level: 0,
+      user_id: current_user.id
     }
     submit_form(form, extras)
   });
@@ -408,7 +373,9 @@ function load_video_data(id) {
               <div class="right-c">
                 <h3 class="c-header">${comment.username}</h3>
                 <div class="c-body">${comment.message}</div>
-                <button class="c-footer">Repondre</button>
+                <div class="c-actions">
+                  <button class="action-btn c-footer">Repondre</button>
+                </div>
               </div>
             </div>
             <div class="comment-replies">
@@ -420,13 +387,23 @@ function load_video_data(id) {
     `;
     single_comment.innerHTML = single_comment_html;
     let replies_toggle = single_comment.querySelector(".c-footer")
+    if (comment.user_id === current_user.id) {
+      let delete_btn = document.createElement('button')
+      delete_btn.classList.add("c-delete")
+      delete_btn.textContent = "Supprimer";
+      replies_toggle.parentNode.insertBefore(delete_btn, replies_toggle.nextSibling)
+      delete_btn.addEventListener('click', () => {
+        delete_btn.textContent = "Suppression...";
+        remove_comment(comment.id);
+      })
+    }
     replies_toggle.addEventListener("click", () => {
       replies_toggle.classList.toggle('active');
       show_comment_replies(single_comment, comment);
       if (replies_toggle.classList.contains('active')) {
         let comment_replie = single_comment.querySelector('.comment-replies .desc-body');
         let form = `
-        <div class="single-reply" id="reply-${Date.now() + (Math.random() * 1000000)}-from-${all_comment[comment.id].id}">
+        <div class="single-reply" id="reply-${Date.now() + (Math.random() * 1000000)}-from-${comment.id}">
           <div class="left-c"></div>
           <form class="right-c" method="post">
             <textarea  title="Ajouter une reponse..." placeholder="Ajouter une reponse..." required></textarea>
@@ -441,8 +418,12 @@ function load_video_data(id) {
         comment_replie.insertAdjacentHTML("afterbegin", form);
         comment_replie.querySelector("textarea").focus()
         update_textareas();
-        submit_form(comment_replie.querySelector("form"),
-          { id: Date.now() + Math.floor(Math.random() * 1000000), from: all_comment[comment.id].id, date: Date.now(), level: 1 });
+        submit_form(comment_replie.querySelector("form"), {
+          id: Date.now() + Math.floor(Math.random() * 1000000),
+          from: comment.id,
+          date: Date.now(), level: 1,
+          user_id: current_user.id
+        });
       }
     })
     let comment_replies_toggle = single_comment.querySelector(".comment-replies .desc-header")
@@ -488,10 +469,17 @@ function load_video_data(id) {
         extras.message = textarea_message;
         data.append('message', textarea_message)
         extras.username = current_user.username;
-        all_comment[extras.id] = extras;
-        console.log(extras);
+        all_comment.push(extras);
+        all_comment.forEach(comment => {
+          if (comment.level == 0) {
+            video_comments[extras.id] = comment
+          } else {
+            comment_replies[extras.from] = [comment]
+          }
+        });
 
-        let extras_user = (extras.level !== 0) ? `<span class="reply-name">@${all_comment[extras.from].username}</span>` : '';
+        let extras_user = (extras.level !== 0) ?
+          `<span class="reply-name">@${video_comments[extras.from].username}</span>` : '';
         let comment_div = document.createElement('div')
         comment_div.className = (extras.level !== 0) ? 'single-reply' : 'single-comment'
         comment_div.id = extras.id
@@ -500,7 +488,9 @@ function load_video_data(id) {
         <div class="right-c">
           <h4 class="c-header">${extras.username}</h4>
           <div class="c-body">${extras_user} ${extras.message}</div>
-          <button class="c-footer">Repondre</button>
+          <div class="c-actions">
+            <button class="action-btn c-footer">Repondre</button>
+          </div>
         </div>
           `
         if (extras.level === 0) {
@@ -510,7 +500,9 @@ function load_video_data(id) {
             <div class="right-c">
               <h3 class="c-header">${extras.username}</h3>
               <div class="c-body">${extras.message}</div>
-              <button class="c-footer">Repondre</button>
+              <div class="c-actions">
+                <button class="action-btn c-footer">Repondre</button>
+              </div>
             </div>
           </div>
           <div class="comment-replies">
@@ -531,14 +523,15 @@ function load_video_data(id) {
         }
         let replies_toggles = comment_div.querySelectorAll('.c-footer');
         replies_toggles.forEach(replies_toggle => {
+          let delete_btn = document.createElement('button')
           replies_toggle.addEventListener("click", () => {
-            let new_replie = replies_toggle.parentNode.parentNode;
+            let new_replie = replies_toggle.parentNode.parentNode.parentNode;
             if (new_replie.parentNode.querySelector('textarea')) {
               new_replie.parentNode.querySelector('textarea').parentNode.parentNode.remove()
             }
             let form_div = document.createElement('div')
             form_div.className = 'single-reply',
-              form_div.id = `reply-${Date.now() + (Math.random() * 1000000)}-from-${all_comment[extras.id].id}`
+              form_div.id = `reply-${Date.now() + (Math.random() * 1000000)}-from-${extras.id}`
             let form_html = `
                   <div class="left-c"></div>
                   <form class="right-c" method="post">
@@ -559,30 +552,62 @@ function load_video_data(id) {
             }
             form_div.querySelector("textarea").focus()
             update_textareas();
-            submit_form(new_replie.parentNode.querySelector("form"),
-              { id: Date.now() + Math.floor(Math.random() * 1000000), from: all_comment[extras.id].id, date: Date.now(), level: ((extras.level !== 2) ? extras.level + 1 : extras.level) });
+            submit_form(new_replie.parentNode.querySelector("form"), {
+              id: Date.now() + Math.floor(Math.random() * 1000000),
+              from: extras.id, 
+              date: Date.now(),
+              level: ((extras.level !== 2) ? extras.level + 1 : extras.level),
+              user_id: current_user.id
+            });
           })
+          if (extras.user_id === current_user.id) {
+            delete_btn.classList.add("c-delete")
+            delete_btn.textContent = "Supprimer";
+            replies_toggle.parentNode.insertBefore(delete_btn, replies_toggle.nextSibling)
+            delete_btn.addEventListener('click', () => {
+              delete_btn.textContent = "Suppression...";
+              remove_comment(extras.id);
+            })
+          }
         });
       }
     })
   }
   function show_comment_replies(comment, data) {
     let comment_replie = comment.querySelector('.comment-replies .desc-body');
+    all_comment.push(data);
+    all_comment.forEach(comment => {
+      if (comment.level === 0) {
+        video_comments[comment.id] = comment
+      } else {
+        comment_replies[comment.from] = [comment]
+      }
+    });
     let from = data.id;
     comment_replie.innerHTML = '';
     comment_replies[data.id].forEach(reply => {
+      all_comment.push(reply);;
+      all_comment.forEach(comment => {
+        if (comment.level === 0) {
+          video_comments[comment.id] = comment
+        } else {
+          comment_replies[comment.from] = [comment]
+        }
+      });
       let replies_html = `
         <div class="single-reply" id="reply-${reply.id}-from-${data.id}">
           <div class="left-c"></div>
           <div class="right-c">
             <h4 class="c-header">${reply.username}</h4>
             <div class="c-body"><span class="reply-name">@${data.username}</span> ${reply.message}</div>
-            <button class="c-footer">Repondre</button>
+            <div class="c-actions">
+              <button class="action-btn c-footer">Repondre</button>
+            </div>
           </div>
         </div>
         `
       comment_replie.innerHTML += replies_html;
-      from = data.id
+      from = data.id;
       comment_replies[reply.id].forEach(reply_reply => {
         let replies_html = `
         <div class="single-reply" id="reply-${reply_reply.id}-from-${reply.id}">
@@ -590,7 +615,9 @@ function load_video_data(id) {
           <div class="right-c">
             <h4 class="c-header">${reply_reply.username}</h4>
             <div class="c-body"><span class="reply-name">@${reply.username}</span> ${reply_reply.message}</div>
-            <button class="c-footer">Repondre</button>
+            <div class="c-actions">
+              <button class="action-btn c-footer">Repondre</button>
+            </div>
           </div>
         </div>
         `
@@ -599,9 +626,19 @@ function load_video_data(id) {
       });
       let replies_toggles = comment_replie.querySelectorAll('.c-footer');
       replies_toggles.forEach(replies_toggle => {
-        if (replies_toggle.parentNode.parentNode.parentNode === comment_replie) {
+        if (replies_toggle.parentNode.parentNode.parentNode.parentNode === comment_replie) {
+          if (data.user_id === current_user.id) {
+            let delete_btn = document.createElement('button')
+            delete_btn.classList.add("c-delete")
+            delete_btn.textContent = "Supprimer";
+            replies_toggle.parentNode.insertBefore(delete_btn, replies_toggle.nextSibling)
+            delete_btn.addEventListener('click', () => {
+              delete_btn.textContent = "Suppression...";
+              remove_comment(data.id);
+            })
+          }
           replies_toggle.addEventListener("click", () => {
-            let new_replie = replies_toggle.parentNode.parentNode;
+            let new_replie = replies_toggle.parentNode.parentNode.parentNode;
             let from = +new_replie.getAttribute('id').split("-from-")[0].split("reply-")[1];
             if (new_replie.parentNode.querySelector('textarea')) {
               new_replie.parentNode.querySelector('textarea').parentNode.parentNode.remove()
@@ -624,12 +661,31 @@ function load_video_data(id) {
             new_replie.parentNode.insertBefore(form_div, new_replie.nextSibling);
             form_div.querySelector("textarea").focus()
             update_textareas();
-            submit_form(new_replie.parentNode.querySelector("form"),
-              { id: Date.now() + Math.floor(Math.random() * 1000000), from: from, date: Date.now(), level: 2 });
+            submit_form(new_replie.parentNode.querySelector("form"), {
+              id: Date.now() + Math.floor(Math.random() * 1000000),
+              from: from, date: Date.now(),
+              level: 2,
+              user_id: current_user.id
+            });
           })
         }
       });
     })
+  }
+  function remove_comment(id) {
+    let comments_d = video_comments, replies_d = comment_replies
+    comments_d.forEach(comment => {
+      // if (comment.level === 0 && comment.id === id) {
+        for (const key in replies_d) {
+          const elements = replies_d[key];
+          elements.forEach(element => {
+            if (element.from === id){
+              console.log(all_comment);
+            }
+          });
+        }
+      // }
+    });
   }
 }
 function update_textareas() {

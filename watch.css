@@ -228,6 +228,10 @@ main > .video-details{
     flex-direction: column;
     gap: 10px;
 }
+.single-comment .c-actions{
+    display: flex;
+    gap: 10px;
+}
 .single-comment button{
     border: none;
     outline: none;
