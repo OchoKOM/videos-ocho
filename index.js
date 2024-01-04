@@ -183,6 +183,7 @@ function load_video_data(id) {
   const leading_zero_formatter = new Intl.NumberFormat(undefined, {
     minimumIntegerDigits: 2,
   })
+  // Exemple of video data
   function VideoData() {
     this.titre = "Pete & Bas - Stepped Into the Building";
     this.descr = "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Animi fugit, aspernatur sapiente velit natus officia, recusandae nisi itaque deserunt illum quos corrupti suscipit quibusdam, exercitationem expedita! Aliquam, modi veritatis soluta exercitationem aspernatur voluptatibus est. Similique, ab sapiente ratione eveniet officia ex hic modi obcaecati exercitationem delectus eius maiores tempore consectetur vero at earum deleniti labore non nam beatae repellendus? Saepe obcaecati eos sit quo eaque modi. Magni eum distinctio, ex doloremque iste fugit in ad est eligendi obcaecati, tempora illum asperiores at dolore similique consectetur nemo nesciunt. Suscipit laudantium architecto dolorem accusamus cumque, voluptatibus doloremque dolor quidem autem veritatis excepturi.";
@@ -201,6 +202,7 @@ function load_video_data(id) {
 
   const video_data = new VideoData();
   let all_comment = []
+  // Exemple of current user
   let current_user = {
     id: 20,
     username: "Martin Ocho"
@@ -211,11 +213,10 @@ function load_video_data(id) {
 
   all_comment.forEach(comment => {
     if (comment.level == 0) {
-      video_comments.push(comment)
+      comment.id = Date.now() + Math.floor(Math.random() * 1000000);
+      video_comments[comment.id] = comment
     } else {
-      comment_replies[comment.from] = [
-        comment
-      ]
+      comment_replies[comment.from] = [comment]
     }
   });
   video_comments.sort((a, b) => a.timestamp - b.timestamp);
@@ -225,7 +226,6 @@ function load_video_data(id) {
     let replies = 1;
     if (reply[0].level === 1) {
       for (const key in comment_replies[reply_id]) {
-        const element = comment_replies[reply_id][key];
         replies++;
       }
       replies_num[reply_id] = replies
@@ -335,7 +335,7 @@ function load_video_data(id) {
         <div class="single-comment">
             <div class="comment-content">
               <div class="left-c"></div>
-              <form class="right-c">
+              <form class="right-c" method="post">
                 <textarea  title="Commenter" placeholder="Commenter" required></textarea>
                 <button type="submit" title="Envoyer">
                   <svg height="24" width="24" fill="currentColor">
@@ -351,18 +351,16 @@ function load_video_data(id) {
     `
   let video_details = document.querySelector(".video-details");
   video_details.innerHTML = video_details_html;
-  let all_forms = video_details.querySelectorAll('form.right-c')
-  all_forms.forEach(form => {
-    let extras = {
-      id: Date.now() + Math.floor(Math.random() * 1000000),
-      username: current_user.username,
-      message: "",
-      timestamp: Date.now(),
-      level: 0,
-      user_id: current_user.id
-    }
-    submit_form(form, extras)
-  });
+  let comment_form = video_details.querySelector('form.right-c')
+
+  submit_form(comment_form, {
+    id: Date.now() + Math.floor(Math.random() * 1000000),
+    username: current_user.username,
+    message: "",
+    timestamp: Date.now(),
+    level: 0,
+    user_id: current_user.id
+  })
   let comment_section = video_details.querySelector('.video-comments .comments');
   video_comments.forEach(comment => {
     let single_comment = document.createElement('div');
@@ -403,9 +401,9 @@ function load_video_data(id) {
       if (replies_toggle.classList.contains('active')) {
         let comment_replie = single_comment.querySelector('.comment-replies .desc-body');
         let form = `
-        <div class="single-reply" id="reply-${Date.now() + (Math.random() * 1000000)}-from-${comment.id}">
+        <div class="single-reply" id="reply-${Date.now() + (Math.random() * 1000000)}">
           <div class="left-c"></div>
-          <form class="right-c" method="post">
+          <form class="right-c" method="post>
             <textarea  title="Ajouter une reponse..." placeholder="Ajouter une reponse..." required></textarea>
             <button type="submit" title="Envoyer">
               <svg height="24" width="24" fill="currentColor">
@@ -463,26 +461,36 @@ function load_video_data(id) {
   function submit_form(form, extras) {
     form.addEventListener('submit', e => {
       e.preventDefault();
+      extras.id = Date.now() + Math.floor(Math.random() * 1000000);
       let data = new FormData();
-      const textarea_message = form.querySelector('textarea').value.trim();
+      const textarea_message = htmlspecialchars(form.querySelector('textarea').value.trim());
       if (textarea_message && textarea_message.trim() !== '') {
         extras.message = textarea_message;
         data.append('message', textarea_message)
         extras.username = current_user.username;
+        if (extras.level === 0) {
+          extras.id = Date.now() + Math.floor(Math.random() * 1000000);
+        }
         all_comment.push(extras);
         all_comment.forEach(comment => {
           if (comment.level == 0) {
-            video_comments[extras.id] = comment
+            video_comments[comment.id] = comment;
           } else {
-            comment_replies[extras.from] = [comment]
+            if (!comment_replies[comment.from]) {
+              comment_replies[comment.from] = [];
+            }
+            comment_replies[comment.from] = comment;
           }
         });
-
+        console.log(extras.from);
+        console.log(video_comments);
         let extras_user = (extras.level !== 0) ?
-          `<span class="reply-name">@${video_comments[extras.from].username}</span>` : '';
+          `<span class="reply-name">@${(extras.level === 1) ?
+            video_comments[extras.from].username
+            : comment_replies[extras.from].username}</span>` : '';
         let comment_div = document.createElement('div')
-        comment_div.className = (extras.level !== 0) ? 'single-reply' : 'single-comment'
-        comment_div.id = extras.id
+        comment_div.className = (extras.level !== 0) ? 'single-reply' : 'single-comment';
+        (extras.level > 0) && (comment_div.id = `comment-${extras.id}`);
         let comment_html = `
         <div class="left-c"></div>
         <div class="right-c">
@@ -521,66 +529,69 @@ function load_video_data(id) {
         } else {
           form.querySelector('textarea').value = ''
         }
-        let replies_toggles = comment_div.querySelectorAll('.c-footer');
-        replies_toggles.forEach(replies_toggle => {
+        let replies_toggle = comment_div.querySelector('.c-footer');
+        let reply_parent = (extras.level === 0) ?
+          replies_toggle.parentNode.parentNode.parentNode.parentNode
+          : replies_toggle.parentNode.parentNode.parentNode;
+        if (reply_parent === comment_div) {
           let delete_btn = document.createElement('button')
-          replies_toggle.addEventListener("click", () => {
-            let new_replie = replies_toggle.parentNode.parentNode.parentNode;
-            if (new_replie.parentNode.querySelector('textarea')) {
-              new_replie.parentNode.querySelector('textarea').parentNode.parentNode.remove()
-            }
-            let form_div = document.createElement('div')
-            form_div.className = 'single-reply',
-              form_div.id = `reply-${Date.now() + (Math.random() * 1000000)}-from-${extras.id}`
-            let form_html = `
-                  <div class="left-c"></div>
-                  <form class="right-c" method="post">
-                    <textarea  title="Ajouter une reponse..." placeholder="Ajouter une reponse..." required></textarea>
-                    <button type="submit" title="Envoyer">
-                      <svg height="24" width="24" fill="currentColor">
-                        <use xlink:href="#send-icon"></use>
-                      </svg>
-                    </button>
-                  </form>
-                `
-            form_div.innerHTML = form_html;
-            if (extras.level !== 0) {
-              new_replie.parentNode.insertBefore(form_div, new_replie.nextSibling);
-            } else {
-              new_replie.parentNode.parentNode
-                .querySelector('.comment-replies .desc-body').prepend(form_div)
-            }
-            form_div.querySelector("textarea").focus()
-            update_textareas();
-            submit_form(new_replie.parentNode.querySelector("form"), {
-              id: Date.now() + Math.floor(Math.random() * 1000000),
-              from: extras.id, 
-              date: Date.now(),
-              level: ((extras.level !== 2) ? extras.level + 1 : extras.level),
-              user_id: current_user.id
-            });
-          })
           if (extras.user_id === current_user.id) {
             delete_btn.classList.add("c-delete")
             delete_btn.textContent = "Supprimer";
             replies_toggle.parentNode.insertBefore(delete_btn, replies_toggle.nextSibling)
             delete_btn.addEventListener('click', () => {
               delete_btn.textContent = "Suppression...";
-              remove_comment(extras.id);
+              let new_id = +delete_btn.parentNode.parentNode.parentNode.getAttribute('id').split('-')[1];
+              remove_comment(new_id)
             })
           }
-        });
+          replies_toggle.addEventListener("click", () => {
+            let new_replie = reply_parent;
+            if (new_replie.querySelector('textarea')) {
+              new_replie.querySelector('textarea').parentNode.parentNode.remove()
+            }
+            let form_div = document.createElement('div')
+            form_div.className = 'single-reply',
+              form_div.id = `reply-${Date.now() + (Math.random() * 1000000)}`
+            let form_html = `
+                    <div class="left-c"></div>
+                    <form class="right-c" method="post">
+                      <textarea  title="Ajouter une reponse..." placeholder="Ajouter une reponse..." required></textarea>
+                      <button type="submit" title="Envoyer">
+                        <svg height="24" width="24" fill="currentColor">
+                          <use xlink:href="#send-icon"></use>
+                        </svg>
+                      </button>
+                    </form>
+                  `
+            form_div.innerHTML = form_html;
+            if (extras.level !== 0) {
+              new_replie.parentNode.insertBefore(form_div, new_replie.nextSibling);
+            } else {
+              comment_div.querySelector('.comment-replies .desc-body').prepend(form_div)
+            }
+            form_div.querySelector("textarea").focus()
+            update_textareas();
+            submit_form(form_div.querySelector("form"), {
+              id: Date.now() + Math.floor(Math.random() * 1000000),
+              from: extras.id,
+              date: Date.now(),
+              level: ((extras.level !== 2) ? extras.level + 1 : extras.level),
+              user_id: current_user.id
+            });
+          })
+        }
       }
     })
   }
   function show_comment_replies(comment, data) {
     let comment_replie = comment.querySelector('.comment-replies .desc-body');
     all_comment.push(data);
-    all_comment.forEach(comment => {
-      if (comment.level === 0) {
-        video_comments[comment.id] = comment
+    all_comment.forEach(el => {
+      if (el.level === 0) {
+        video_comments[comment.id] = el
       } else {
-        comment_replies[comment.from] = [comment]
+        comment_replies[comment.from] = [el]
       }
     });
     let from = data.id;
@@ -595,7 +606,7 @@ function load_video_data(id) {
         }
       });
       let replies_html = `
-        <div class="single-reply" id="reply-${reply.id}-from-${data.id}">
+        <div class="single-reply" id="reply-${reply.id}">
           <div class="left-c"></div>
           <div class="right-c">
             <h4 class="c-header">${reply.username}</h4>
@@ -610,7 +621,7 @@ function load_video_data(id) {
       from = data.id;
       comment_replies[reply.id].forEach(reply_reply => {
         let replies_html = `
-        <div class="single-reply" id="reply-${reply_reply.id}-from-${reply.id}">
+        <div class="single-reply" id="reply-${reply_reply.id}">
           <div class="left-c"></div>
           <div class="right-c">
             <h4 class="c-header">${reply_reply.username}</h4>
@@ -626,12 +637,12 @@ function load_video_data(id) {
       });
       let replies_toggles = comment_replie.querySelectorAll('.c-footer');
       replies_toggles.forEach(replies_toggle => {
-        if (replies_toggle.parentNode.parentNode.parentNode.parentNode === comment_replie) {
+        if (replies_toggle.parentNode.parentNode.parentNode === comment_replie) {
           if (data.user_id === current_user.id) {
             let delete_btn = document.createElement('button')
             delete_btn.classList.add("c-delete")
             delete_btn.textContent = "Supprimer";
-            replies_toggle.parentNode.insertBefore(delete_btn, replies_toggle.nextSibling)
+            comment_replie.insertBefore(delete_btn, replies_toggle.nextSibling)
             delete_btn.addEventListener('click', () => {
               delete_btn.textContent = "Suppression...";
               remove_comment(data.id);
@@ -639,13 +650,14 @@ function load_video_data(id) {
           }
           replies_toggle.addEventListener("click", () => {
             let new_replie = replies_toggle.parentNode.parentNode.parentNode;
-            let from = +new_replie.getAttribute('id').split("-from-")[0].split("reply-")[1];
+            let from = +new_replie.getAttribute('id').split("comment-")[1];
+            console.log(from);
             if (new_replie.parentNode.querySelector('textarea')) {
               new_replie.parentNode.querySelector('textarea').parentNode.parentNode.remove()
             }
             let form_div = document.createElement('div')
             form_div.className = 'single-reply',
-              form_div.id = `reply-${Date.now() + (Math.random() * 1000000)}-from-${from}`
+              form_div.id = `reply-${Date.now() + (Math.random() * 1000000)}`
             let form = `
                 <div class="left-c"></div>
                 <form class="right-c" method="post">
@@ -673,20 +685,63 @@ function load_video_data(id) {
     })
   }
   function remove_comment(id) {
-    let comments_d = video_comments, replies_d = comment_replies
-    comments_d.forEach(comment => {
-      // if (comment.level === 0 && comment.id === id) {
-        for (const key in replies_d) {
-          const elements = replies_d[key];
-          elements.forEach(element => {
-            if (element.from === id){
-              console.log(all_comment);
+    for (const cle in video_comments) {
+      const comment = video_comments[cle];
+      if (comment.id === id) {
+          for (const key in comment_replies) {
+            const elements = comment_replies[key];
+            if (Array.isArray(elements)) {
+              elements.forEach(element => {
+                if (element.from === id) {
+                  remove_comment(element.id);
+                }
+              });
+            } else {
+              if (elements.from === id) {
+                remove_comment(elements.id);
+              }
             }
-          });
+          }
+        delete_comment(comment);
+      }
+    }
+    for (const key in comment_replies) {
+      const replies = comment_replies[key];
+      if (replies.id === id) {
+        // if (replies.level !== 2) {
+        for (const key in comment_replies) {
+          const elements = comment_replies[key];
+          if (Array.isArray(elements)) {
+            elements.forEach(element => {
+              if (element.from === id) {
+                remove_comment(element.id);
+              }
+            });
+          } else {
+            if (elements.from === id) {
+              remove_comment(elements.id);
+            }
+          }
         }
-      // }
-    });
+        // }
+        delete_comment(replies);
+      }
+    }
+    function delete_comment(comment) {
+      for (let i = 0; i < all_comment.length; i++) {
+        const element = all_comment[i];
+        if (element.id === comment.id) {
+          let dom_id = `comment-${element.id}`;
+          all_comment.splice(i, 1);
+          const element_to_remove = (comment.level === 0) ?
+            document.getElementById(dom_id).parentNode : document.getElementById(dom_id)
+          element_to_remove && element_to_remove.remove();
+        }
+      }
+    }
   }
+
+
 }
 function update_textareas() {
   let textareas = document.querySelectorAll('textarea')
@@ -696,6 +751,11 @@ function update_textareas() {
       textarea.style.setProperty('--text-lines', (textarea.value.split(/\r?\n|\r/).length + 1.1) + "em")
     })
   });
+}
+function htmlspecialchars(str) {
+  var el = document.createElement("div");
+  el.appendChild(document.createTextNode(str));
+  return el.innerHTML;
 }
 
 load_video_data(1);
