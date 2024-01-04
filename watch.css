@@ -265,6 +265,7 @@ main > .video-details{
 .comment-content, .single-reply{
     display: flex;
     gap: 5px;
+    transition: 150ms ease-in-out;
 }
 .comments .left-c{
     width: 30px;
