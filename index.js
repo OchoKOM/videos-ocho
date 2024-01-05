@@ -5,18 +5,31 @@ function App() {
     play_video(video);
   });
 }
-function aside_page() {
+function aside_page(id = false) {
+  class VideoData{
+    constructor(id, title, user, user_profile = false, vues = 0, date, cover){
+      this.id= id;
+      this.title = title;
+      this.user = user;
+      this.user_profile = user_profile ? 
+      `<img src="${user_profile}" alt="${this.user}'s profile"/>` : `<h4>${this.user[0]}</h4>`,
+      this.vues = vues;
+      this.date = date;
+      this.cover = cover;
+    }
+  }
   let video_array = []
   let container = document.querySelector('.aside');
   for (let i = 0; i < 10; i++) {
-    let datas = {
-      id: i + 1,
-      title: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-      user: "Martin Ocho",
-      vues: Math.floor(Math.random() * 1000),
-      date: Math.floor(Math.random() * 1702123979),
-      cover: "img.webp"
-    }
+    let datas = new VideoData(
+      i + 1,
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      "Martin Ocho",
+      false,
+      Math.floor(Math.random() * 10000),
+      Math.floor(Math.random() * 1702123979),
+      "img.webp"
+    )
     video_array.push(datas);
   }
   video_array.forEach(async video => {
@@ -28,7 +41,7 @@ function aside_page() {
             <video src="" muted autoplay loop poster="${video.cover}"></video>
         </div>
         <div class="video-details">
-            <div class="left-d"></div>
+            <div class="left-d">${video.user_profile}</div>
             <div class="right-d">
                 <div class="v-title">${video.title}</div>
                 <div class="v-data">${video.user} • ${video.vues} vues • Il y a <span class="time"></span></div>
@@ -44,17 +57,31 @@ function aside_page() {
   });
 }
 function home_page() {
+  class VideoData{
+    constructor(id, title, user, user_profile = false, vues = 0, date, source, cover){
+      this.id= id;
+      this.title = title;
+      this.user = user;
+      this.user_profile = user_profile ? 
+      `<img src="${user_profile}" alt="${this.user}'s profile"/>` : `<h4>${this.user[0]}</h4>`,
+      this.vues = vues;
+      this.date = date;
+      this.source = source;
+      this.cover = cover;
+    }
+  }
   let video_array = []
   for (let i = 0; i < 10; i++) {
-    let datas = {
-      id: i + 1,
-      title: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-      user: "Martin Ocho",
-      vues: Math.floor(Math.random() * 1000),
-      date: Math.floor(Math.random() * 1702123979),
-      source: "video.mp4",
-      cover: "img.webp"
-    }
+    let datas = new VideoData(
+      i + 1,
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      "Martin Ocho",
+      "profil.jpg",
+       Math.floor(Math.random() * 1000),
+      Math.floor(Math.random() * 1702123979),
+      "video.mp4",
+      "img.webp"
+    )
     video_array.push(datas);
   }
   video_array.forEach(async video => {
@@ -66,7 +93,7 @@ function home_page() {
             <video src="" muted autoplay loop poster="${video.cover}"></video>
         </div>
         <div class="video-details">
-            <div class="left-d"></div>
+            <div class="left-d">${video.user_profile}</div>
             <div class="right-d">
                 <div class="v-title">${video.title}</div>
                 <div class="v-data">${video.user} • ${video.vues} vues • Il y a <span class="time"></span></div>
@@ -180,6 +207,10 @@ function format_number(number, language = 'en') {
 
 // console.log(Math.floor(new Date(new Date('2023-04-13T18:30:00Z').getTime()).getMonth() + 1));
 function load_video_data(id) {
+  let video_details = document.querySelector(".video-details");
+  if (!video_details) {
+    return
+  }
   const leading_zero_formatter = new Intl.NumberFormat(undefined, {
     minimumIntegerDigits: 2,
   })
@@ -377,7 +408,6 @@ function load_video_data(id) {
       </div>
     </div>
     `
-  let video_details = document.querySelector(".video-details");
   video_details.innerHTML = video_details_html;
   let like_check = document.getElementById('like-check')
   let dislike_check = document.getElementById('dislike-check');

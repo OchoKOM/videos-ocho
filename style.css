@@ -51,10 +51,10 @@ ocho{
     flex-direction: column;
     gap: 10px;
     width: 100%;
-    max-width: 350px;
     height: max-content;
 }
 .aside .video-section {
+    max-width: 350px;
     flex-direction: initial;
 }
 .video-section .mini-player {
@@ -84,6 +84,9 @@ ocho{
     height: 40px;
     border-radius: 50%;
     position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .aside .video-section .video-details .left-d {
     display: none;
@@ -236,7 +239,7 @@ video:fullscreen {
         width: 100%;
     }
     .aside .video-section .video-details .left-d {
-        display: initial;
+        display: flex;
     }
     .aside .video-section .video-details .right-d {
         width: calc(100% - 45px);

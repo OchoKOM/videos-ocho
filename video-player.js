@@ -247,6 +247,261 @@ async function video_player() {
         </div>
       </div>
     `
+  const mobile_player_controls = `
+  <div class="light"></div>
+      <svg class="loader" viewBox="25 25 50 50" stroke-width="5">
+        <circle cx="50" cy="50" r="20"></circle>
+      </svg>
+      <p class="caption-text">
+        <mark></mark>
+      </p>
+      <div class="overlay"></div>
+      <div class="video-controls-container">
+        <div class="overlay"></div>
+        <div class="controls top">
+          <div class="volume-container">
+            <button class="mute-btn" title="Son (m)">
+              <svg fill="currentColor" height="30">
+                <use xlink:href="#volume-high-icon"></use>
+              </svg>
+            </button>
+        </div>
+        <div class="auto-play" title="Lecture automatique"></div>
+          <button class="caption-btn" title="Sous-titres">
+            <svg fill="currentColor" height="30">
+              <use xlink:href="#closed-caption-icon"></use>
+            </svg>
+          </button>
+          <button class="settings-btn" title="Sous-titres">
+            <svg fill="currentColor" height="30">
+              <use xlink:href="#cog-icon"></use>
+            </svg>
+          </button>
+          <button class="close-controls-btn" title="Fermer">
+            <svg fill="currentColor" height="24"> 
+              <use xlink:href="#times-icon"></use>
+            </svg>
+          </button>
+        </div>
+        <div class="controls center">
+          <button class="prev-btn" title="Précédent">
+            <svg fill="currentColor" height="30">
+              <use xlink:href="#prev-icon"></use>
+            </svg>
+          </button>
+          <button class="play-pause-btn" title="Lecture (k)">
+            <svg fill="currentColor" height="50">
+              <use xlink:href="#play-icon-fill"></use>
+            </svg>
+          </button>
+          <button class="next-btn" title="Suivant">
+            <svg fill="currentColor" height="30">
+              <use xlink:href="#next-icon"></use>
+            </svg>
+          </button>
+        </div>
+        <div class="controls bottom">
+            <div class="controls">
+
+                <div class="duration-container">
+                    <span class="current-time">0:00</span>
+                    <span>/</span>
+                    <span class="total-time">-</span>
+                </div>
+                <div class="volume-container">
+                  <button class="mute-btn" title="Son (m)">
+                    <svg fill="currentColor" height="24">
+                      <use xlink:href="#volume-high-icon"></use>
+                    </svg>
+                  </button>
+                </div>
+                <button class="fullscreen-btn" title="Mode plein écran (f)">
+                  <svg fill="currentColor" height="24">
+                    <use xlink:href="#fullscreen-open-icon-fill"></use>
+                  </svg>
+                </button>
+            </div>
+            <div class="timeline-container">
+              <div class="timeline">
+                <div class="preview-thumb" data-time="0:00">
+                  <div></div>
+                </div>
+                <div class="thumb-indicator"></div>
+                <canvas class="loaded-progress"></canvas>
+              </div>
+            </div>
+        </div>
+        <div class="settings-menu">
+          <div class="wrapper">
+            <ul class="main-section">
+              <li class="ambiant-light">
+                <label>
+                  <span>
+                    <svg viewBox="0 0 24 24" fill="currentColor" height="30">
+                      <use xlink:href="#cinema-light"></use>
+                    </svg>
+                  </span>
+                  <span>Eclairage de cinema</span>
+                  <div class="icon arrow">
+                    <div class="cl-switch">
+                      <input type="checkbox" class="cinema-light-check" />
+                      <span></span>
+                    </div>
+                  </div>
+                </label>
+              </li>
+              <li class="drop-item" data-drop="quality-drop">
+                <span>
+                  <svg viewBox="0 0 48 48" fill="currentColor" height="30">
+                    <use xlink:href="#tune-icon"></use>
+                  </svg>
+                </span>
+                <span>Qualité</span>
+                <div class="icon arrow">
+                  <svg viewBox="0 0 48 48" fill="currentColor">
+                    <use xlink:href="#chevron-right-icon"></use>
+                  </svg>
+                </div>
+              </li>
+              <li class="drop-item" data-drop="captions-drop">
+                <span>
+                  <svg viewBox="0 0 48 48" height="30" fill="currentColor">
+                    <use xlink:href="#caption-icon"></use>
+                  </svg>
+                </span>
+                <span>Sous-titres</span>
+                <div class="icon arrow">
+                  <svg viewBox="0 0 48 48" fill="currentColor">
+                    <use xlink:href="#chevron-right-icon"></use>
+                  </svg>
+                </div>
+              </li>
+              <li class="loop-line">
+                <label>
+                  <span>
+                    <svg viewBox="0 0 48 48" height="30" fill="currentColor">
+                      <use xlink:href="#repeat-one"></use>
+                    </svg>
+                  </span>
+                  <span>Lecture en boucle</span>
+                  <div class="icon arrow">
+                    <div class="cl-switch">
+                      <input type="checkbox" class="loop-check" />
+                      <span></span>
+                    </div>
+                  </div>
+                </label>
+              </li>
+              <li class="drop-item" data-drop="speed-drop">
+                <span>
+                  <svg viewBox="0 0 48 48" fill="currentColor" height="30">
+                    <use xlink:href="#playback-speed"></use>
+                  </svg>
+                </span>
+                <span>Vitesse de lecture</span>
+                <div class="icon arrow">
+                  <svg viewBox="0 0 48 48" fill="currentColor">
+                    <use xlink:href="#chevron-right-icon"></use>
+                  </svg>
+                </div>
+              </li>
+              <li class="drop-item" data-drop="info-user-drop">
+                <span>
+                  <svg viewBox="0 0 48 48" fill="currentColor" height="30">
+                    <use xlink:href="#info-fill"></use>
+                  </svg>
+                </span>
+                <span>Infos sur la chaine</span>
+                <div class="icon arrow">
+                  <svg viewBox="0 0 48 48" fill="currentColor">
+                    <use xlink:href="#chevron-right-icon"></use>
+                  </svg>
+                </div>
+              </li>
+            </ul>
+            <div class="drop quality-drop" id="quality-drop">
+              <div class="label">
+                <span class="back-icon">
+                  <svg viewBox="0 0 24 24" height="30" fill="currentColor">
+                    <use xlink:href="#chevron-left-icon"></use>
+                  </svg>
+                </span>
+                <span>Qualité</span>
+              </div>
+              <ul></ul>
+            </div>
+            <div class="drop captions-drop">
+              <div class="label">
+                <span class="back-icon">
+                  <svg viewBox="0 0 24 24" height="30" fill="currentColor">
+                    <use xlink:href="#chevron-left-icon"></use>
+                  </svg>
+                </span>
+                <span>Sous-titre</span>
+              </div>
+              <ul></ul>
+            </div>
+            <div class="drop speed-drop">
+              <div class="label">
+                <span class="back-icon">
+                  <svg viewBox="0 0 24 24" height="30" fill="currentColor">
+                    <use xlink:href="#chevron-left-icon"></use>
+                  </svg>
+                </span>
+                <span>Vitesse de lecture</span>
+              </div>
+              <ul>
+                <li data-speed="0.5">
+                  <div class="check"></div>
+                  <span>0.5</span>
+                </li>
+                <li data-speed="0.75">
+                  <div class="check"></div>
+                  <span>0.75</span>
+                </li>
+                <li data-speed="1">
+                  <div class="check active"></div>
+                  <span>Normale</span>
+                </li>
+                <li data-speed="1.5">
+                  <div class="check"></div>
+                  <span>1.5</span>
+                </li>
+                <li data-speed="2">
+                  <div class="check"></div>
+                  <span>2</span>
+                </li>
+                <li data-speed="2.5">
+                  <div class="check"></div>
+                  <span>2.5</span>
+                </li>
+              </ul>
+            </div>
+            <div class="drop info-user-drop">
+              <div class="label">
+                <span class="back-icon">
+                  <svg viewBox="0 0 24 24" height="30" fill="currentColor">
+                    <use xlink:href="#chevron-left-icon"></use>
+                  </svg>
+                </span>
+                <span>Infos sur la chaine</span>
+              </div>
+              <div class="info-drop">
+                <div class="channel-profile">
+                  <img
+                    src="https://ochokom.github.io/videos-ocho/profil.jpg"
+                    alt="profile"
+                  />
+                </div>
+                <p>Martin Ocho</p>
+                <button>S'abonner</button>
+                <button>Afficher la chaine</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `
   const player_svgs = `
     <svg style="display: none;">
     <symbol id="play-icon-fill" viewbox="0 0 24 24">
@@ -280,9 +535,17 @@ async function video_player() {
       <path
         d="M21 3H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H3V5h18v14zm-10-7h9v6h-9z" />
     </symbol>
+    <symbol id="closed-caption-icon" viewbox="0 0 48 48">
+      <path
+        d="M9 40q-1.2 0-2.1-.9Q6 38.2 6 37V11q0-1.2.9-2.1Q7.8 8 9 8h30q1.2 0 2.1.9.9.9.9 2.1v26q0 1.2-.9 2.1-.9.9-2.1.9Zm0-3h30V11H9v26Zm4.5-7.05h7.1q.65 0 1.075-.425.425-.425.425-1.075v-2.1h-2.5v1.1h-5.1v-6.9h5.1v1.1h2.5v-2.1q0-.65-.425-1.075-.425-.425-1.075-.425h-7.1q-.65 0-1.075.425Q12 18.9 12 19.55v8.9q0 .65.425 1.075.425.425 1.075.425Zm13.95 0h7.1q.6 0 1.05-.45.45-.45.45-1.05v-2.1h-2.5v1.1h-5.1v-6.9h5.1v1.1h2.5v-2.1q0-.6-.45-1.05-.45-.45-1.05-.45h-7.1q-.6 0-1.05.45-.45.45-.45 1.05v8.9q0 .6.45 1.05.45.45 1.05.45ZM9 37V11v26Z" />
+    </symbol>
     <symbol id="cog-icon" viewbox="0 0 48 48">
       <path
         d="m19.4 44-1-6.3q-.95-.35-2-.95t-1.85-1.25l-5.9 2.7L4 30l5.4-3.95q-.1-.45-.125-1.025Q9.25 24.45 9.25 24q0-.45.025-1.025T9.4 21.95L4 18l4.65-8.2 5.9 2.7q.8-.65 1.85-1.25t2-.9l1-6.35h9.2l1 6.3q.95.35 2.025.925Q32.7 11.8 33.45 12.5l5.9-2.7L44 18l-5.4 3.85q.1.5.125 1.075.025.575.025 1.075t-.025 1.05q-.025.55-.125 1.05L44 30l-4.65 8.2-5.9-2.7q-.8.65-1.825 1.275-1.025.625-2.025.925l-1 6.3ZM24 30.5q2.7 0 4.6-1.9 1.9-1.9 1.9-4.6 0-2.7-1.9-4.6-1.9-1.9-4.6-1.9-2.7 0-4.6 1.9-1.9 1.9-1.9 4.6 0 2.7 1.9 4.6 1.9 1.9 4.6 1.9Zm0-3q-1.45 0-2.475-1.025Q20.5 25.45 20.5 24q0-1.45 1.025-2.475Q22.55 20.5 24 20.5q1.45 0 2.475 1.025Q27.5 22.55 27.5 24q0 1.45-1.025 2.475Q25.45 27.5 24 27.5Zm0-3.5Zm-2.2 17h4.4l.7-5.6q1.65-.4 3.125-1.25T32.7 32.1l5.3 2.3 2-3.6-4.7-3.45q.2-.85.325-1.675.125-.825.125-1.675 0-.85-.1-1.675-.1-.825-.35-1.675L40 17.2l-2-3.6-5.3 2.3q-1.15-1.3-2.6-2.175-1.45-.875-3.2-1.125L26.2 7h-4.4l-.7 5.6q-1.7.35-3.175 1.2-1.475.85-2.625 2.1L10 13.6l-2 3.6 4.7 3.45q-.2.85-.325 1.675-.125.825-.125 1.675 0 .85.125 1.675.125.825.325 1.675L8 30.8l2 3.6 5.3-2.3q1.2 1.2 2.675 2.05Q19.45 35 21.1 35.4Z" />
+    </symbol>
+    <symbol id="times-icon" viewbox="0 0 48 48">
+      <path
+        d="m12.45 37.65-2.1-2.1L21.9 24 10.35 12.45l2.1-2.1L24 21.9l11.55-11.55 2.1 2.1L26.1 24l11.55 11.55-2.1 2.1L24 26.1Z" />
     </symbol>
     <symbol id="cinema-light" viewbox="0 0 24 24">
       <path
@@ -323,10 +586,12 @@ async function video_player() {
         d="m14 44-8-8 8-8 2.1 2.2-4.3 4.3H35v-8h3v11H11.8l4.3 4.3Zm9.3-14.1v-9.45h-2.8V18h5.25v11.9ZM10 21.5v-11h26.2l-4.3-4.3L34 4l8 8-8 8-2.1-2.2 4.3-4.3H13v8Z" />
     </symbol>
     <symbol id="repeat-one-on" viewbox="0 0 48 48">
-      <path d="M5 46q-1.2 0-2.1-.9Q2 44.2 2 43V5q0-1.2.9-2.1Q3.8 2 5 2h38q1.2 0 2.1.9.9.9.9 2.1v38q0 1.2-.9 2.1-.9.9-2.1.9Zm9-2 2.1-2.2-4.3-4.3H38v-11h-3v8H11.8l4.3-4.3L14 28l-8 8Zm9.3-14.1h2.45V18H20.5v2.45h2.8ZM10 21.5h3v-8h23.2l-4.3 4.3L34 20l8-8-8-8-2.1 2.2 4.3 4.3H10Z" />
+      <path
+        d="M5 46q-1.2 0-2.1-.9Q2 44.2 2 43V5q0-1.2.9-2.1Q3.8 2 5 2h38q1.2 0 2.1.9.9.9.9 2.1v38q0 1.2-.9 2.1-.9.9-2.1.9Zm9-2 2.1-2.2-4.3-4.3H38v-11h-3v8H11.8l4.3-4.3L14 28l-8 8Zm9.3-14.1h2.45V18H20.5v2.45h2.8ZM10 21.5h3v-8h23.2l-4.3 4.3L34 20l8-8-8-8-2.1 2.2 4.3 4.3H10Z" />
     </symbol>
     <symbol id="playback-speed" viewbox="0 0 48 48">
-      <path d="M8.3 36.3q-1.9-2.25-2.975-5.025Q4.25 28.5 4.05 25.5h3.1q.25 2.35 1.1 4.55.85 2.2 2.35 4ZM4.05 21.5q.1-3 1.225-5.75T8.3 10.7l2.3 2.25Q9.15 14.85 8.275 17 7.4 19.15 7.15 21.5Zm18 22.05q-2.95-.4-5.7-1.4-2.75-1-5.1-2.75l2.3-2.4q1.9 1.3 4.05 2.225t4.45 1.325ZM13.65 10l-2.4-2.4q2.4-1.8 5.175-2.775Q19.2 3.85 22.2 3.45v3q-2.35.4-4.5 1.275Q15.55 8.6 13.65 10Zm5.7 22.05v-17.1l13.4 8.55Zm6.85 11.5v-3q6.4-.95 10.6-5.775Q41 29.95 41 23.5t-4.2-11.275Q32.6 7.4 26.2 6.45v-3q7.7.75 12.75 6.525T44 23.5q0 7.75-5.05 13.5T26.2 43.55Z" />
+      <path
+        d="M8.3 36.3q-1.9-2.25-2.975-5.025Q4.25 28.5 4.05 25.5h3.1q.25 2.35 1.1 4.55.85 2.2 2.35 4ZM4.05 21.5q.1-3 1.225-5.75T8.3 10.7l2.3 2.25Q9.15 14.85 8.275 17 7.4 19.15 7.15 21.5Zm18 22.05q-2.95-.4-5.7-1.4-2.75-1-5.1-2.75l2.3-2.4q1.9 1.3 4.05 2.225t4.45 1.325ZM13.65 10l-2.4-2.4q2.4-1.8 5.175-2.775Q19.2 3.85 22.2 3.45v3q-2.35.4-4.5 1.275Q15.55 8.6 13.65 10Zm5.7 22.05v-17.1l13.4 8.55Zm6.85 11.5v-3q6.4-.95 10.6-5.775Q41 29.95 41 23.5t-4.2-11.275Q32.6 7.4 26.2 6.45v-3q7.7.75 12.75 6.525T44 23.5q0 7.75-5.05 13.5T26.2 43.55Z" />
     </symbol>
     <symbol id="thumb-up" viewBox="0 -960 960 960">
       <path d="M720-120H320v-520l280-280 50 50q7 7 11.5 19t4.5 23v14l-44 174h218q32 0 56 24t24 56v80q0 7-1.5 15t-4.5 15L794-168q-9 20-30 34t-44 14ZM240-640v520H80v-520h160Z"/>
@@ -346,7 +611,8 @@ async function video_player() {
   let current_index = 0;
   let new_index = 0;
   style_sheet.rel = 'stylesheet';
-  style_sheet.href = 'player.css';
+  let mobile = document.querySelector('[mobile]');
+  style_sheet.href = (!!mobile) ? 'player-mobile.css' : 'player.css';
   document.head.prepend(style_sheet);
   document.body.innerHTML += player_svgs;
   await new Promise((resolve, reject) => {
@@ -364,7 +630,7 @@ async function video_player() {
       } else {
         load_ocho_player(ocho)
       }
-      ocho.innerHTML += player_controls;
+      ocho.innerHTML += (!!mobile) ? mobile_player_controls : player_controls;;
       function load_ocho_player(player) {
         let video = document.createElement('video');
         ocho.classList.add('player');
@@ -386,12 +652,13 @@ async function video_player() {
     })
     resolve()
   });
-  const players = document.querySelectorAll('.player')
+  const players = document.querySelectorAll('.player');
   players.forEach(player => {
     const loader_spinner = player.querySelector('.loader'),
       timeline = player.querySelector('.timeline'),
       loaded_progress = player.querySelector('.loaded-progress'),
       play_pause_btn = player.querySelector('.play-pause-btn'),
+      mute_btns = player.querySelectorAll('.mute-btn'),
       mute_btn = player.querySelector('.mute-btn'),
       volume_slider = player.querySelector('.volume-slider'),
       preview_thumb_el = player.querySelector('.preview-thumb'),
@@ -416,6 +683,25 @@ async function video_player() {
       video_container = player,
       play_pause_icon = play_pause_btn.querySelector('svg')
     let preview_thumbnails;
+
+    //! Fonction pour les ecrans tactiles
+    const init = function () {
+      document.addEventListener('touchstart', handler, true)
+      document.addEventListener('touchmove', handler, true)
+      document.addEventListener('touchend', handler, true)
+      document.addEventListener('touchcancel', handler, true)
+    }
+    const handler = function touch(event) {
+      const touch = event.changedTouches[0],
+        simulatedEvent = document.createEvent('MouseEvent')
+
+      simulatedEvent.initMouseEvent(
+        { touchstart: 'mousedown', touchmove: 'mousemove', touchend: 'mouseup' }[event.type],
+        true, true, window, 1, touch.screenX, touch.screenY, touch.clientX, touch.clientY, false, false, false, false, 0, null
+      )
+
+      touch.target.dispatchEvent(simulatedEvent)
+    }
 
     document.addEventListener('keydown', e => {
       const tag_name = document.activeElement.tagName.toLocaleLowerCase();
@@ -449,6 +735,55 @@ async function video_player() {
 
       }
     })
+    // ? Touch events
+    function touch_screen_controls() {
+      const overlays = player.querySelectorAll('.overlay');
+      const close_controls = player.querySelectorAll('.close-controls-btn')
+      overlays.forEach(overlay => {
+        overlay.addEventListener('click', () => {
+          player.classList.toggle('control');
+          settings_btn.classList.contains('active') && remove_settings()
+        })
+      });
+      close_controls.forEach(close_control => {
+        close_control.addEventListener('click', () => {
+          player.classList.toggle('control');
+          settings_btn.classList.contains('active') && remove_settings()
+        })
+      });
+      toggle_mute();
+      // Vérifier si l'API Orientation Events est prise en charge par le navigateur
+      if ('onorientationchange' in window) {
+        // Ajouter un écouteur d'événement pour détecter les changements d'orientation
+        window.screen.orientation.onchange = function () {
+          if (this.type.startsWith('landscape')) {
+            if (document.fullscreenElement === null) {
+              toggle_fullscreen_mode();
+              window.screen.orientation.onchange = function () {
+                if (this.type.startsWith('portrait')) {
+                  if (document.fullscreenElement !== null) {
+                    toggle_fullscreen_mode();
+                  }
+                }
+              }
+            }
+          }
+          player.addEventListener('fullscreenchange', () => {
+            if (document.fullscreenElement !== null) {
+              screen.orientation
+                .lock("landscape")
+            } else {
+              screen.orientation.unlock()
+            }
+          })
+        }
+      } else {
+        console.log("L'appareil ne prend pas en charge l'API Orientation Events.");
+      }
+
+    }
+    let mobile = document.querySelector('[mobile]');
+    (!!mobile) && touch_screen_controls();
 
     //! Play/pause
     const play_pause_svg = {
@@ -492,7 +827,7 @@ async function video_player() {
     next_or_prev();
     function next_or_prev() {
       if (video_container.getAttribute("type") &&
-      video_container.getAttribute("type").toLocaleLowerCase() === "playlist") {
+        video_container.getAttribute("type").toLocaleLowerCase() === "playlist") {
         let playlist_id = video_container.getAttribute('playlist');
         let playlist = document.getElementById(playlist_id);
         let playlist_items = playlist.querySelectorAll('ocho-pi');
@@ -505,22 +840,22 @@ async function video_player() {
             if (i === current_index) {
               (i > 0) && prev_btn.classList.add('active');
               (i < (playlist_items.length - 1)) && next_btn.classList.add('active');
-              video.onended = ()=>{
+              video.onended = () => {
                 if (auto_play.classList.contains('active') && !video.loop) {
                   next();
                 }
               }
-              prev_btn.onclick = ()=>{prev()};
-              next_btn.onclick = ()=>{next()};
+              prev_btn.onclick = () => { prev() };
+              next_btn.onclick = () => { next() };
               function next() {
                 let caption_text = player.querySelector('.caption-text');
                 caption_text && (caption_text.innerHTML = '');
                 remove_active_class(subtitle_btn)
-                if (new_index !== current_index && new_index === current_index-1) {
+                if (new_index !== current_index && new_index === current_index - 1) {
                   new_index = current_index;
-                  current_index+= 1;
+                  current_index += 1;
                   reload_ocho_player(playlist_items[current_index])
-                }else if (new_index === current_index) {
+                } else if (new_index === current_index) {
                   current_index += 1;
                   reload_ocho_player(playlist_items[current_index])
                 }
@@ -530,11 +865,11 @@ async function video_player() {
                 let caption_text = player.querySelector('.caption-text');
                 caption_text && (caption_text.innerHTML = '');
                 remove_active_class(subtitle_btn)
-                if (new_index !== current_index && new_index === current_index+1) {
+                if (new_index !== current_index && new_index === current_index + 1) {
                   new_index = current_index;
-                  current_index-= 1;
+                  current_index -= 1;
                   reload_ocho_player(playlist_items[current_index])
-                }else if (new_index === current_index) {
+                } else if (new_index === current_index) {
                   current_index -= 1;
                   reload_ocho_player(playlist_items[current_index])
                 }
@@ -568,6 +903,92 @@ async function video_player() {
     }
 
     // ! Volume
+    // ! Next/prev
+    next_or_prev();
+    function next_or_prev() {
+      if (video_container.getAttribute("type").toLocaleLowerCase() === "playlist") {
+        let playlist_id = video_container.getAttribute('playlist');
+        let playlist = document.getElementById(playlist_id);
+        let playlist_items = playlist.querySelectorAll('ocho-pi');
+        let next_btn = video_container.querySelector('.next-btn');
+        let prev_btn = video_container.querySelector('.prev-btn');
+        remove_active_class(prev_btn);
+        remove_active_class(next_btn);
+        if (playlist_items.length > 1) {
+          for (let i = 0; i < playlist_items.length; i++) {
+            if (i === current_index) {
+              (i > 0) && prev_btn.classList.add('active');
+              (i < (playlist_items.length - 1)) && next_btn.classList.add('active');
+              video.onended = () => {
+                if (auto_play.classList.contains('active') && !video.loop) {
+                  next();
+                }
+              }
+              prev_btn.onclick = () => { prev() };
+              next_btn.onclick = () => { next() };
+              function next() {
+                let caption_text = player.querySelector('.caption-text');
+                caption_text && (caption_text.innerHTML = '');
+                remove_active_class(subtitle_btn);
+                pause_video();
+                if (new_index !== current_index && new_index === current_index - 1) {
+                  new_index = current_index;
+                  current_index += 1;
+                  reload_ocho_player(playlist_items[current_index])
+                } else if (new_index === current_index) {
+                  current_index += 1;
+                  reload_ocho_player(playlist_items[current_index])
+                }
+                caption_void()
+                settings_btn.classList.contains('active') && remove_settings();
+              }
+              function prev() {
+                let caption_text = player.querySelector('.caption-text');
+                caption_text && (caption_text.innerHTML = '');
+                pause_video();
+                remove_active_class(subtitle_btn)
+                if (new_index !== current_index && new_index === current_index + 1) {
+                  new_index = current_index;
+                  current_index -= 1;
+                  reload_ocho_player(playlist_items[current_index])
+                } else if (new_index === current_index) {
+                  current_index -= 1;
+                  reload_ocho_player(playlist_items[current_index])
+                }
+                caption_void()
+                settings_btn.classList.contains('active') && remove_settings();
+              }
+            }
+          }
+        }
+      }
+    }
+    function reload_ocho_player(player) {
+      if (typeof player === 'undefined') {
+        return;
+      }
+      (video_container.querySelector('.light')) && video_container.querySelector('.light').remove();
+      video_container.classList.add('player');
+      video.classList.add('main-video');
+      let sources = player.querySelectorAll('source');
+      let tracks = player.querySelectorAll('track');
+      video.innerHTML = '';
+      sources.forEach(source => {
+        video.appendChild(source)
+      });
+      tracks.forEach(track => {
+        video.appendChild(track)
+      });
+      let player_size = player.getAttribute('size') ? player.getAttribute('size') : 0;
+      video.src = player.getAttribute('src') ? player.getAttribute('src') : '';
+      video.setAttribute('size', player_size);
+      next_or_prev();
+    }
+
+    // ! Volume
+    mute_btns.forEach(mute_btn => {
+      mute_btn.addEventListener('click', toggle_mute)
+    })
     mute_btn.addEventListener('click', toggle_mute)
     function toggle_mute() {
       if (video.volume !== 0) {
@@ -580,12 +1001,14 @@ async function video_player() {
       settings_btn.classList.contains('active') && remove_settings();
     }
     video.addEventListener('volumechange', volume_change);
-    volume_slider.addEventListener('change', () => {
-      volume_slide(volume_slider.value);
-    });
-    volume_slider.addEventListener('mousemove', () => {
-      volume_slide(volume_slider.value);
-    });
+    if (volume_slider) {
+      volume_slider.addEventListener('change', () => {
+        volume_slide(volume_slider.value);
+      });
+      volume_slider.addEventListener('mousemove', () => {
+        volume_slide(volume_slider.value);
+      });
+    }
     function volume_change() {
       let volume_svg = [
         '<use xlink:href="#volume-muted-icon"></use>',
@@ -593,12 +1016,15 @@ async function video_player() {
         '<use xlink:href="#volume-high-icon"></use>',
       ];
 
-      volume_slider.value = video.volume;
+      (volume_slider) && (volume_slider.value = video.volume);
       let video_volume = video.volume;
       // Détermine le niveau sonore en fonction des conditions
       video_volume = video_volume > 0.5 ? 2 : (video_volume !== 0 ? 1 : 0);
       // Mettre à jour l'icône du bouton de sourdine en fonction du niveau sonore
       mute_btn.querySelector('svg').innerHTML = volume_svg[video_volume];
+      mute_btns.forEach(mute_btn => {
+        mute_btn.querySelector('svg').innerHTML = volume_svg[video_volume];
+      })
     }
 
     function volume_slide(level) {
@@ -642,7 +1068,9 @@ async function video_player() {
       draw_progress(loaded_progress, video.buffered, video.duration);
     }, 1000);
     preview_thumbnails = generate_thumbnails(video.src);
-    timeline.addEventListener('pointermove', async (e) => {
+    timeline.addEventListener('touchstart', init, true)
+    timeline.addEventListener('mousemove', async (e) => {
+      timeline.parentNode.classList.add('hover')
       total_time_el.textContent = format_duration(video.duration);
       let preview_position = (e.layerX / timeline.clientWidth) || 1;
       (preview_position <= 0) && (preview_position = 0)
@@ -673,12 +1101,16 @@ async function video_player() {
         });
       })
     })
-    timeline.addEventListener('pointerdown', () => {
+    timeline.addEventListener('mousedown', () => {
       timeline.addEventListener('click', skip_time);
-      timeline.addEventListener('pointermove', skip_time);
-      document.addEventListener('pointerup', () => {
-        timeline.removeEventListener('pointermove', skip_time);
+      timeline.addEventListener('mousemove', skip_time);
+      document.addEventListener('mouseup', () => {
+        timeline.parentNode.classList.remove('hover')
+        timeline.removeEventListener('mousemove', skip_time);
       })
+    })
+    timeline.addEventListener('mouseleave', () => {
+      timeline.parentNode.classList.remove('hover')
     })
     function skip_time(e) {
       if (e.target !== timeline) {
@@ -760,10 +1192,10 @@ async function video_player() {
     }
 
     //! View modes
-    cinema_btn.addEventListener('click', toggle_cinema_mode)
+    cinema_btn && cinema_btn.addEventListener('click', toggle_cinema_mode)
     document.addEventListener('fullscreenchange', change_fullscreen)
     fullscreen_btn.addEventListener('click', toggle_fullscreen_mode)
-    pip_btn.addEventListener('click', toggle_pip)
+    pip_btn && pip_btn.addEventListener('click', toggle_pip)
 
     function toggle_cinema_mode() {
       const cinema_svg = {
@@ -1059,7 +1491,7 @@ async function video_player() {
 
   });
   function show_aside() {
-    
+
   }
   show_aside();
 }
