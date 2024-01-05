@@ -759,20 +759,20 @@ async function video_player() {
           if (e.srcElement.type.startsWith('landscape')) {
             if (document.fullscreenElement === null) {
               toggle_fullscreen_mode();
-              screen.orientation.onchange = function () {
+              screen.orientation.addEventListener('change', (e) => {
                 if (e.srcElement.type.startsWith('portrait')) {
                   if (document.fullscreenElement !== null) {
                     toggle_fullscreen_mode();
                   }
                 }
-              }
+              })
             }
           }
           player.addEventListener('fullscreenchange', () => {
             if ('orientation' in screen && 'lock' in screen.orientation) {
               // L'appareil prend en charge le changement de l'orientation verrouillée
               if (document.fullscreenElement !== null) {
-                screen.orientation.lock("landscape")
+                screen.orientation.lock("landscape");
               } else {
                 screen.orientation.lock("portrait");
               }
