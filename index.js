@@ -218,7 +218,6 @@ function load_video_data(id) {
     true,
     50890,
     false,
-    0
   );
   // Définition des classes
   class CommentData {
