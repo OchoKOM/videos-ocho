@@ -197,8 +197,12 @@ function load_video_data(id) {
       this.channel = "Pete & Bas";
       this.channel_profile = "profil.jpg";
       this.channel_subs = format_number(10000347, "fr");
-      this.likes = 90000;
-      this.likes_formated = format_number(this.likes, "fr");
+      this.liked = true,
+        this.likes = 90000;
+      this.likes_formated = (this.likes !== 0) ? format_number(this.likes) : '';
+      this.disliked = false,
+        this.dislikes = 0,
+        this.dislikes_formated = (this.dislikes !== 0) ? format_number(this.dislikes) : ''
     }
   }
 
@@ -267,18 +271,18 @@ function load_video_data(id) {
       <div class="video-actions">
         <div class="react-section like" data-user="1">
           <label class="like-btn like" title="J'aime ce conenu">
-            <input type="checkbox" name="like" id="like-check" title="J'aime ce conenu"/>
+            <input type="checkbox" name="like" id="like-check" title="J'aime ce conenu"${!video_data.liked || ' checked'}/>
             <svg height="30" fill="#999">
               <use xlink:href="#thumb-up"></use>
             </svg>
             <span class="react-num" data-num="${video_data.likes}" data-num-formated="${video_data.likes_formated}"></span>
           </label>
           <label class="like-btn dislike">
-            <input type="checkbox" name="like" id="dislike-check" title="Je n'aime pas ce conenu"/>
+            <input type="checkbox" name="like" id="dislike-check" title="Je n'aime pas ce conenu" ${!video_data.disliked || ' checked'}/>
             <svg height="30" fill="#999">
               <use xlink:href="#thumb-down"></use>
             </svg>
-            <span class="react-num" data-num=""></span>
+            <span class="react-num" data-num="${video_data.dislikes}" data-num-formated="${video_data.dislikes_formated}"></span>
           </label>
         </div>
         <div class="react-section">
@@ -363,8 +367,53 @@ function load_video_data(id) {
     `
   let video_details = document.querySelector(".video-details");
   video_details.innerHTML = video_details_html;
+  let like_check = document.getElementById('like-check')
+  let dislike_check = document.getElementById('dislike-check')
+  like_check.addEventListener('change', e => {
+    let react_num = e.target.parentNode.querySelector(".react-num")
+    if (e.target.checked) {
+      dislike_check.checked = false;
+      if (video_data.disliked) {
+        video_data.disliked = false;
+        video_data.dislikes--
+        react_num.setAttribute("data-num", video_data.dislikes);
+        react_num.setAttribute("data-num-formated", video_data.dislikes <= 0 ? format_number(video_data.dislikes, "fr") : '');
+      }
+      video_data.liked = true;
+      video_data.likes ++;
+    }else{
+      if (video_data.liked) {
+        video_data.likes--;
+        video_data.liked = false;
+        
+      }
+    }
+    react_num.setAttribute("data-num", video_data.likes);
+    react_num.setAttribute("data-num-formated",  video_data.likes <= 0 ? format_number(video_data.likes, "fr") : '');
+  })
+  dislike_check.addEventListener('change', e => {
+    let react_num = e.target.parentNode.querySelector(".react-num")
+    if (e.target.checked) {
+      like_check.checked = false;
+      if (video_data.liked) {
+        video_data.liked = false;
+        video_data.likes--
+        react_num.setAttribute("data-num", video_data.likes);
+        react_num.setAttribute("data-num-formated", video_data.likes <= 0 ? format_number(video_data.likes, "fr") : '');
+      }
+      video_data.disliked = true;
+      video_data.dislikes ++;
+    }else{
+      if (video_data.disliked) {
+        video_data.dislikes--;
+        video_data.disliked = false;
+      }
+    }
+    react_num.setAttribute("data-num", video_data.dislikes);
+    react_num.setAttribute("data-num-formated",  video_data.dislikes <= 0 ? format_number(video_data.dislikes, "fr") : '');
+  })
   reload_replies();
-  function reload_replies(data = {}) {
+  function reload_replies() {
     all_comments.forEach(comment => {
       if (comment.level === 0) {
         video_comments[comment.id] = comment;
@@ -373,21 +422,34 @@ function load_video_data(id) {
       }
     });
 
-    let replies = 0;
     for (const key in comment_replies) {
       const reply = comment_replies[key];
       const reply_id = reply[0].from;
-      all_comments.forEach(comment => {
-        if (comment.level === 0) {
-          if (comment.id === reply_id) {
-            replies++
-            replies_num[reply_id] = replies;
-          }
-        }
-      })
+      get_level_zero_of(reply_id, 0);
     }
+
+    function get_level_zero_of(from, num) {
+      const foundComment = all_comments.find(comment => comment.id === from);
+      if (foundComment) {
+        num++;
+        if (foundComment.level === 0) {
+          replies_num[from] = num;
+          for (const cle in replies_num) {
+            const element = replies_num[cle];
+            if (document.getElementById(`comment-${cle}`)) {
+              let nbr_el = document.getElementById(`comment-${cle}`).parentNode.querySelector('.nbr-count');
+              nbr_el.innerText = `${element || 'Aucune'} réponses`;
+            }
+          }
+        } else {
+          get_level_zero_of(foundComment.from, num);
+        }
+      }
+    }
+
     video_details.querySelector('.all-comment-count').textContent = all_comments.length || '';
   }
+
   let comment_form = video_details.querySelector('form.right-c');
   comment_form.addEventListener('submit', e => {
     e.preventDefault();
@@ -439,16 +501,15 @@ function load_video_data(id) {
         const new_replie = new ReplyData(datas.id, datas.username, datas.message, datas.user_id, datas.from, datas.comment_username
         );
         insert_reply(new_replie, form.parentNode);
-        all_comments.unshift(new_replie)
       } else {
         const new_comment = new CommentData(datas.username, datas.message, datas.user_id, datas.id)
-        all_comments.unshift(new_comment);
         insert_comment(new_comment);
       }
-      reload_replies();
     }
+    reload_replies();
   }
   function insert_comment(comment) {
+    (!all_comments.includes(comment)) && all_comments.unshift(comment);
     let comment_div = document.createElement('div');
     comment_div.className = 'single-comment';
     let comment_html = `
@@ -464,7 +525,7 @@ function load_video_data(id) {
     </div>
     <div class="comment-replies">
       <div class="desc-header">
-        <h3>Reponses <span class="nbr-count"></span></h3>
+        <h3><span class="nbr-count"></span></h3>
       </div>
       <div class="desc-body"></div>
     </div>
@@ -502,6 +563,7 @@ function load_video_data(id) {
     }
   }
   function insert_reply(reply, sibling_div, replies_div = null) {
+    (!all_comments.includes(reply)) && all_comments.push(reply);
     let reply_div = document.createElement('div');
     reply_div.className = 'single-reply';
     reply_div.id = `reply-${reply.id}`;
@@ -516,23 +578,27 @@ function load_video_data(id) {
           </div>
         `
     reply_div.innerHTML = replies_html
-    reload_replies(reply);
+    reload_replies();
     for (const key in comment_replies) {
       const reply_2 = comment_replies[key][0];
       if (reply_2.from === reply.id) {
-        insert_reply(reply_2, null, replies_div.parentNode);
+        insert_reply(reply_2, null, replies_div);
       }
     }
     if (!replies_div) {
       sibling_div.parentNode.insertBefore(reply_div, sibling_div.nextSibling);
       if (reply.level !== 2) {
-        handle_reply(reply, reply_div.parentNode.parentNode, reply_div.parentNode)
+        handle_reply(reply, reply_div.parentNode.parentNode, reply_div)
       } else {
         handle_reply(reply, reply_div.parentNode, reply_div)
       }
     } else {
       replies_div.appendChild(reply_div);
-      handle_reply(reply, reply_div.parentNode, reply_div)
+      if (reply.level !== 2) {
+        handle_reply(reply, reply_div.parentNode, reply_div)
+      } else {
+        handle_reply(reply, reply_div, reply_div)
+      }
     }
   }
   function insert_form(comment, comment_div, sibling_div) {
@@ -575,16 +641,34 @@ function load_video_data(id) {
       });
     })
   }
-  function show_comment_replies(comment, data) {
-
-  }
   function remove_comment(id) {
     all_comments.forEach(comment => {
       if (comment.id === id.id) {
-        console.log(id);
+        for (const key in comment_replies) {
+          if (Object.hasOwnProperty.call(comment_replies, key)) {
+            const reply = comment_replies[key][0];
+            if (reply.from === id.id) {
+              remove_comment(reply);
+            }
+          }
+        }
+        all_comments.splice(all_comments.indexOf(comment), 1);
+        reload_replies();
+        delete_element(comment.id);
       }
     });
-    console.log(all_comments);
+    function delete_element(id) {
+      let dom_id = "comment-" + id;
+      let reply_id = "reply-" + id;
+      if (document.getElementById(dom_id)) {
+        let element_to_remove = document.getElementById(dom_id).parentNode;
+        element_to_remove.remove();
+      }
+      if (document.getElementById(reply_id)) {
+        let element_to_remove = document.getElementById(reply_id);
+        element_to_remove.remove();
+      }
+    }
   }
 
 
