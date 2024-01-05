@@ -774,7 +774,7 @@ async function video_player() {
               if (document.fullscreenElement !== null) {
                 screen.orientation.lock("landscape")
               } else {
-                screen.orientation.unlock();
+                screen.orientation.lock("portrait");
               }
             } else {
               // L'appareil ne prend pas en charge le changement de l'orientation verrouillée
