@@ -424,7 +424,7 @@ main > .video-details{
     .comment-content:has(textarea:valid),
     .single-reply:has(textarea:focus),
     .single-reply:has(textarea:valid){
-        position: fixed;
+        position: absolute;
         background: #0f61b4;
         width: 100%;
         left: 0;
