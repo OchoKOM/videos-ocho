@@ -755,12 +755,12 @@ async function video_player() {
       // Vérifier si l'API Orientation Events est prise en charge par le navigateur
       if ('onorientationchange' in window) {
         // Ajouter un écouteur d'événement pour détecter les changements d'orientation
-        window.screen.orientation.onchange = function () {
-          if (this.type.startsWith('landscape')) {
+        screen.orientation.addEventListener('change', (e) => {
+          if (e.srcElement.type.startsWith('landscape')) {
             if (document.fullscreenElement === null) {
               toggle_fullscreen_mode();
-              window.screen.orientation.onchange = function () {
-                if (this.type.startsWith('portrait')) {
+              screen.orientation.onchange = function () {
+                if (e.srcElement.type.startsWith('portrait')) {
                   if (document.fullscreenElement !== null) {
                     toggle_fullscreen_mode();
                   }
@@ -769,14 +769,19 @@ async function video_player() {
             }
           }
           player.addEventListener('fullscreenchange', () => {
-            if (document.fullscreenElement !== null) {
-              screen.orientation
-                .lock("landscape")
+            if ('orientation' in screen && 'lock' in screen.orientation) {
+              // L'appareil prend en charge le changement de l'orientation verrouillée
+              if (document.fullscreenElement !== null) {
+                screen.orientation.lock("landscape")
+              } else {
+                screen.orientation.unlock();
+              }
             } else {
-              screen.orientation.unlock()
+              // L'appareil ne prend pas en charge le changement de l'orientation verrouillée
+              console.log("L'appareil ne prend pas en charge le changement de l'orientation verrouillée.");
             }
           })
-        }
+        })
       } else {
         console.log("L'appareil ne prend pas en charge l'API Orientation Events.");
       }
