@@ -272,6 +272,9 @@ main > .video-details{
     height: 30px;
     background: #80808062;
     border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .comments .left-c img{
     object-fit: cover;
@@ -379,6 +382,9 @@ main > .video-details{
     .video-channel .channel-profile {
         height: 30px;
         width: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
     .video-actions {
         padding: 10px 0;

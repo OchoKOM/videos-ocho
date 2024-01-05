@@ -185,28 +185,41 @@ function load_video_data(id) {
   })
   // Exemple of video data
   class VideoData {
-    constructor() {
-      this.titre = "Pete & Bas - Stepped Into the Building";
-      this.descr = "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Animi fugit, aspernatur sapiente velit natus officia, recusandae nisi itaque deserunt illum quos corrupti suscipit quibusdam, exercitationem expedita! Aliquam, modi veritatis soluta exercitationem aspernatur voluptatibus est.";
-      this.views = 700000;
-      this.views_formated = format_number(this.views, "fr");
-      this.date = 1681410600;
-      this.formated_date = formatTime((new Date().getTime() / 1000) - this.date);
-      this.year = Math.floor(new Date(this.date * 1000).getFullYear());
-      this.ddmm = `${(leading_zero_formatter.format(Math.floor(new Date(this.date * 1000).getDate())))}/${(leading_zero_formatter.format(Math.floor(new Date(this.date * 1000).getMonth() + 1)))}`;
-      this.channel = "Pete & Bas";
-      this.channel_profile = "profil.jpg";
-      this.channel_subs = format_number(10000347, "fr");
-      this.liked = true,
-        this.likes = 90000;
+    constructor(titre, descr, views = 0, date = 0, channel, channel_profile = false, channel_subs = 0, liked, likes =0, disliked,dislikes =0, ) {
+      this.titre = titre || "Untitled Video";
+      this.descr = descr || "Aucune description";
+      this.views = views;
+      this.views_formated = (this.views === 0) ? 'Aucune vue':format_number(this.views, "fr");
+      this.date = date || 0;
+      this.formated_date = (this.date === 0) ? '-':formatTime((new Date().getTime() / 1000) - this.date);
+      this.year = (this.date === 0) ? '-': Math.floor(new Date(this.date * 1000).getFullYear());
+      this.ddmm = (this.date === 0) ? '-/-' : `${(leading_zero_formatter.format(Math.floor(new Date(this.date * 1000).getDate())))}/${(leading_zero_formatter.format(Math.floor(new Date(this.date * 1000).getMonth() + 1)))}`;
+      this.channel = channel;
+      this.channel_profile = channel_profile ? 
+      `<img src="${channel_profile}" alt="${this.channel}'s profile"/>` : `<h3>${this.channel[0]}</h3>`;
+      this.channel_subs = (channel_subs === 0) ? '-/-' : format_number(channel_subs, "fr");
+      this.liked = liked,
+      this.likes = likes;
       this.likes_formated = (this.likes !== 0) ? format_number(this.likes) : '';
-      this.disliked = false,
-        this.dislikes = 0,
-        this.dislikes_formated = (this.dislikes !== 0) ? format_number(this.dislikes) : ''
+      this.disliked = disliked,
+      this.dislikes = dislikes,
+      this.dislikes_formated = (this.dislikes !== 0) ? format_number(this.dislikes) : ''
     }
   }
 
-  const video_data = new VideoData();
+  const video_data = new VideoData(
+    "Pete & Bas - Stepped Into the Building",
+    "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Animi fugit, aspernatur sapiente velit natus officia, recusandae nisi itaque deserunt illum quos corrupti suscipit quibusdam, exercitationem expedita! Aliquam, modi veritatis soluta exercitationem aspernatur voluptatibus est.",
+    70000,
+    1681410600,
+    "Pete & Bas",
+    "unnamed.jpg",
+    65768,
+    true,
+    50890,
+    false,
+    0
+  );
   // Définition des classes
   class CommentData {
     constructor(username, message, user_id, id) {
@@ -258,7 +271,7 @@ function load_video_data(id) {
     <div class="video-channel">
       <div class="channel-info">
         <div class="channel-section">
-          <div class="channel-profile"></div>
+          <div class="channel-profile">${video_data.channel_profile}</div>
           <span class="channel-name">
             <div class="name">${video_data.channel}</div>
             <div class="channel-subs">${video_data.channel_subs} <span class="sub-label"> d'abonnés</span></div>
@@ -368,49 +381,48 @@ function load_video_data(id) {
   let video_details = document.querySelector(".video-details");
   video_details.innerHTML = video_details_html;
   let like_check = document.getElementById('like-check')
-  let dislike_check = document.getElementById('dislike-check')
+  let dislike_check = document.getElementById('dislike-check');
+  function update_react_num(num, node) {
+    node.setAttribute("data-num", num);
+    node.setAttribute("data-num-formated", (num > 0) ? format_number(num, "fr") : '');
+  }
   like_check.addEventListener('change', e => {
     let react_num = e.target.parentNode.querySelector(".react-num")
     if (e.target.checked) {
-      dislike_check.checked = false;
       if (video_data.disliked) {
+        dislike_check.checked = false;
         video_data.disliked = false;
         video_data.dislikes--
-        react_num.setAttribute("data-num", video_data.dislikes);
-        react_num.setAttribute("data-num-formated", video_data.dislikes <= 0 ? format_number(video_data.dislikes, "fr") : '');
+        update_react_num(video_data.dislikes, dislike_check.parentNode.querySelector(".react-num"))
       }
+      video_data.likes++;
       video_data.liked = true;
-      video_data.likes ++;
-    }else{
+    } else {
       if (video_data.liked) {
         video_data.likes--;
         video_data.liked = false;
-        
       }
     }
-    react_num.setAttribute("data-num", video_data.likes);
-    react_num.setAttribute("data-num-formated",  video_data.likes <= 0 ? format_number(video_data.likes, "fr") : '');
+    update_react_num(video_data.likes, react_num)
   })
   dislike_check.addEventListener('change', e => {
     let react_num = e.target.parentNode.querySelector(".react-num")
     if (e.target.checked) {
-      like_check.checked = false;
       if (video_data.liked) {
+        like_check.checked = false;
         video_data.liked = false;
         video_data.likes--
-        react_num.setAttribute("data-num", video_data.likes);
-        react_num.setAttribute("data-num-formated", video_data.likes <= 0 ? format_number(video_data.likes, "fr") : '');
+        update_react_num(video_data.likes, like_check.parentNode.querySelector(".react-num"))
       }
       video_data.disliked = true;
-      video_data.dislikes ++;
-    }else{
+      video_data.dislikes++;
+    } else {
       if (video_data.disliked) {
         video_data.dislikes--;
         video_data.disliked = false;
       }
     }
-    react_num.setAttribute("data-num", video_data.dislikes);
-    react_num.setAttribute("data-num-formated",  video_data.dislikes <= 0 ? format_number(video_data.dislikes, "fr") : '');
+    update_react_num(video_data.dislikes, react_num)
   })
   reload_replies();
   function reload_replies() {
