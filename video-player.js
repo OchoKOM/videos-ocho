@@ -489,7 +489,7 @@ async function video_player() {
               <div class="info-drop">
                 <div class="channel-profile">
                   <img
-                    src="https://ochokom.github.io/videos-ocho/profil.jpg"
+                    src="https://ochokom.github.io/videos-ocho/logo.webp"
                     alt="profile"
                   />
                 </div>
